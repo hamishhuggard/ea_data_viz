@@ -2,6 +2,9 @@
 
 Project partly inspired by the [Johns Hopkins Corona Virus Dashboard](https://coronavirus.jhu.edu/map.html).
 
+Precedents:
+ - [EA hub map](https://eahub.org/)
+
 Intend to have five panels:
  - Total members/donations/pledges of EA
  - Demographics of EAs
