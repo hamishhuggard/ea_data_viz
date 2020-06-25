@@ -1,21 +1,23 @@
 # Effective Altruism Dashboard
 
-Project partly inspired by the [Johns Hopkins Corona Virus Dashboard](https://coronavirus.jhu.edu/map.html).
+This is a dashboard to provide a quick overview of some key statistics of the [effective altruism](https://www.effectivealtruism.org/) (EA) movement.
 
 ## Precedents:
+
+We are aware of the following existing dashboards relating to EA
  - [EA hub map](https://eahub.org/)
  - [EA funds dashboard](https://app.effectivealtruism.org/funds/about/stats)
 
 ## Design
 
-Intend to have five panels:
+We intend to have five panels:
  - Total members/donations/pledges of EA
  - Demographics of EAs
  - World map of EAs
  - Sankey diagram of EA donations: sources -> cause areas -> charities
  - Timeline of growth (membership, donations)
  
-We'd also like to do a map in the style of [Gapminder](https://www.gapminder.org/tools/#$chart-type=bubbles). Countries are replaced with EA orgs, and the axes are measures of growth (donations made, donations pledged, pageviews, etc). Perhaps the central map can be toggle-able between the map and this diagram.
+We'd also like to do a map in the style of [Gapminder](https://www.gapminder.org/tools/#$chart-type=bubbles). Countries are replaced with EA orgs, and the axes are measures of growth (donations made, donations pledged, pageviews, etc). Perhaps the central panel can be toggle-able between the map and this diagram.
 
 ## Data sources
 
