@@ -19,16 +19,9 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 ###       DEMOGRAPHICS         ###
 ##################################
 
-for path in glob('./rp_survey_data/*.csv'):
-    data = pd.read_csv(path, sep='\t')
-    title = data.columns[0]
-    print(title)
-    print(data)
-
 demo_pies = []
 for table_name in [
-        'age_group', 'diet', 'gender', 'education', 'employment', 'ethnicity', 
-        'religion', 'subject', 'work_experience'
+        'age_group', 'diet', 'gender', 'employment', 'ethnicity', 'subject',
         ]:
 
     path = f"./rp_survey_data/{table_name}.csv"
@@ -37,34 +30,21 @@ for table_name in [
 
     # remove the 'Total' row
     demo_table = demo_table[ ~demo_table[title].isin(['Total', 'Total respondents']) ]
+    demo_table['label'] = demo_table[title] + demo_table['Percent']
     # convert '5%' to 5
     demo_table['Percent'] = demo_table['Percent'].apply(lambda x: float(x[:-1]))
-    
+
+
+    pie_fig = px.pie(demo_table, values='Percent', names=title, title=title)#, hovertext='label')
+    # pie_fig.update_trace(hovertemplate=)
+    pie_fig.update_traces(hoverinfo='none', textinfo='none')
+    pie_fig.update(layout_showlegend=False)
     this_pie = dcc.Graph(
         id=title,
-        figure=px.pie(demo_table, values='Percent', names=title, title=title)
+        figure=pie_fig
     )
 
     demo_pies.append(this_pie)
-
-# #### AGE PIE CHART ####
-# age = pd.read_csv ("./rp_survey_data/age_group.csv", sep='\t')
-# # remove the 'Total' row
-# age = age[ age['Age Group']!='Total' ]
-# # convert '5%' to 5
-# age['Percent'] = age['Percent'].apply(lambda x: float(x[:-1]))
-# # display a pie chart
-# age_pie = px.pie(age, values='Percent', names='Age Group', title=age.columns[0])
-
-# #### DIET PIE CHART ####
-# diet = pd.read_csv ("./rp_survey_data/age_group.csv", sep='\t')
-# # remove the 'Total' row
-# age = age[ age['Age Group']!='Total' ]
-# # convert '5%' to 5
-# age['Percent'] = age['Percent'].apply(lambda x: float(x[:-1]))
-# # display a pie chart
-# age_pie = px.pie(age, values='Percent', names='Age Group', title=age.columns[0])
-
 
 ##################################
 ###         WORLD MAP          ###
@@ -97,7 +77,12 @@ app.layout = html.Div(children=[
         id='map_fig',
         figure=map_fig
     ),
-] + demo_pies)
+
+    html.Div(demo_pies, style={'columnCount': 2, 'width': '49%', 'display': 'inline-block'})
+
+    html.Div(map_fig, style={'width': '75%', 'display': 'inline-block'})
+
+])
 
 if __name__ == '__main__':
     app.run_server(debug=True)
