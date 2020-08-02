@@ -39,8 +39,11 @@ for table_name in [
     # pie_fig.update_trace(hovertemplate=)
     pie_fig.update_traces(hoverinfo='none', textinfo='none')
     pie_fig.update(layout_showlegend=False)
+    pie_fig.update_layout(
+        margin=dict(l=50, r=0, t=50, b=200),
+    )
     this_pie = dcc.Graph(
-        id=title,
+        id=title, #style={'margin': '0%'},
         figure=pie_fig
     )
 
@@ -82,14 +85,10 @@ app.layout = html.Div(children=[
                 id='map_fig',
                 figure=map_fig
             )
-        ], style={'width': '49%', 'float': 'right', 'display': 'inline-block'}),
+        ], style={'width': '49%', 'float': 'right'}),
 
-        html.Div([
-            dcc.Graph(
-                id='this_pie',
-                figure=this_pie
-            )
-        ], style={'columnCount': 1, 'float': 'left', 'width': '49%', 'display': 'inline-block'}),
+        html.Div(demo_pies, style={'columnCount': 2, 'float': 'left', 'padding': '0px 0px 0px 200px',
+        'width': '30%', 'display': 'inline-block'}),
     ])
 ])
 
