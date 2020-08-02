@@ -16,6 +16,20 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 ##################################
+###          TOTAL             ###
+##################################
+
+total_eas = 100
+total_pledged = 10
+total_donated = 1
+
+total_div = html.Div([
+    html.H2(f'{total_eas} Effective Altruists'),
+    html.H3(f'Have donated ${total_donated}'),
+    html.H3(f'And pledged another ${total_pledged}'),
+])
+
+##################################
 ###       DEMOGRAPHICS         ###
 ##################################
 
