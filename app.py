@@ -52,10 +52,18 @@ for table_name in [
 
 # source: https://plotly.com/python/bubble-maps/
 
-df = px.data.gapminder()
-map_fig = px.scatter_geo(df, locations="iso_alpha", color="continent",
-                     hover_name="country", size="pop",
-                     projection="natural earth")
+countries = pd.read_csv('./rp_survey_data/country.csv')
+countries = countries[
+    ~countries['Country'].isin(['All other stated countries', 'Total respondents'])
+]
+# df = px.data.gapminder()
+# print(df)
+map_fig = px.scatter_geo(countries, locations="Country", #color="continent",
+                     hover_name="Country", 
+                     size="Responses",
+                     # animation_frame="year",
+                     projection="natural earth"
+)
 
 
 app.layout = html.Div(children=[
