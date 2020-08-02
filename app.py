@@ -55,7 +55,6 @@ for table_name in [
 df = px.data.gapminder()
 map_fig = px.scatter_geo(df, locations="iso_alpha", color="continent",
                      hover_name="country", size="pop",
-                     animation_frame="year",
                      projection="natural earth")
 
 
@@ -65,16 +64,22 @@ app.layout = html.Div(children=[
     # html.Div('''
     #     Dash: A web application framework for Python.
     # '''),
+   html.Div([
 
-    dcc.Graph(
-        id='map_fig',
-        figure=map_fig
-    ),
+        html.Div([
+            dcc.Graph(
+                id='map_fig',
+                figure=map_fig
+            )
+        ], style={'width': '45%', 'float': 'right', 'display': 'inline-block'}),
 
-    html.Div(demo_pies, style={'columnCount': 2, 'width': '49%', 'display': 'inline-block'})
-
-    html.Div(map_fig, style={'width': '75%', 'display': 'inline-block'})
-
+        html.Div([
+            dcc.Graph(
+                id='this_pie',
+                figure=this_pie
+            )
+        ], style={'columnCount': 2, 'float': 'left', 'width': '49%', 'display': 'inline-block'}),
+    ])
 ])
 
 if __name__ == '__main__':
