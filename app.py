@@ -60,14 +60,8 @@ countries['Responses'] = countries['Responses'].astype('int')
 countries.replace({'UK': 'United Kingdom', 'USA': 'United States'}, inplace=True)
 gapminder = px.data.gapminder().query("year==2007")
 gapminder['Country'] = gapminder['country']
-print(gapminder)
-print(list(gapminder['iso_alpha']))
-print(list(gapminder['country']))
-print(countries)
 countries = countries.merge(gapminder, on='Country', how='left')
-print(countries)
-# print(df)
-map_fig = px.scatter_geo(countries, locations="Country", #color="continent",
+map_fig = px.scatter_geo(countries, locations="iso_alpha", #color="continent",
                      hover_name="Country", 
                      size="Responses",
                      # animation_frame="year",
