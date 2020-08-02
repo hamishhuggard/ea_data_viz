@@ -25,13 +25,45 @@ for path in glob('./rp_survey_data/*.csv'):
     print(title)
     print(data)
 
-gender = pd.read_csv ("./rp_survey_data/gender.csv", sep='\t')
-# convert '5%' to 5
-gender['Percent'] = gender['Percent'].apply(lambda x: float(x[:-1]))
-# remove the 'Total' row
-gender = gender[ gender['Gender']!='Total' ]
-# display a pie chart
-gender_pie = px.pie(gender, values='Percent', names='Gender', title=gender.columns[0])
+demo_pies = []
+for table_name in [
+        'age_group', 'diet', 'gender', 'education', 'employment', 'ethnicity', 
+        'religion', 'subject', 'work_experience'
+        ]:
+
+    path = f"./rp_survey_data/{table_name}.csv"
+    demo_table = pd.read_csv(path, sep='\t')
+    title = demo_table.columns[0]
+
+    # remove the 'Total' row
+    demo_table = demo_table[ ~demo_table[title].isin(['Total', 'Total respondents']) ]
+    # convert '5%' to 5
+    demo_table['Percent'] = demo_table['Percent'].apply(lambda x: float(x[:-1]))
+    
+    this_pie = dcc.Graph(
+        id=title,
+        figure=px.pie(demo_table, values='Percent', names=title, title=title)
+    )
+
+    demo_pies.append(this_pie)
+
+# #### AGE PIE CHART ####
+# age = pd.read_csv ("./rp_survey_data/age_group.csv", sep='\t')
+# # remove the 'Total' row
+# age = age[ age['Age Group']!='Total' ]
+# # convert '5%' to 5
+# age['Percent'] = age['Percent'].apply(lambda x: float(x[:-1]))
+# # display a pie chart
+# age_pie = px.pie(age, values='Percent', names='Age Group', title=age.columns[0])
+
+# #### DIET PIE CHART ####
+# diet = pd.read_csv ("./rp_survey_data/age_group.csv", sep='\t')
+# # remove the 'Total' row
+# age = age[ age['Age Group']!='Total' ]
+# # convert '5%' to 5
+# age['Percent'] = age['Percent'].apply(lambda x: float(x[:-1]))
+# # display a pie chart
+# age_pie = px.pie(age, values='Percent', names='Age Group', title=age.columns[0])
 
 
 ##################################
@@ -55,15 +87,10 @@ app.layout = html.Div(children=[
     # '''),
 
     dcc.Graph(
-        id='gender_pie',
-        figure=gender_pie
-    ),
-
-    dcc.Graph(
         id='map_fig',
         figure=map_fig
-    )
-])
+    ),
+] + demo_pies)
 
 if __name__ == '__main__':
     app.run_server(debug=True)
