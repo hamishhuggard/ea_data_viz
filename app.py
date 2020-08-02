@@ -79,14 +79,14 @@ app.layout = html.Div(children=[
                 id='map_fig',
                 figure=map_fig
             )
-        ], style={'width': '45%', 'float': 'right', 'display': 'inline-block'}),
+        ], style={'width': '49%', 'float': 'right', 'display': 'inline-block'}),
 
         html.Div([
             dcc.Graph(
                 id='this_pie',
                 figure=this_pie
             )
-        ], style={'columnCount': 2, 'float': 'left', 'width': '49%', 'display': 'inline-block'}),
+        ], style={'columnCount': 1, 'float': 'left', 'width': '49%', 'display': 'inline-block'}),
     ])
 ])
 
