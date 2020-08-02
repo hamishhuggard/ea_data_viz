@@ -56,18 +56,45 @@ countries = pd.read_csv('./rp_survey_data/country.csv', sep='\t')
 countries = countries[
     ~countries['Country'].isin(['All other stated countries', 'Total respondents'])
 ]
+
+# 
 countries['Responses'] = countries['Responses'].astype('int')
 countries.replace({'UK': 'United Kingdom', 'USA': 'United States'}, inplace=True)
+
+# For location, need ISO codes. Get these from Gapminder.
 gapminder = px.data.gapminder().query("year==2007")
 gapminder['Country'] = gapminder['country']
 countries = countries.merge(gapminder, on='Country', how='left')
+
+# https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo.html
 map_fig = px.scatter_geo(countries, locations="iso_alpha", #color="continent",
                      hover_name="Country", 
+                     # hover_data=['Country', 'Responses'],
                      size="Responses",
-                     # animation_frame="year",
-                     projection="natural earth"
+                     projection="equirectangular" # 'orthographic' is fun
 )
 
+##################################
+###         FUNDING            ###
+##################################
+
+# want source -> cause area -> charity
+funding = pd.DataFrame(columns=['Source', 'Cause Area', 'Organization', 'Amount'])
+op_grants = pd.read_csv('./openphil_grants.csv')
+op_grants = op_grants[['Organization Name', 'Focus Area', 'Amount']]
+op_grants.rename(columns={
+    'Organization Name': 'Organization', 
+    'Focus Area': 'Cause Area', 
+    'Amount': 'Amount'
+}, inplace=True)
+op_grants['Source'] = 'Open Philanthropy'
+funding = funding.append(op_grants)
+print(funding)
+
+
+##################################
+###          LAYOUT            ###
+##################################
 
 app.layout = html.Div(children=[
     html.H1('Effective Altruism Dashboard'),
