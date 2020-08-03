@@ -52,14 +52,15 @@ for table_name in [
 
     pie_fig = px.pie(demo_table, values='Percent', names=title, title=title)#, hovertext='label')
     # pie_fig.update_trace(hovertemplate=)
-    pie_fig.update_traces(hoverinfo='none', textinfo='none')
+    pie_fig.update_traces(hoverinfo='none', textinfo='label')
     pie_fig.update(layout_showlegend=False)
     pie_fig.update_layout(
-        margin=dict(l=50, r=0, t=50, b=200),
+        margin=dict(l=30, r=30, t=0, b=0),
     )
     this_pie = dcc.Graph(
         id=title, #style={'margin': '0%'},
-        figure=pie_fig
+        figure=pie_fig,
+        # style={},
     )
 
     demo_pies.append(this_pie)
@@ -70,24 +71,15 @@ for table_name in [
 
 # source: https://plotly.com/python/bubble-maps/
 
-countries = pd.read_csv('./rp_survey_data/country.csv', sep='\t')
-countries = countries[
-    ~countries['Country'].isin(['All other stated countries', 'Total respondents'])
-]
-
-# 
+countries = pd.read_csv('./rp_survey_data/country2.csv')
 countries['Responses'] = countries['Responses'].astype('int')
-countries.replace({'UK': 'United Kingdom', 'USA': 'United States'}, inplace=True)
-
-# For location, need ISO codes. Get these from Gapminder.
-gapminder = px.data.gapminder().query("year==2007")
-gapminder['Country'] = gapminder['country']
-countries = countries.merge(gapminder, on='Country', how='left')
 
 # https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo.html
-map_fig = px.scatter_geo(countries, locations="iso_alpha", #color="continent",
+map_fig = px.scatter_geo(countries, 
+                     locations="Country", #color="continent",
                      hover_name="Country", 
                      # hover_data=['Country', 'Responses'],
+                     locationmode='country names',
                      size="Responses",
                      projection="equirectangular" # 'orthographic' is fun
 )
@@ -96,7 +88,6 @@ map_fig = px.scatter_geo(countries, locations="iso_alpha", #color="continent",
 ###         FUNDING            ###
 ##################################
 
-# want source -> cause area -> charity
 funding = pd.DataFrame(columns=['Source', 'Cause Area', 'Organization', 'Amount'])
 
 # Parse open philanthropy grants
@@ -145,27 +136,61 @@ funding_fig = go.Figure(data=[go.Sankey(
 ##################################
 
 app.layout = html.Div(children=[
+
+    ## HEADING ##
+
     html.H1('Effective Altruism Dashboard'),
 
-    total_div,
+
+    ## CONTENT ##
+
+    html.Div([
+
+      # LEFT #
+
+      html.Div([
+
+          # Totals
+          total_div,  
+
+          # Demographics
+          html.Div(
+            demo_pies, 
+            style={
+              'columnCount': 2, 
+              # 'padding': '0px 0px 0px 200px',
+            }
+          ),
+
+        ], style={
+          'width': '30%',
+          'background-color': 'red',
+          # 'float': 'left', 
+          # 'display': 'inline-block'
+        }
+      ),
+
+      # MIDDLE #
+
+      html.Div([
+
+          # Map
+          dcc.Graph(
+              id='map_fig',
+              figure=map_fig
+          )
+
+        ], style={
+          'width': '70%', 
+          'background-color': 'blue',
+          # 'float': 'left',
+          # 'display': 'inline-block'
+        }
+      ),
+
+    ]),
 
     dcc.Graph(figure=funding_fig),
-
-    # html.Div('''
-    #     Dash: A web application framework for Python.
-    # '''),
-   html.Div([
-
-        html.Div([
-            dcc.Graph(
-                id='map_fig',
-                figure=map_fig
-            )
-        ], style={'width': '49%', 'float': 'right'}),
-
-        html.Div(demo_pies, style={'columnCount': 2, 'float': 'left', 'padding': '0px 0px 0px 200px',
-        'width': '30%', 'display': 'inline-block'}),
-    ]),
 
 ])
 
