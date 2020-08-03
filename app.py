@@ -53,6 +53,8 @@ for table_name in [
     pie_fig = px.pie(demo_table, values='Percent', names=title, title=title)#, hovertext='label')
     # pie_fig.update_trace(hovertemplate=)
     pie_fig.update_traces(hoverinfo='none', textinfo='label')
+    # pie_fig.update_traces(textposition='inside')
+    pie_fig.update_traces(insidetextorientation='horizontal')
     pie_fig.update(layout_showlegend=False)
     pie_fig.update_layout(
         margin=dict(l=30, r=30, t=0, b=0),
@@ -148,7 +150,8 @@ app.layout = html.Div(children=[
 
       # LEFT #
 
-      html.Div([
+      html.Div(
+        [
 
           # Totals
           total_div,  
@@ -162,17 +165,21 @@ app.layout = html.Div(children=[
             }
           ),
 
-        ], style={
-          'width': '30%',
+        ], 
+        style={
+          'width': '32%',
           'background-color': 'red',
-          # 'float': 'left', 
+          'padding': '10px',
+          # 'height': '500px',
+          'float': 'left', 
           # 'display': 'inline-block'
         }
       ),
 
       # MIDDLE #
 
-      html.Div([
+      html.Div(
+        [
 
           # Map
           dcc.Graph(
@@ -180,17 +187,40 @@ app.layout = html.Div(children=[
               figure=map_fig
           )
 
-        ], style={
-          'width': '70%', 
+        ], 
+        style={
+          'width': '32%', 
           'background-color': 'blue',
-          # 'float': 'left',
+          'padding': '10px',
+          'float': 'left',
+          # 'height': '500px',
           # 'display': 'inline-block'
         }
       ),
 
-    ]),
+      # RIGHT #
 
-    dcc.Graph(figure=funding_fig),
+      html.Div(
+        [
+          dcc.Graph(figure=funding_fig),
+        ], 
+        style={
+          'width': '31%', 
+          'background-color': 'orange',
+          'padding': '10px',
+          'float': 'left',
+          # 'height': '500px',
+          # 'display': 'inline-block'
+        }
+      ),
+
+    ],
+    style={
+      'padding': '10px',
+    }
+    ),
+
+    # 
 
 ])
 
