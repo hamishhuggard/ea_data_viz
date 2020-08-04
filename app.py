@@ -7,6 +7,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import plotly.express as px
 import pandas as pd
 import re
@@ -25,9 +26,9 @@ total_pledged = 10
 total_donated = 1
 
 total_div = html.Div([
-    html.H2(f'{total_eas} Effective Altruists'),
-    html.H3(f'Have donated ${total_donated}'),
-    html.H3(f'And pledged another ${total_pledged}'),
+    html.H4(f'{total_eas} Effective Altruists'),
+    html.H5(f'Have donated ${total_donated}'),
+    html.H5(f'And pledged another ${total_pledged}'),
 ])
 
 ##################################
@@ -57,7 +58,7 @@ for table_name in [
     pie_fig.update_traces(insidetextorientation='horizontal')
     pie_fig.update(layout_showlegend=False)
     pie_fig.update_layout(
-        margin=dict(l=30, r=30, t=0, b=0),
+        margin=dict(l=50, r=50, t=0, b=0),
     )
     this_pie = dcc.Graph(
         id=title, #style={'margin': '0%'},
@@ -66,6 +67,62 @@ for table_name in [
     )
 
     demo_pies.append(this_pie)
+
+demo_pies = []
+labels = ["US", "China", "European Union", "Russian Federation", "Brazil", "India",
+          "Rest of World"]
+
+# Create subplots: use 'domain' type for Pie subplot
+demo_fig = make_subplots(
+  rows=1, cols=2, 
+  specs=[[{'type':'domain'}, {'type':'domain'}]], 
+  subplot_titles=['1980', '2007']
+)
+demo_fig.add_trace(
+  go.Pie(
+    labels=labels, 
+    values=[16, 15, 12, 6, 5, 4, 42], 
+    name="GHG Emissions",
+  ),
+  1, 1
+)
+demo_fig.add_trace(
+  go.Pie(labels=labels, values=[27, 11, 25, 8, 1, 3, 25], name="CO2 Emissions"),
+  1, 2
+)
+
+
+
+# Use `hole` to create a donut-like pie chart
+demo_fig.update_traces(hoverinfo="label+percent")
+
+demo_fig.update_layout(
+    title_text="Global Emissions 1990-2011",
+    # Add annotations in the center of the donut pies.
+    # annotations=[dict(text='GHG', x=0.18, y=0.5, font_size=20, showarrow=False),
+                 # dict(text='CO2', x=0.82, y=0.5, font_size=20, showarrow=False)]
+)
+
+demo_pies.append(dcc.Graph(figure=demo_fig))
+
+
+
+
+
+for table_name in [
+        'age_group', 'diet', 'gender', 'employment', 'ethnicity', 'subject',
+        ]:
+
+    path = f"./rp_survey_data/{table_name}.csv"
+    demo_table = pd.read_csv(path, sep='\t')
+    title = demo_table.columns[0]
+
+    # remove the 'Total' row
+    demo_table = demo_table[ ~demo_table[title].isin(['Total', 'Total respondents']) ]
+    demo_table['label'] = demo_table[title] + demo_table['Percent']
+    # convert '5%' to 5
+    demo_table['Percent'] = demo_table['Percent'].apply(lambda x: float(x[:-1]))
+
 
 ##################################
 ###         WORLD MAP          ###
@@ -84,6 +141,9 @@ map_fig = px.scatter_geo(countries,
                      locationmode='country names',
                      size="Responses",
                      projection="equirectangular" # 'orthographic' is fun
+)
+map_fig.update_layout(
+    margin=dict(l=00, r=00, t=0, b=0),
 )
 
 ##################################
@@ -141,7 +201,12 @@ app.layout = html.Div(children=[
 
     ## HEADING ##
 
-    html.H1('Effective Altruism Dashboard'),
+    html.H1(
+      'Effective Altruism Dashboard',
+      style={
+          'float': 'center',
+      }
+    ),
 
 
     ## CONTENT ##
@@ -160,14 +225,14 @@ app.layout = html.Div(children=[
           html.Div(
             demo_pies, 
             style={
-              'columnCount': 2, 
+              'columnCount': 1, 
               # 'padding': '0px 0px 0px 200px',
             }
           ),
 
         ], 
         style={
-          'width': '32%',
+          'width': '25%',
           'background-color': 'red',
           'padding': '10px',
           # 'height': '500px',
@@ -189,7 +254,7 @@ app.layout = html.Div(children=[
 
         ], 
         style={
-          'width': '32%', 
+          'width': '40%', 
           'background-color': 'blue',
           'padding': '10px',
           'float': 'left',
@@ -205,7 +270,7 @@ app.layout = html.Div(children=[
           dcc.Graph(figure=funding_fig),
         ], 
         style={
-          'width': '31%', 
+          'width': '30%', 
           'background-color': 'orange',
           'padding': '10px',
           'float': 'left',
@@ -216,7 +281,7 @@ app.layout = html.Div(children=[
 
     ],
     style={
-      'padding': '10px',
+      # 'padding': '10px',
     }
     ),
 

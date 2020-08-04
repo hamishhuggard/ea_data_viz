@@ -34,13 +34,3 @@ We'd also like to do a map in the style of [Gapminder](https://www.gapminder.org
 
 ### Global Poverty
  - [Global poverty](https://sdg-tracker.org/no-poverty)
-
-# Schedule
-
-- 12pm Orientation and setup
-- 1pm Lunch
-- 2pm Total + Demographics + Map
-- 3pm Sankey Diagram
-- 4pm Growth
-- 5pm Write up for EA Forums
-- 6pm Dinner
