@@ -122,7 +122,8 @@ froms = list(funding_long['From'].map(entity2idx))
 tos = list(funding_long['To'].map(entity2idx))
 
 # Create Sankey diagram
-funding_fig = go.Figure(data=[go.Sankey(
+funding_fig = go.Figure(
+  data=[go.Sankey(
     node = dict(
       pad = 15,
       thickness = 20,
@@ -134,7 +135,15 @@ funding_fig = go.Figure(data=[go.Sankey(
       source = froms, 
       target = tos,
       value = funding_long['Amount']
-  ))])
+    )
+  )],
+  # config={
+  #   'displayModeBar': False,
+  # }
+)
+funding_fig.update_layout(
+  margin=dict(l=0, r=0, t=0, b=0),
+)
 
 ##################################
 ###           TOTALS           ###

@@ -50,13 +50,25 @@ map_fig = px.scatter_geo(countries,
                      # hover_data=['Country', 'Responses'],
                      locationmode='country names',
                      size="Responses",
-                     projection="equirectangular" # 'orthographic' is fun
+                     projection="equirectangular", # 'orthographic' is fun
+                     height=150,
+        # config={
+        #     'displayModeBar': False,
+        # },
 )
 map_fig.update_layout(
-    margin=dict(l=00, r=00, t=0, b=0),
+    margin=dict(l=0, r=0, t=0, b=0),
 )
-
-
+map_fig.update_geos(
+    # resolution=50,
+    showcoastlines=False, 
+    # coastlinecolor="RebeccaPurple",
+    # showland=True, 
+    landcolor="LightBlue",
+    # showocean=False,#True, oceancolor="LightBlue",
+    # showlakes=True, lakecolor="Blue",
+    # showrivers=True, rivercolor="Blue"
+)
 
 ##################################
 ###          LAYOUT            ###
@@ -84,23 +96,29 @@ app.layout = html.Div(children=[
         [
 
           # Totals
-          total_div,  
+          # total_div,  
+
+          # Map
+          dcc.Graph(
+              id='map_fig',
+              figure=map_fig
+          ),
 
           # Demographics
           html.Div(
             demo_pies, 
             style={
-              'columnCount': 6, 
+              'columnCount': 2, 
               # 'padding': '0px 0px 0px 200px',
             }
           ),
 
         ], 
         style={
-          'width': '98%',
+          'width': '30%',
           # 'background-color': 'red',
           'padding': '10px',
-          'height': '400px',
+          # 'height': '400px',
           'float': 'left', 
           # 'display': 'inline-block'
         }
@@ -111,11 +129,6 @@ app.layout = html.Div(children=[
       html.Div(
         [
 
-          # Map
-          dcc.Graph(
-              id='map_fig',
-              figure=map_fig
-          )
 
         ], 
         style={

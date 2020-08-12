@@ -14,7 +14,12 @@ from glob import glob
 
 demo_pies = []
 for table_name in [
-        'age_group', 'diet', 'gender', 'employment', 'ethnicity', 'subject',
+        'gender', 
+        'age_group', 
+        'diet', 
+        'ethnicity', 
+        'employment', 
+        'subject',
         ]:
 
     path = f"./data/rp_survey_data/{table_name}.csv"
@@ -29,10 +34,10 @@ for table_name in [
 
 
     subs = {
-        'Eat meat, but try to reduce the amount  ': 'Reduce',
-        'Eat meat': 'Meat',
-        'Vegetarian': 'Veg.',
-        'Pescetarian': 'Pesc.',
+        'Eat meat, but try to reduce the amount  ': 'Reduce',#tarian',
+        # 'Eat meat': 'Meat',
+        # 'Vegetarian': 'Veg.',
+        # 'Pescetarian': 'Pesc.',
         'Other (please specify)': 'Other',
 
         'Native Hawaiian or Other Pacific Islander': 'Other',
@@ -53,33 +58,49 @@ for table_name in [
 
         'Employed, Full-Time': 'Employed',
         'Student, Full-Time': 'Student',
-        'Employed, Part-Time': 'Part-Timte',
+        'Employed, Part-Time': 'Part-Time',
         'Not employed, but looking for work': 'Unemployed',
         'Student, Part-Time': 'Student',
-        'Not employed, but not looking for work': 'Not looking for work',
+        'Not employed, but not looking for work': 'Other',
+        'Homemaker ': 'Other',
+        'Student, Part-Time': 'Student',
+        'Self-Employed': 'Self-Employ',
 
         'Age Group': 'Age',
         'Employment Type': 'Employment',
         'Race/Ethnicitiy': 'Ethnicity',
         'Subject Studied': 'Subject',
+
+        # '13-17': '13-17yo'
+        # 18-24
+        # 25-34
+        # 35-44
+        # 45-54
+        # 55-64
+        # 65+
     }
     demo_table['label'] = demo_table[title].map(subs).fillna(demo_table[title])
+
+    if title in ['Gender', 'Race/Ethnicity']:
+        height=120
+    else:
+        height=150
 
     pie_fig = px.bar(
         demo_table, 
         y='label', 
         x='Percent', 
-        title=title,
+        title='',#title,
         hover_data={
             # title: True,
             'Percent': True,
             # 'label': False
         },
-        height=300,
+        height=height,
         orientation='h',
         labels={
-            'label': '',
-            'Percent': '',
+            'label': title,
+            'Percent': 'Percentage',
         },
         # layout={
         #     'l': 0,
@@ -95,11 +116,16 @@ for table_name in [
     # pie_fig.update_traces(insidetextorientation='horizontal')
     # pie_fig.update(layout_showlegend=False)
     pie_fig.update_layout(
-        margin=dict(l=0, r=0, t=0, b=0),
+        margin=dict(l=0, r=0, t=10, b=0),
+        xaxis=dict(title=''),
+        yaxis=dict(title=''),
     )
     this_pie = dcc.Graph(
         id=title, #style={'margin': '0%'},
         figure=pie_fig,
+        config={
+            'displayModeBar': False,
+        },
         # style={},
     )
 
