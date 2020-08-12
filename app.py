@@ -25,13 +25,11 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 ##################################
 
 total_eas = 100
-total_pledged = 10
-total_donated = 1
 
 total_div = html.Div([
     html.H4(f'{total_eas} Effective Altruists'),
-    html.H5(f'Have donated ${total_donated}'),
-    html.H5(f'And pledged another ${total_pledged}'),
+    html.H5(f'Have donated ${TOTAL_PLEDGED}'),
+    html.H5(f'And pledged another ${TOTAL_DONATED}'),
 ])
 
 

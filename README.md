@@ -34,3 +34,15 @@ We'd also like to do a map in the style of [Gapminder](https://www.gapminder.org
 
 ### Global Poverty
  - [Global poverty](https://sdg-tracker.org/no-poverty)
+
+## TODO:
+ - Find colors that represent:
+   - EA in general
+   - Open Philanthropy
+   - GiveWell
+   - AMF
+ - Graphical representations of growth
+ - From Rethink Priorities:
+   - Check if there is more recent growth data
+   - Get donations data
+   - GiveDirectly
