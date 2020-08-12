@@ -90,17 +90,17 @@ app.layout = html.Div(children=[
           html.Div(
             demo_pies, 
             style={
-              'columnCount': 1, 
+              'columnCount': 6, 
               # 'padding': '0px 0px 0px 200px',
             }
           ),
 
         ], 
         style={
-          'width': '25%',
-          'background-color': 'red',
+          'width': '98%',
+          # 'background-color': 'red',
           'padding': '10px',
-          # 'height': '500px',
+          'height': '400px',
           'float': 'left', 
           # 'display': 'inline-block'
         }
@@ -120,7 +120,7 @@ app.layout = html.Div(children=[
         ], 
         style={
           'width': '40%', 
-          'background-color': 'blue',
+          # 'background-color': 'blue',
           'padding': '10px',
           'float': 'left',
           # 'height': '500px',
@@ -135,8 +135,8 @@ app.layout = html.Div(children=[
           dcc.Graph(figure=funding_fig),
         ], 
         style={
-          'width': '30%', 
-          'background-color': 'orange',
+          'width': '50%', 
+          # 'background-color': 'orange',
           'padding': '10px',
           'float': 'left',
           # 'height': '500px',

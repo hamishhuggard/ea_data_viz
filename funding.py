@@ -24,7 +24,7 @@ op_grants = pd.read_csv('./data/openphil_grants.csv')
 # standard names from https://80000hours.org/topic/causes/
 subs = {
   'Potential Risks from Advanced Artificial Intelligence': 'AI',
-  'History of Philanthropy': 'Meta',
+  'History of Philanthropy': 'Other',
   'Immigration Policy': 'Policy',
   'Macroeconomic Stabilization Policy': 'Policy',
   'Land Use Reform': 'Policy',
@@ -38,12 +38,15 @@ subs = {
 }
 op_grants['Cause Area'] = op_grants['Focus Area'].map(subs).fillna(op_grants['Focus Area'])
 
+subs = {
+  'Johns Hopkins Center for Health Security': 'JHCHS',
+  'Against Malaria Foundation': 'AMF',
+  'Georgetown University': 'GU',
+}
+op_grants['Organization'] = op_grants['Organization Name'].map(subs).fillna(op_grants['Organization Name'])
+
 # Standardise Column Names
-op_grants = op_grants[['Organization Name', 'Cause Area', 'Amount']]
-op_grants.rename(columns={
-    'Focus Area': 'Cause Area', 
-    'Amount': 'Amount'
-}, inplace=True)
+op_grants = op_grants[['Organization', 'Cause Area', 'Amount']]
 op_grants['Source'] = 'Open Philanthropy'
 funding = funding.append(op_grants)
 
@@ -67,10 +70,15 @@ funding['Amount'] = funding['Amount'].apply(lambda x: int(x[1:].replace(',', '')
 
 funding_long = pd.DataFrame(columns=['From', 'To', 'Amount', 'Source'])
 
-# Source -> Cause pairs
-source_cause_pairs = set(zip(funding['Source'], funding['Cause Area']))
-for source, cause in source_cause_pairs:
-  source_cause_df = funding[ (funding['Source']==source) & (funding['Cause Area']==cause) ]
+for source, cause in set(zip(
+    funding['Source'], 
+    funding['Cause Area']
+  )):
+
+  source_cause_df = funding[ 
+    (funding['Source']==source) & \
+    (funding['Cause Area']==cause) 
+  ]
   total_funding = source_cause_df['Amount'].sum()
   funding_long.loc[len(funding_long)] = [
     source,
@@ -79,9 +87,28 @@ for source, cause in source_cause_pairs:
     source
   ]
 
-print(funding_long)
-
-# Cause -> Org pairs
+  other_total = 0
+  for org in source_cause_df['Organization'].unique():
+    org_df = source_cause_df[ 
+      (source_cause_df['Organization']==org)
+    ]
+    total_funding = org_df['Amount'].sum()
+    if total_funding < 3*10**7:
+      other_total += total_funding
+      continue
+    funding_long.loc[len(funding_long)] = [
+      cause,
+      org,
+      total_funding,
+      source
+    ]
+  if other_total > 0:
+    funding_long.loc[len(funding_long)] = [
+      cause,
+      'Others',
+      other_total,
+      source
+    ]
 
 # Get a list of all funding-related entities
 entities = set()

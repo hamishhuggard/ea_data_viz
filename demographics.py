@@ -75,21 +75,28 @@ for table_name in [
             'Percent': True,
             # 'label': False
         },
-        # height=200,
+        height=300,
         orientation='h',
         labels={
             'label': '',
             'Percent': '',
-        }
+        },
+        # layout={
+        #     'l': 0,
+        #     'r': 0,
+        #     'b': 0,
+        #     't': 0,
+        # }
+
     )#, hovertext='label')
     # # pie_fig.update_trace(hovertemplate=)
     # pie_fig.update_traces(hoverinfo='none', textinfo='label')
     # # pie_fig.update_traces(textposition='inside')
     # pie_fig.update_traces(insidetextorientation='horizontal')
     # pie_fig.update(layout_showlegend=False)
-    # pie_fig.update_layout(
-    #     margin=dict(l=50, r=50, t=0, b=0),
-    # )
+    pie_fig.update_layout(
+        margin=dict(l=0, r=0, t=0, b=0),
+    )
     this_pie = dcc.Graph(
         id=title, #style={'margin': '0%'},
         figure=pie_fig,

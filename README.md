@@ -36,13 +36,16 @@ We'd also like to do a map in the style of [Gapminder](https://www.gapminder.org
  - [Global poverty](https://sdg-tracker.org/no-poverty)
 
 ## TODO:
- - Find colors that represent:
+ - How to get rid of white space around the graphs?
+ - Find hex values of colors that represent:
    - EA in general
    - Open Philanthropy
-   - GiveWell
-   - AMF
+   - GiveWell?
+   - AMF?
  - Graphical representations of growth
+ - Is it possible to change the map colors to EA colors?
  - From Rethink Priorities:
    - Check if there is more recent growth data
    - Get donations data
    - GiveDirectly
+ - A small "learn more" panel at the bottom with links to CEA, 80kH, OP, etc 
