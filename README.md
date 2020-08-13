@@ -42,6 +42,10 @@ We'd also like to do a map in the style of [Gapminder](https://www.gapminder.org
    - GiveWell?
    - AMF?
  - Graphical representations of growth
+ - Apply EA colours to everything
+ - Apply org-specific colors to sankey diagram
+ - Choose growth data
+ - Create growth plot
  - From Rethink Priorities:
    - Check if there is more recent growth data
    - Get donations data
