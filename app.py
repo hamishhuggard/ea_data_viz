@@ -32,7 +32,7 @@ total_div = html.Div([
     html.H5(f'And pledged another ${TOTAL_DONATED}'),
 ])
 
-
+# nothing
 
 ##################################
 ###         WORLD MAP          ###
