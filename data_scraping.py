@@ -8,8 +8,12 @@ def url_to_soup(url):
 
 def download_op_grants():
     openphil_url = 'https://www.openphilanthropy.org/giving/grants/spreadsheet'
+    return requests.get(openphil_url, headers={'User-Agent': ''})
 
 def download_ea_funds_grants():
+    '''
+    this doesn't work because the page isn't static
+    '''
     fund_names = [
         'global-development',
         'animal-welfare',

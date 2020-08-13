@@ -7,6 +7,7 @@ import plotly.express as px
 import pandas as pd
 import re
 from glob import glob
+import os
 
 ##################################
 ###         FUNDING            ###
@@ -53,6 +54,50 @@ funding = funding.append(op_grants)
 # Parse funding amounts
 funding['Amount'] = funding['Amount'].apply(lambda x: int(x[1:].replace(',', '') if type(x)==str else 0)).astype('int')
 
+##################################
+###          EA FUNDS          ###
+##################################
+
+ea_funds = pd.DataFrame(columns=['Source', 'Cause Area', 'Organization', 'Amount'])
+
+for path in glob('./data/ea_funds/*.txt'):
+
+  # Extract title
+  title = os.path.basename(path)
+  title = title[:-4]
+  title = title.replace('_',' ')
+  title = title.title()
+
+  # Get text
+  with open(path) as f:
+    lines = f.read().split('\n')
+
+  for line in lines:
+    pattern = '\$([\d,.]+) \- ([ \w\d])+: ([ \w]+)'
+    amount, date, org = re.match(pattern, line).groups()
+  ea_funds.loc[len(ea_funds)] = [
+    'EA Funds',
+    title,
+    org,
+    int(amount[:-3].replace(',',''))
+  ]
+
+ea_funds['Cause Area'] = ea_funds['Cause Area'].map({
+  'Ea Community': 'Meta',
+  'Global Development': 'Global Poverty',
+  'Far Future': 'Far Future',
+  'Animal Welfare': 'Animal Welfare',
+})
+
+funding = pd.concat([ea_funds, funding])
+
+##################################
+###  GWWC AND FOUNDERS PLEDGE  ###
+##################################
+
+other_df = pd.read_csv('data/misc.csv')
+
+funding = pd.concat([other_df, funding])
 ##################################
 ###       SANKEY DIAGRAM       ###
 ##################################
