@@ -16,9 +16,9 @@ demo_pies = []
 for table_name in [
         'gender', 
         'age_group', 
-        'diet', 
-        'ethnicity', 
         'employment', 
+        'ethnicity', 
+        'diet', 
         'subject',
         ]:
 
@@ -45,16 +45,19 @@ for table_name in [
         'Black or African American': 'Black',
         'Hispanic, Latino or Spanish Origin': 'Latino',
 
-        # 'Sciences': 'Sci',
-        'Engineering': 'Eng',
-        'Psychology': 'Psych',
         'Computer Science': 'CS',
-        'Professional or vocational qualification': 'Vocation',
-        'Economics': 'Econ',
-        'Arts & Humanities': 'Arts',
+        'Math': 'Math',
+        # 'Economics': 'Econ',
+        'Social Science': 'Soc. Sci.',
         # 'Philosophy': 'Phil',
-        'Social Science': 'Social Sci',
-        # 'Medicine': 'Med',
+        # 'Psychology': 'Science',#'Psych',
+        'Arts & Humanities': 'Arts',
+        'Sciences': 'Other',
+        'Engineering': 'Other',
+        'Physics': 'Other',
+        'Psychology': 'Other',
+        'Medicine': 'Other',
+        'Professional or vocational qualification': 'Other',
 
         'Employed, Full-Time': 'Employed',
         'Student, Full-Time': 'Student',
@@ -83,8 +86,10 @@ for table_name in [
 
     if title in ['Gender', 'Race/Ethnicity']:
         height=120
+    elif title in ['Subject Studied', 'Employment']:
+        height = 180
     else:
-        height=150
+        height=140
 
     pie_fig = px.bar(
         demo_table, 
