@@ -15,6 +15,7 @@ from glob import glob
 
 from funding import *
 from demographics import *
+from growth import *
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
