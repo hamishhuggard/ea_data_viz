@@ -151,7 +151,7 @@ app.layout = html.Div(children=[
       html.Div(
         [
           dcc.Graph(figure=funding_fig),
-        ], 
+        ] + growing_figs, 
         style={
           'width': '50%', 
           # 'background-color': 'orange',
