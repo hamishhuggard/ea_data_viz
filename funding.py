@@ -172,13 +172,14 @@ funding_fig = go.Figure(
     node = dict(
       pad = 15,
       thickness = 20,
-      line = dict(color = "black", width = 0.5),
+      line = dict(color = "#4196AA", width = 1),
       label = entities,
-      color = "blue"
+      color = "#4196AA"
     ),
     link = dict(
       source = froms, 
       target = tos,
+      color = "#C1E3EA",
       value = funding_long['Amount']
     )
   )],

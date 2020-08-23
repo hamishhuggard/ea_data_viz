@@ -46,10 +46,13 @@ countries['Responses'] = countries['Responses'].astype('int')
 # https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo.html
 map_fig = px.scatter_geo(countries, 
                      locations="Country", #color="continent",
-                     hover_name="Country", 
+                     hover_name="Country",
                      # hover_data=['Country', 'Responses'],
                      locationmode='country names',
                      size="Responses",
+                     #marker = dict(
+            #color ="#36859A",
+        #),
                      projection="equirectangular", # 'orthographic' is fun
                      height=150,
         # config={
@@ -64,7 +67,8 @@ map_fig.update_geos(
     showcoastlines=False, 
     # coastlinecolor="RebeccaPurple",
     # showland=True, 
-    landcolor="LightBlue",
+    landcolor="#B8C8D3",
+    #color="#36859A",
     # showocean=False,#True, oceancolor="LightBlue",
     # showlakes=True, lakecolor="Blue",
     # showrivers=True, rivercolor="Blue"
