@@ -12,17 +12,9 @@ from glob import glob
 ###       DEMOGRAPHICS         ###
 ##################################
 
-demo_pies = []
-for table_name in [
-        'gender', 
-        'age_group', 
-        'employment', 
-        'ethnicity', 
-        'diet', 
-        'subject',
-        ]:
+def get_demo_table(demo_name):
 
-    path = f"./data/rp_survey_data/{table_name}.csv"
+    path = f"./data/rp_survey_data/{demo_name}.csv"
     demo_table = pd.read_csv(path, sep='\t')
     title = demo_table.columns[0]
 
@@ -33,48 +25,48 @@ for table_name in [
     demo_table['Percent'] = demo_table['Percent'].apply(lambda x: float(x[:-1]))
 
 
+
     subs = {
-        'Eat meat, but try to reduce the amount  ': 'Reduce',#tarian',
+        'Eat meat, but try to reduce the amount  ': 'Reducetarian',
         # 'Eat meat': 'Meat',
         # 'Vegetarian': 'Veg.',
         # 'Pescetarian': 'Pesc.',
         'Other (please specify)': 'Other',
 
-        'Native Hawaiian or Other Pacific Islander': 'Other',
-        'American Indian or Alaskan Native': 'Other',
+        'Native Hawaiian or Other Pacific Islander': 'Pacific Island', # 'Other',
+        'American Indian or Alaskan Native': 'Native American', # 'Other',
         'Black or African American': 'Black',
         'Hispanic, Latino or Spanish Origin': 'Latino',
 
-        'Computer Science': 'CS',
+        # 'Computer Science': 'CS',
         'Math': 'Math',
         # 'Economics': 'Econ',
-        'Social Science': 'Soc. Sci.',
+        # 'Social Science': 'Soc. Sci.',
         # 'Philosophy': 'Phil',
         # 'Psychology': 'Science',#'Psych',
-        'Arts & Humanities': 'Arts',
-        'Sciences': 'Other',
-        'Engineering': 'Other',
-        'Physics': 'Other',
-        'Psychology': 'Other',
-        'Medicine': 'Other',
-        'Professional or vocational qualification': 'Other',
+        # 'Arts & Humanities': 'Arts',
+        # 'Sciences': 'Other',
+        # 'Engineering': 'Other',
+        # 'Physics': 'Other',
+        # 'Psychology': 'Other',
+        # 'Medicine': 'Other',
+        'Professional or vocational qualification': 'Professional/Vocational',
 
-        'Employed, Full-Time': 'Employed',
-        'Student, Full-Time': 'Student',
-        'Employed, Part-Time': 'Part-Time',
-        'Not employed, but looking for work': 'Unemployed',
-        'Student, Part-Time': 'Student',
-        'Not employed, but not looking for work': 'Other',
-        'Homemaker ': 'Other',
-        'Student, Part-Time': 'Student',
-        'Self-Employed': 'Self-Employ',
+        'Employed, Full-Time': 'Employed (FT)',
+        'Student, Full-Time': 'Student (FT)',
+        'Employed, Part-Time': 'Employed (PT)',
+        'Not employed, but looking for work': 'Seeking employment',
+        'Student, Part-Time': 'Student (PT)',
+        'Not employed, but not looking for work': 'Not employed',
+        # 'Homemaker ': 'Other',
+        # 'Student, Part-Time': 'Student',
+        # 'Self-Employed': 'Self-Employ',
 
-        'Age Group': 'Age',
-        'Employment Type': 'Employment',
-        'Race/Ethnicitiy': 'Ethnicity',
-        'Subject Studied': 'Subject',
 
-        # '13-17': '13-17yo'
+        'Consequentialism (utilitarian)': 'Utilitarianism',
+        'Consequentualism (other than utilitarian)': 'Consequentialism',
+
+        # '13-17': '13-17'
         # 18-24
         # 25-34
         # 35-44
@@ -82,22 +74,33 @@ for table_name in [
         # 55-64
         # 65+
     }
+    max_chars = 20
     demo_table['label'] = demo_table[title].map(subs).fillna(demo_table[title])
+    demo_table['label'] = demo_table['label'].apply(lambda x: x.rjust(max_chars))
 
-    if title in ['Gender', 'Race/Ethnicity']:
-        height=120
-    elif title in ['Subject Studied', 'Employment']:
-        height = 180
-    else:
-        height=140
+    # Normalise title
+    title_subs = {
+        'Age Group': 'Age',
+        'Employment Type': 'Employment',
+        'Race/Ethnicity': 'Ethnicity',
+        'Subject Studied': 'Subject Studied',
+        'Moral View': 'Moral View',
+        'Gender': 'Gender',
+        'Diet ': 'Diet',
+        'Education': 'Education',
+    }
+    title = title_subs[title]
 
-    pie_fig = px.bar(
+    height_per_bar = 20 if len(demo_table) > 10 else 23
+    height = height_per_bar * len(demo_table) + 30
+
+    bar_fig = px.bar(
         demo_table, 
         y='label', 
         x='Percent', 
-        title='',#title,
+        title=title,
         hover_data={
-            # title: True,
+            # 'title': True,
             'Percent': True,
             # 'label': False
         },
@@ -107,31 +110,99 @@ for table_name in [
             'label': title,
             'Percent': 'Percentage',
         },
-        # layout={
-        #     'l': 0,
-        #     'r': 0,
-        #     'b': 0,
-        #     't': 0,
-        # }
-
-    )#, hovertext='label')
-    # # pie_fig.update_trace(hovertemplate=)
-    # pie_fig.update_traces(hoverinfo='none', textinfo='label')
-    # # pie_fig.update_traces(textposition='inside')
-    # pie_fig.update_traces(insidetextorientation='horizontal')
-    # pie_fig.update(layout_showlegend=False)
-    pie_fig.update_layout(
-        margin=dict(l=0, r=0, t=10, b=0),
+    )
+    bar_fig.update_layout(
+        margin=dict(l=0, r=0, t=30, b=0),
         xaxis=dict(title=''),
         yaxis=dict(title=''),
+        font=dict(
+            # family="Courier New, monospace",
+            size=8,
+            # color="RebeccaPurple"
+        )
     )
-    this_pie = dcc.Graph(
+    this_bar = dcc.Graph(
         id=title, #style={'margin': '0%'},
-        figure=pie_fig,
+        figure=bar_fig,
         config={
             'displayModeBar': False,
         },
         # style={},
     )
 
-    demo_pies.append(this_pie)
+    return this_bar
+
+demo_names = [
+        'gender', 
+        'age_group', 
+        'employment', 
+        'ethnicity', 
+        'diet', 
+        'subject',
+        'moral_view',
+        'education2',
+]
+
+demo_bars = {
+    demo_name: get_demo_table(demo_name)
+    for demo_name in demo_names
+}
+
+demo_div = html.Div(
+    [
+        html.Div(
+            html.H2('Demographics'),
+            style = {
+                'width': '100%',
+            }
+        ),
+        html.Div(
+            [
+                demo_bars['gender'],
+                demo_bars['age_group'],
+                demo_bars['ethnicity'],
+
+            ],
+            className='demo-column',
+            style = {
+                # 'background-color': 'yellow',
+            }
+        ), 
+
+        html.Div(
+            [
+                demo_bars['diet'],
+                demo_bars['employment'],
+            ],
+            className='demo-column',
+            style = {
+                # 'background-color': 'red',
+            }
+        ), 
+
+        html.Div(
+            [
+                demo_bars['subject'],
+                demo_bars['education2'],
+            ],
+            className='demo-column',
+            # style = {
+            #     # 'background-color': 'yellow',
+            # }
+        ),
+        html.Div(
+            [
+                demo_bars['moral_view'],
+            ],
+            className='demo-column',
+            # style = {
+            #     # 'background-color': 'yellow',
+            # }
+        ),
+
+
+    ],
+    style = {
+        'height': '100vh',
+    }
+)

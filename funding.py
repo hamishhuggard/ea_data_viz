@@ -15,6 +15,8 @@ import os
 
 funding = pd.DataFrame(columns=['Source', 'Cause Area', 'Organization', 'Amount'])
 
+# funding.loc[0, :] = ['$1M', '', '', 1000000]
+
 ##################################
 ###      OPEN PHILANTHROPY     ###
 ##################################
@@ -49,10 +51,11 @@ op_grants['Organization'] = op_grants['Organization Name'].map(subs).fillna(op_g
 # Standardise Column Names
 op_grants = op_grants[['Organization', 'Cause Area', 'Amount']]
 op_grants['Source'] = 'Open Philanthropy'
+# Parse funding amounts
+op_grants['Amount'] = op_grants['Amount'].apply(lambda x: int(x[1:].replace(',', '') if type(x)==str else 0)).astype('int')
+
 funding = funding.append(op_grants)
 
-# Parse funding amounts
-funding['Amount'] = funding['Amount'].apply(lambda x: int(x[1:].replace(',', '') if type(x)==str else 0)).astype('int')
 
 ##################################
 ###          EA FUNDS          ###
@@ -166,6 +169,12 @@ entity2idx = {x: i for i,x in enumerate(entities)}
 froms = list(funding_long['From'].map(entity2idx))
 tos = list(funding_long['To'].map(entity2idx))
 
+entities += ["$100M"]
+froms += [ len(entity2idx) ]
+tos += [ len(entity2idx) ]
+
+values = funding_long['Amount'].to_list() + [1e8]
+
 # Create Sankey diagram
 funding_fig = go.Figure(
   data=[go.Sankey(
@@ -180,7 +189,7 @@ funding_fig = go.Figure(
       source = froms, 
       target = tos,
       color = "#C1E3EA",
-      value = funding_long['Amount']
+      value = values
     )
   )],
   # config={

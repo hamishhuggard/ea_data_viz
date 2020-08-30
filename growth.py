@@ -64,7 +64,7 @@ for df in [commiting, doing, joining, reading]:
 	for row in range(len(df)):
 		label = df.loc[row, 'Type of data']
 		values = df.loc[row, years]
-		if df==reading:
+		if df is reading:
 			values = values
 		else:
 			values = np.nancumsum(values)
