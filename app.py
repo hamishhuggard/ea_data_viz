@@ -50,6 +50,10 @@ app.layout = html.Div(children=[
       [
           html.Div(
             [
+                html.Img(
+                  src='https://effectivealtruism.nz/wp-content/uploads/2018/02/lightbulblogo-1.png',
+                  # width=200,
+                ),
                 html.H1(
                   [
                     html.Span(
@@ -69,6 +73,12 @@ app.layout = html.Div(children=[
                   style = {
                     'font-family': 'Roboto Slab',
                     # 'font-weight': '700',
+                  }
+                ),
+                html.H3(
+                  'Data Visualizer',
+                  style = {
+                    'font-family': 'Raleway',
                   }
                 )
             ],
