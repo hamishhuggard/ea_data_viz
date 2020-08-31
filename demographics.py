@@ -154,6 +154,7 @@ demo_div = html.Div(
             html.H2('Demographics'),
             style = {
                 'width': '100%',
+                'font-family': 'RaleWay',
             }
         ),
         html.Div(

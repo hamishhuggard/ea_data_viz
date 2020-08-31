@@ -50,7 +50,27 @@ app.layout = html.Div(children=[
       [
           html.Div(
             [
-                html.H1('Effective Altruism')
+                html.H1(
+                  [
+                    html.Span(
+                      'Effective ',
+                      style = {
+                        'font-weight': '700',
+                      }
+                    ),
+                    html.Span(
+                      'Altruism',
+                      style = {
+                        'font-weight': '400',
+                      }
+                    )
+                  ],
+                  # 'Effective Altruism',
+                  style = {
+                    'font-family': 'Roboto Slab',
+                    # 'font-weight': '700',
+                  }
+                )
             ],
             style = {
               'margin': '0',
