@@ -157,6 +157,11 @@ demo_div = html.Div(
                 'font-family': 'RaleWay',
             }
         ),
+        html.P(
+            'There are about {} active members of the '.format(6500) + \ 
+            'Effective Altruism community. Who are they?'
+            # source: https://www.rethinkpriorities.org/blog/2020/6/26/ea-survey-2019-series-how-many-people-are-there-in-the-ea-community
+        ),
         html.Div(
             [
                 demo_bars['gender'],
