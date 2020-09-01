@@ -61,36 +61,43 @@ funding = funding.append(op_grants)
 ###          EA FUNDS          ###
 ##################################
 
-ea_funds = pd.DataFrame(columns=['Source', 'Cause Area', 'Organization', 'Amount'])
+ea_funds = pd.read_csv('./data/ea_funds_grants.csv')
+ea_funds['Source'] = 'EA Funds'
+ea_funds['Cause Area'] = ea_funds['fund']
+ea_funds['Organization'] = 'Unknowns'
+ea_funds['Amount'] = ea_funds['amount']
+ea_funds = ea_funds[['Source', 'Cause Area', 'Organization', 'Amount']]
 
-for path in glob('./data/ea_funds/*.txt'):
+# ea_funds = pd.DataFrame(columns=['Source', 'Cause Area', 'Organization', 'Amount'])
 
-  # Extract title
-  title = os.path.basename(path)
-  title = title[:-4]
-  title = title.replace('_',' ')
-  title = title.title()
+# for path in glob('./data/ea_funds/*.txt'):
 
-  # Get text
-  with open(path) as f:
-    lines = f.read().split('\n')
+#   # Extract title
+#   title = os.path.basename(path)
+#   title = title[:-4]
+#   title = title.replace('_',' ')
+#   title = title.title()
 
-  for line in lines:
-    pattern = '\$([\d,.]+) \- ([ \w\d])+: ([ \w]+)'
-    amount, date, org = re.match(pattern, line).groups()
-  ea_funds.loc[len(ea_funds)] = [
-    'EA Funds',
-    title,
-    org,
-    int(amount[:-3].replace(',',''))
-  ]
+#   # Get text
+#   with open(path) as f:
+#     lines = f.read().split('\n')
 
-ea_funds['Cause Area'] = ea_funds['Cause Area'].map({
-  'Ea Community': 'Meta',
-  'Global Development': 'Global Poverty',
-  'Far Future': 'Far Future',
-  'Animal Welfare': 'Animal Welfare',
-})
+#   for line in lines:
+#     pattern = '\$([\d,\.]+) \- ([ \w\d])+: ([ \w]+)'
+#     amount, date, org = re.match(pattern, line).groups()
+#   ea_funds.loc[len(ea_funds)] = [
+#     'EA Funds',
+#     title,
+#     org,
+#     int(amount[:-3].replace(',',''))
+#   ]
+
+# ea_funds['Cause Area'] = ea_funds['Cause Area'].map({
+#   'Ea Community': 'Meta',
+#   'Global Development': 'Global Poverty',
+#   'Far Future': 'Far Future',
+#   'Animal Welfare': 'Animal Welfare',
+# })
 
 funding = pd.concat([ea_funds, funding])
 
