@@ -51,3 +51,33 @@ We'd also like to do a map in the style of [Gapminder](https://www.gapminder.org
    - Get donations data
    - GiveDirectly
  - A small "learn more" panel at the bottom with links to CEA, 80kH, OP, etc 
+
+Path to MVP:
+- Give every section a header
+- Make the map a reasonable size
+- Put the timelines together
+- Gather the demographics into somehting reasonable
+- Fix the "others" and "unknowns" in the funding graph
+- EA Funds 
+
+Fix:
+- countries bar chart scroll
+- circles on map are too small
+- "Geography" is right aligned
+
+Bar charts:
+- Demographics
+  - gender
+  - ethnicity
+  - age
+- Education
+  - education2
+  - subject
+- Career
+  - Career\_path
+  - employment
+- Beliefs
+  - political\_belief
+  - moral\_view
+  - diet
+
