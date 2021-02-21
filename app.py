@@ -29,9 +29,9 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 total_eas = 100
 
 total_div = html.Div([
-    html.H4(f'{total_eas} Effective Altruists'),
-    html.H5(f'Have donated ${TOTAL_PLEDGED}'),
-    html.H5(f'And pledged another ${TOTAL_DONATED}'),
+    html.H4('{total_eas} Effective Altruists'),
+    html.H5('Have donated ${TOTAL_PLEDGED}'),
+    html.H5('And pledged another ${TOTAL_DONATED}'),
 ])
 
 # nothing
@@ -85,30 +85,34 @@ app.layout = html.Div(children=[
             style = {
               'margin': '0',
               'position': 'absolute',
-              'top': '50%',
+              'top': '35%',
               'left': '50%',
               '-ms-transform': 'translate(-50%, -50%)',
               'transform': 'translate(-50%, -50%)',
             }
           )
       ],
+      className='big-box',
       style={
           'margin': '0 auto',
           'width': '100%',
-          'height': '100vh',
+          'height': '60vh',
       }
     ),
 
     # Demographics
     demo_div,
 
-    # geography
+    # Geography
     geo_div,
 
-      dcc.Graph(figure=funding_fig),
+    # Donations
+    donation_div,
 
-    ] + growing_figs , 
-    # ],
+    # Growth
+    growth_div,
+
+    ],
 
     style={
       'width': '90%',
