@@ -42,9 +42,9 @@ subs = {
 op_grants['Cause Area'] = op_grants['Focus Area'].map(subs).fillna(op_grants['Focus Area'])
 
 subs = {
-  'Johns Hopkins Center for Health Security': 'JHCHS',
-  'Against Malaria Foundation': 'AMF',
-  'Georgetown University': 'GU',
+#  'Johns Hopkins Center for Health Security': 'JHCHS',
+#  'Against Malaria Foundation': 'AMF',
+#  'Georgetown University': 'GU',
 }
 op_grants['Organization'] = op_grants['Organization Name'].map(subs).fillna(op_grants['Organization Name'])
 
@@ -148,7 +148,7 @@ for source, cause in set(zip(
       (source_cause_df['Organization']==org)
     ]
     total_funding = org_df['Amount'].sum()
-    if total_funding < 3*10**7:
+    if total_funding < 2*10**7:
       other_total += total_funding
       continue
     funding_long.loc[len(funding_long)] = [
@@ -165,6 +165,8 @@ for source, cause in set(zip(
       source
     ]
 
+funding_long = funding_long[funding_long['To']!='Unknowns']
+
 # Get a list of all funding-related entities
 entities = set()
 for col in ['From', 'To']:
@@ -176,7 +178,7 @@ entity2idx = {x: i for i,x in enumerate(entities)}
 froms = list(funding_long['From'].map(entity2idx))
 tos = list(funding_long['To'].map(entity2idx))
 
-entities += ["$100M"]
+entities += ["$100M (for scale)"]
 froms += [ len(entity2idx) ]
 tos += [ len(entity2idx) ]
 
@@ -205,6 +207,22 @@ funding_fig = go.Figure(
 )
 funding_fig.update_layout(
   margin=dict(l=0, r=0, t=0, b=0),
+)
+
+donation_div = html.Div(
+    [
+        html.Div(
+            html.H2('Donation Channels'),
+            className='section-heading',
+        ),
+        html.Div(
+            dcc.Graph(
+                id='Donations',
+                figure=funding_fig,
+            )
+        ),
+    ],
+    style = {'overflow': 'auto'}
 )
 
 ##################################
