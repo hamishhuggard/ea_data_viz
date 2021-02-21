@@ -61,10 +61,10 @@ countries_bar = px.bar(
      x = 'Responses',
      orientation = 'h',
      height = 20 * len(countries),
-     title = 'no title',
+#     title = 'no title',
 )
 countries_bar.update_layout(
-    margin=dict(l=0, r=0, t=30, b=0),
+    margin=dict(l=0, r=0, t=0, b=0),
     xaxis=dict(title=''),
     yaxis=dict(title=''),
     font=dict(
@@ -101,7 +101,7 @@ geo_div = html.Div(
                ),
                style={
                    'width': '20%',
-                   'height': '90%',
+                   'height': '425px',
 #                   'background-color': 'blue',
                    'overflow-y': 'scroll',
                },
@@ -109,7 +109,8 @@ geo_div = html.Div(
             )
         ], style={'height': '80%'}),
     ],
-    className='big-box'
+    style = {'overflow': 'auto'}
+    #className='big-box'
 #    style = {
 #        'height': '100vh',
 #        'background-color': 'yellow'
