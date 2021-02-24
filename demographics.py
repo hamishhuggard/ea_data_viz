@@ -34,7 +34,7 @@ def get_demo_table(demo_name):
         'Other (please specify)': 'Other',
 
         'Native Hawaiian or Other Pacific Islander': 'Hawaiian or Pacific Islander',
-        'American Indian or Alaskan Native': 'Native American or Alaskan', 
+        'American Indian or Alaskan Native': 'Native American/Alaskan', 
     #     'Black or African American': 'Black',
         'Hispanic, Latino or Spanish Origin': 'Hispanic or Latino',
 
@@ -50,7 +50,7 @@ def get_demo_table(demo_name):
     #     # 'Physics': 'Other',
     #     # 'Psychology': 'Other',
     #     # 'Medicine': 'Other',
-        'Professional or vocational qualification': 'Professional/Vocational qualification',
+        'Professional or vocational qualification': 'Professional or Vocational',
 
     #     'Employed, Full-Time': 'Employed (FT)',
     #     'Student, Full-Time': 'Student (FT)',
@@ -61,6 +61,9 @@ def get_demo_table(demo_name):
     #     # 'Homemaker ': 'Other',
     #     # 'Student, Part-Time': 'Student',
     #     # 'Self-Employed': 'Self-Employ',
+
+        'Work at a non-profit (not an EA organization)': 'Non-profit (not EA org)',
+        'Work at a non-profit (EA organization)': 'Non-profit (EA org)',
 
 
         'Consequentialism (utilitarian)': 'Utilitarianism',
