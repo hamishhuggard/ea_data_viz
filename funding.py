@@ -27,13 +27,13 @@ op_grants = pd.read_csv('./data/openphil_grants.csv')
 # standard names from https://80000hours.org/topic/causes/
 subs = {
   'Potential Risks from Advanced Artificial Intelligence': 'AI',
-  'History of Philanthropy': 'Other',
+  'History of Philanthropy': 'Other cause area',
   'Immigration Policy': 'Policy',
   'Macroeconomic Stabilization Policy': 'Policy',
   'Land Use Reform': 'Policy',
   'Criminal Justice Reform': 'Policy',
   'U.S. Policy': 'Policy',
-  'Other areas': 'Other',
+  'Other areas': 'Other cause area',
   'Biosecurity and Pandemic Preparedness': 'Biosecurity',
   'Farm Animal Welfare': 'Animal Welfare',
   'Global Catastrophic Risks': 'Catastrophic Risks',
@@ -56,12 +56,28 @@ op_grants['Amount'] = op_grants['Amount'].apply(lambda x: int(x[1:].replace(',',
 
 funding = funding.append(op_grants)
 
+##################################
+###  GWWC AND FOUNDERS PLEDGE  ###
+##################################
+
+other_df = pd.read_csv('data/misc.csv')
+funding = pd.concat([other_df, funding])
+
 
 ##################################
 ###          EA FUNDS          ###
 ##################################
 
 ea_funds = pd.read_csv('./data/ea_funds_grants.csv')
+
+subs = {
+    'global-development': 'Global Poverty',
+    'far-future': 'Far Future',
+    'ea-community': 'EA Community',
+    'animal-welfare': 'Animal Welfare'
+}
+ea_funds['fund'] = ea_funds['fund'].map(subs).fillna(ea_funds['fund'])
+
 ea_funds['Source'] = 'EA Funds'
 ea_funds['Cause Area'] = ea_funds['fund']
 ea_funds['Organization'] = 'Unknowns'
@@ -101,13 +117,6 @@ ea_funds = ea_funds[['Source', 'Cause Area', 'Organization', 'Amount']]
 
 funding = pd.concat([ea_funds, funding])
 
-##################################
-###  GWWC AND FOUNDERS PLEDGE  ###
-##################################
-
-other_df = pd.read_csv('data/misc.csv')
-
-funding = pd.concat([other_df, funding])
 ##################################
 ###       SANKEY DIAGRAM       ###
 ##################################
@@ -160,7 +169,7 @@ for source, cause in set(zip(
   if other_total > 0:
     funding_long.loc[len(funding_long)] = [
       cause,
-      'Others',
+      'Other orgs',
       other_total,
       source
     ]
