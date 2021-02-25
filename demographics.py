@@ -2,11 +2,11 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import plotly.express as px
 import pandas as pd
 import re
 from glob import glob
+from ea_bar_graph import EABarGraph
 
 ##################################
 ###       DEMOGRAPHICS         ###
@@ -104,44 +104,15 @@ def get_demo_table(demo_name):
     elif title=='Education':
         height = 250
     else:
-        height_per_bar = 20 if len(demo_table) > 10 else 23
+        height_per_bar = 25 if len(demo_table) > 10 else 28
         height = height_per_bar * len(demo_table) + 30
 
-    bar_fig = px.bar(
-        demo_table,
-        y='label',
-        x='Percent',
-        title=title,
-        hover_data={
-            # 'title': True,
-            'Percent': True,
-            # 'label': False
-        },
-        height=height,
-        orientation='h',
-        labels={
-            'label': title,
-            'Percent': 'Percentage',
-        },
-    )
-    bar_fig.update_layout(
-        margin=dict(l=0, r=0, t=30, b=0),
-        xaxis=dict(title=''),
-        yaxis=dict(title=''),
-        font=dict(
-            # family="Courier New, monospace",
-            # size=8,
-            # color="RebeccaPurple"
-        )
-    )
-    this_bar = dcc.Graph(
-        id=title, #style={'margin': '0%'},
-        figure=bar_fig,
-        config={
-            'displayModeBar': False,
-        },
-        # style={},
-    )
+    demo_table['label'] = demo_table['label'] + demo_table['Percent'].apply(lambda x: f'{x:>8}%')
+
+    demo_table['x'] = demo_table['label']
+    demo_table['y'] = demo_table['Percent']
+
+    this_bar = EABarGraph(demo_table, height, title)
 
     return this_bar
 
@@ -168,53 +139,53 @@ demo_div = html.Div(
         html.Div(
             [
                 html.Div(
-                    html.H2('Demographics'),
+                    # html.H2('Demographics'),
+                    html.H2('Demographics, Backgrounds, Beliefs'),
                     className='section-heading',
                 ),
                 html.Div(
                     demo_bars['gender'],
                     className='demo-column',
                     style={
-                        'width': '25%'
+                        'width': '27%'
                     }
                 ),
                 html.Div(
                     demo_bars['age_group'],
                     className='demo-column',
                     style={
-                        'width': '25%'
+                        'width': '27%'
                     }
                 ),
                 html.Div(
                     demo_bars['ethnicity'],
                     className='demo-column',
                     style={
-                        'width': '40%'
+                        'width': '38%'
                     }
                 ),
             ],
             style={'overflow': 'auto'}
-#            className='big-box'
         ),
 
         html.Div(
             [
-                html.Div(
-                    html.H2('Education'),
-                    className='section-heading',
-                ),
+                # html.Div(
+                #     html.H2('Education'),
+                #     className='section-heading',
+                # ),
                 html.Div(
                     demo_bars['education2'],
                     className='demo-column',
                     style={
-                        'width': '30%'
+                        'width': '45%'
                     }
                 ),
                 html.Div(
                     demo_bars['subject'],
                     className='demo-column',
                     style={
-                        'width': '60%'
+                        'width': '45%'
                     }
                 ),
             ],
@@ -224,10 +195,10 @@ demo_div = html.Div(
 
         html.Div(
             [
-                html.Div(
-                    html.H2('Career'),
-                    className='section-heading',
-                ),
+                # html.Div(
+                #     html.H2('Career'),
+                #     className='section-heading',
+                # ),
                 html.Div(
                     demo_bars['career_path'],
                     className='demo-column',
@@ -249,10 +220,10 @@ demo_div = html.Div(
 
         html.Div(
             [
-                html.Div(
-                    html.H2('Beliefs'),
-                    className='section-heading',
-                ),
+                # html.Div(
+                #     html.H2('Beliefs'),
+                #     className='section-heading',
+                # ),
                 html.Div(
                     demo_bars['political_belief'],
                     className='demo-column',

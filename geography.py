@@ -3,6 +3,7 @@ import dash_html_components as html
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
+from ea_bar_graph import EABarGraph
 
 ##################################
 ###         WORLD MAP          ###
@@ -55,24 +56,33 @@ map_fig.update_geos(
     # showrivers=True, rivercolor="Blue"
 )
 
-countries_bar = px.bar(
-     countries,
-     y = 'Country',
-     x = 'Responses',
-     orientation = 'h',
-     height = 20 * len(countries),
-#     title = 'no title',
+countries['x'] = countries['Country'] + countries['Responses'].apply(lambda x: f'{x:>5}')
+countries['y'] = countries['Responses']
+
+countries_bar = EABarGraph(
+    countries,
+    height = 20*len(countries),
+    title = 'Number of EAs'
 )
-countries_bar.update_layout(
-    margin=dict(l=0, r=0, t=0, b=0),
-    xaxis=dict(title=''),
-    yaxis=dict(title=''),
-    font=dict(
-        # family="Courier New, monospace",
-        # size=8,
-        # color="RebeccaPurple"
-    )
-)
+
+# countries_bar = px.bar(
+#      countries,
+#      y = 'Country',
+#      x = 'Responses',
+#      orientation = 'h',
+#      height = 20 * len(countries),
+# #     title = 'no title',
+# )
+# countries_bar.update_layout(
+#     margin=dict(l=0, r=0, t=0, b=0),
+#     xaxis=dict(title=''),
+#     yaxis=dict(title=''),
+#     font=dict(
+#         # family="Courier New, monospace",
+#         # size=8,
+#         # color="RebeccaPurple"
+#     )
+# )
 
 geo_div = html.Div(
     [
@@ -94,11 +104,7 @@ geo_div = html.Div(
                     className='floaty-boi'
             ),
             html.Div(
-               dcc.Graph(
-                    id='geo_bar',
-                    figure=countries_bar,
-                    config={'displayModeBar': False}
-               ),
+               countries_bar,
                style={
                    'width': '20%',
                    'height': '425px',
