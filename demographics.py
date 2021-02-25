@@ -101,6 +101,8 @@ def get_demo_table(demo_name):
 
     return demo_table
 
+pad_to = len('Hawaiian or Pacific Islander') + 8
+
 def create_row(demo_names, widths=None):
 
     if not widths:
@@ -126,6 +128,7 @@ def create_row(demo_names, widths=None):
         title = demo_table.columns[0]
 
         demo_table['label'] = demo_table['label'] + demo_table['Percent'].apply(lambda x: f'{x:>8}%')
+        demo_table['label'] = demo_table['label'].apply(lambda x: ('{:>'+str(pad_to)+'}').format(x))
         demo_table['x'] = demo_table['label']
         demo_table['y'] = demo_table['Percent']
 
@@ -142,207 +145,47 @@ def create_row(demo_names, widths=None):
 
     return bars
 
-demo_names = [
-        'gender',
-        'ethnicity',
-        'age_group',
-        'education2',
-        'subject',
-        'career_path',
-        'employment',
-        'political_belief',
-        'diet',
-        'moral_view',
-]
-
-demo_bars = {
-    demo_name: get_demo_table(demo_name)
-    for demo_name in demo_names
-}
-
 demo_div = html.Div(
     [
         html.Div(
             [
                 html.Div(
-                    # html.H2('Demographics'),
                     html.H2('Demographics, Backgrounds, Beliefs'),
                     className='section-heading',
                 ),
-            ] + create_row(
-                ['gender', 'age_group', 'ethnicity'],
-                ['27%', '27%', '38%']
-            ),
-            #    html.Div(
-            #        demo_bars['gender'],
-            #        className='demo-column',
-            #        style={
-            #            'width': '27%'
-            #        }
-            #    ),
-            #    html.Div(
-            #        demo_bars['age_group'],
-            #        className='demo-column',
-            #        style={
-            #            'width': '27%'
-            #        }
-            #    ),
-            #    html.Div(
-            #        demo_bars['ethnicity'],
-            #        className='demo-column',
-            #        style={
-            #            'width': '38%'
-            #        }
-            #    ),
-            #],
-            style={'overflow': 'auto'}
-        ),
-
-        html.Div(
-            create_row(
-                ['education2', 'subject']
-            ),
-            #[
-            #    # html.Div(
-            #    #     html.H2('Education'),
-            #    #     className='section-heading',
-            #    # ),
-            #    html.Div(
-            #        demo_bars['education2'],
-            #        className='demo-column',
-            #        style={
-            #            'width': '45%'
-            #        }
-            #    ),
-            #    html.Div(
-            #        demo_bars['subject'],
-            #        className='demo-column',
-            #        style={
-            #            'width': '45%'
-            #        }
-            #    ),
-            #],
-            style={'overflow': 'auto'}
-        ),
-
-        html.Div(
-            create_row(
-                ['career_path', 'employment'],
-            ),
-            #[
-            #    # html.Div(
-            #    #     html.H2('Career'),
-            #    #     className='section-heading',
-            #    # ),
-            #    html.Div(
-            #        demo_bars['career_path'],
-            #        className='demo-column',
-            #        style={
-            #            'width': '45%'
-            #        }
-            #    ),
-            #    html.Div(
-            #        demo_bars['employment'],
-            #        className='demo-column',
-            #        style={
-            #            'width': '45%'
-            #        }
-            #    ),
-            #],
-            style={'overflow': 'auto'}
-#            className='big-box'
-        ),
-
-        html.Div(
-            create_row(
-                ['political_belief', 'moral_view', 'diet'],
-                ['30%', '35%', '30%']
-            ),
-            #[
-            #    # html.Div(
-            #    #     html.H2('Beliefs'),
-            #    #     className='section-heading',
-            #    # ),
-            #    html.Div(
-            #        demo_bars['political_belief'],
-            #        className='demo-column',
-            #        style={
-            #            'width': '30%'
-            #        }
-            #    ),
-            #    html.Div(
-            #        demo_bars['moral_view'],
-            #        className='demo-column',
-            #        style={
-            #            'width': '30%'
-            #        }
-            #    ),
-            #    html.Div(
-            #        demo_bars['diet'],
-            #        className='demo-column',
-            #        style={
-            #            'width': '30%'
-            #        }
-            #    ),
-            #],
-            style={'overflow': 'auto'}
-#            className='big-box'
-        ),
-
-
-
-
-
 #        html.P(
 #            'There are about {} active members of the '.format(6500) + \
 #            'Effective Altruism community. Who are they?'
 #            # source: https://www.rethinkpriorities.org/blog/2020/6/26/ea-survey-2019-series-how-many-people-are-there-in-the-ea-community
-#        ),
-#        html.Div(
-#            [
-#                demo_bars['gender'],
-#                demo_bars['age_group'],
-#                demo_bars['ethnicity'],
-#
-#            ],
-#            className='demo-column',
-#            style = {
-#                # 'background-color': 'yellow',
-#            }
-#        ),
-#
-#        html.Div(
-#            [
-#                demo_bars['diet'],
-#                demo_bars['employment'],
-#            ],
-#            className='demo-column',
-#            style = {
-#                # 'background-color': 'red',
-#            }
-#        ),
-#
-#        html.Div(
-#            [
-#                demo_bars['subject'],
-#                demo_bars['education2'],
-#            ],
-#            className='demo-column',
-#            # style = {
-#            #     # 'background-color': 'yellow',
-#            # }
-#        ),
-#        html.Div(
-#            [
-#                demo_bars['moral_view'],
-#            ],
-#            className='demo-column',
-#            # style = {
-#            #     # 'background-color': 'yellow',
-#            # }
-#        ),
+            ] + create_row(
+                ['gender', 'age_group', 'ethnicity'],
+                ['30%', '30%', '35%']
+            ),
+            style={'overflow': 'auto'}
+        ),
 
+        html.Div(
+            create_row(
+                ['political_belief', 'diet', 'moral_view', ],
+                ['30%', '30%', '35%']
+            ),
+            style={'overflow': 'auto'}
+        ),
+
+        html.Div(
+            create_row(
+                ['education2', 'career_path']
+            ),
+            style={'overflow': 'auto'}
+        ),
+
+        html.Div(
+            create_row(
+                ['subject', 'employment'],
+            ),
+            style={'overflow': 'auto'}
+        ),
 
     ],
-#    className='big-box'
 )
+
