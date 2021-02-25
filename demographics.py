@@ -150,14 +150,15 @@ demo_div = html.Div(
         html.Div(
             [
                 html.Div(
-                    html.H2('Demographics, Backgrounds, Beliefs'),
+                    html.H2('Demographics and Beliefs'),
                     className='section-heading',
                 ),
+            ] + \
 #        html.P(
 #            'There are about {} active members of the '.format(6500) + \
 #            'Effective Altruism community. Who are they?'
 #            # source: https://www.rethinkpriorities.org/blog/2020/6/26/ea-survey-2019-series-how-many-people-are-there-in-the-ea-community
-            ] + create_row(
+            create_row(
                 ['gender', 'age_group', 'ethnicity'],
                 ['32.5%', '32.5%', '35%']
             ) + \
@@ -169,12 +170,18 @@ demo_div = html.Div(
             create_row(
                 ['political_belief', 'diet', 'moral_view', ],
                 ['32.5%', '32.5%', '35%']
-            ) + \
-        #     ),
-        #     style={'overflow': 'auto'}
-        # ),
+        #     ) + \
+            ),
+            style={'overflow': 'auto'}
+        ),
 
-        # html.Div(
+        html.Div(
+            [
+                html.Div(
+                    html.H2('Education and Career'),
+                    className='section-heading',
+                ),
+            ] + \
             create_row(
                 ['education2', 'career_path']
             ) + \
