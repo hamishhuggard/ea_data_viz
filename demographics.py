@@ -106,7 +106,7 @@ pad_to = len('Hawaiian or Pacific Islander') + 8
 def create_row(demo_names, widths=None):
 
     if not widths:
-        widths = [ f'{95/len(demo_names)}%' ] * len(demo_names)
+        widths = [ f'{100/len(demo_names)}%' ] * len(demo_names)
 
     demo_tables = []
     demo_heights = []
@@ -159,27 +159,30 @@ demo_div = html.Div(
 #            # source: https://www.rethinkpriorities.org/blog/2020/6/26/ea-survey-2019-series-how-many-people-are-there-in-the-ea-community
             ] + create_row(
                 ['gender', 'age_group', 'ethnicity'],
-                ['30%', '30%', '35%']
-            ),
-            style={'overflow': 'auto'}
-        ),
+                ['32.5%', '32.5%', '35%']
+            ) + \
+        #     ),
+        #     style={'overflow': 'auto'}
+        # ),
 
-        html.Div(
+        # html.Div(
             create_row(
                 ['political_belief', 'diet', 'moral_view', ],
-                ['30%', '30%', '35%']
-            ),
-            style={'overflow': 'auto'}
-        ),
+                ['32.5%', '32.5%', '35%']
+            ) + \
+        #     ),
+        #     style={'overflow': 'auto'}
+        # ),
 
-        html.Div(
+        # html.Div(
             create_row(
                 ['education2', 'career_path']
-            ),
-            style={'overflow': 'auto'}
-        ),
+            ) + \
+        #     ),
+        #     style={'overflow': 'auto'}
+        # ),
 
-        html.Div(
+        # html.Div(
             create_row(
                 ['subject', 'employment'],
             ),
