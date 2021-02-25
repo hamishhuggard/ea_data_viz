@@ -99,22 +99,48 @@ def get_demo_table(demo_name):
     # }
     # title = title_subs[title]
 
-    if title=='Gender':
-        height = 200
-    elif title=='Education':
-        height = 250
-    else:
+    return demo_table
+
+def create_row(demo_names, widths=None):
+
+    if not widths:
+        widths = [ f'{95/len(demo_names)}%' ] * len(demo_names)
+
+    demo_tables = []
+    demo_heights = []
+
+    for demo_name in demo_names:
+
+        demo_table = get_demo_table(demo_name)
+        demo_tables.append(demo_table)
+
         height_per_bar = 25 if len(demo_table) > 10 else 28
         height = height_per_bar * len(demo_table) + 30
+        demo_heights.append(height)
 
-    demo_table['label'] = demo_table['label'] + demo_table['Percent'].apply(lambda x: f'{x:>8}%')
+    height = max(demo_heights)
+    bars = []
 
-    demo_table['x'] = demo_table['label']
-    demo_table['y'] = demo_table['Percent']
+    for width, demo_table in zip(widths, demo_tables):
 
-    this_bar = EABarGraph(demo_table, height, title)
+        title = demo_table.columns[0]
 
-    return this_bar
+        demo_table['label'] = demo_table['label'] + demo_table['Percent'].apply(lambda x: f'{x:>8}%')
+        demo_table['x'] = demo_table['label']
+        demo_table['y'] = demo_table['Percent']
+
+        bar = EABarGraph(demo_table, height, title)
+        bars.append(
+            html.Div(
+                bar,
+                className='demo-column',
+                style={
+                    'width': width
+                }
+            )
+        )
+
+    return bars
 
 demo_names = [
         'gender',
@@ -143,109 +169,122 @@ demo_div = html.Div(
                     html.H2('Demographics, Backgrounds, Beliefs'),
                     className='section-heading',
                 ),
-                html.Div(
-                    demo_bars['gender'],
-                    className='demo-column',
-                    style={
-                        'width': '27%'
-                    }
-                ),
-                html.Div(
-                    demo_bars['age_group'],
-                    className='demo-column',
-                    style={
-                        'width': '27%'
-                    }
-                ),
-                html.Div(
-                    demo_bars['ethnicity'],
-                    className='demo-column',
-                    style={
-                        'width': '38%'
-                    }
-                ),
-            ],
+            ] + create_row(
+                ['gender', 'age_group', 'ethnicity'],
+                ['27%', '27%', '38%']
+            ),
+            #    html.Div(
+            #        demo_bars['gender'],
+            #        className='demo-column',
+            #        style={
+            #            'width': '27%'
+            #        }
+            #    ),
+            #    html.Div(
+            #        demo_bars['age_group'],
+            #        className='demo-column',
+            #        style={
+            #            'width': '27%'
+            #        }
+            #    ),
+            #    html.Div(
+            #        demo_bars['ethnicity'],
+            #        className='demo-column',
+            #        style={
+            #            'width': '38%'
+            #        }
+            #    ),
+            #],
             style={'overflow': 'auto'}
         ),
 
         html.Div(
-            [
-                # html.Div(
-                #     html.H2('Education'),
-                #     className='section-heading',
-                # ),
-                html.Div(
-                    demo_bars['education2'],
-                    className='demo-column',
-                    style={
-                        'width': '45%'
-                    }
-                ),
-                html.Div(
-                    demo_bars['subject'],
-                    className='demo-column',
-                    style={
-                        'width': '45%'
-                    }
-                ),
-            ],
+            create_row(
+                ['education2', 'subject']
+            ),
+            #[
+            #    # html.Div(
+            #    #     html.H2('Education'),
+            #    #     className='section-heading',
+            #    # ),
+            #    html.Div(
+            #        demo_bars['education2'],
+            #        className='demo-column',
+            #        style={
+            #            'width': '45%'
+            #        }
+            #    ),
+            #    html.Div(
+            #        demo_bars['subject'],
+            #        className='demo-column',
+            #        style={
+            #            'width': '45%'
+            #        }
+            #    ),
+            #],
+            style={'overflow': 'auto'}
+        ),
+
+        html.Div(
+            create_row(
+                ['career_path', 'employment'],
+            ),
+            #[
+            #    # html.Div(
+            #    #     html.H2('Career'),
+            #    #     className='section-heading',
+            #    # ),
+            #    html.Div(
+            #        demo_bars['career_path'],
+            #        className='demo-column',
+            #        style={
+            #            'width': '45%'
+            #        }
+            #    ),
+            #    html.Div(
+            #        demo_bars['employment'],
+            #        className='demo-column',
+            #        style={
+            #            'width': '45%'
+            #        }
+            #    ),
+            #],
             style={'overflow': 'auto'}
 #            className='big-box'
         ),
 
         html.Div(
-            [
-                # html.Div(
-                #     html.H2('Career'),
-                #     className='section-heading',
-                # ),
-                html.Div(
-                    demo_bars['career_path'],
-                    className='demo-column',
-                    style={
-                        'width': '45%'
-                    }
-                ),
-                html.Div(
-                    demo_bars['employment'],
-                    className='demo-column',
-                    style={
-                        'width': '45%'
-                    }
-                ),
-            ],
-            style={'overflow': 'auto'}
-#            className='big-box'
-        ),
-
-        html.Div(
-            [
-                # html.Div(
-                #     html.H2('Beliefs'),
-                #     className='section-heading',
-                # ),
-                html.Div(
-                    demo_bars['political_belief'],
-                    className='demo-column',
-                    style={
-                        'width': '30%'
-                    }
-                ),
-                html.Div(
-                    demo_bars['moral_view'],
-                    className='demo-column',
-                    style={
-                        'width': '30%'
-                    }
-                ),
-                html.Div(
-                    demo_bars['diet'],
-                    className='demo-column',
-                    style={
-                        'width': '30%'
-                    }
-                ),
-            ],
+            create_row(
+                ['political_belief', 'moral_view', 'diet'],
+                ['30%', '35%', '30%']
+            ),
+            #[
+            #    # html.Div(
+            #    #     html.H2('Beliefs'),
+            #    #     className='section-heading',
+            #    # ),
+            #    html.Div(
+            #        demo_bars['political_belief'],
+            #        className='demo-column',
+            #        style={
+            #            'width': '30%'
+            #        }
+            #    ),
+            #    html.Div(
+            #        demo_bars['moral_view'],
+            #        className='demo-column',
+            #        style={
+            #            'width': '30%'
+            #        }
+            #    ),
+            #    html.Div(
+            #        demo_bars['diet'],
+            #        className='demo-column',
+            #        style={
+            #            'width': '30%'
+            #        }
+            #    ),
+            #],
             style={'overflow': 'auto'}
 #            className='big-box'
         ),
