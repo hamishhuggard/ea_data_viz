@@ -27,9 +27,6 @@ map_fig = px.scatter_geo(countries,
     locationmode='country names',
     # size="Responses",
     size="circle size",
-    #marker = dict(
-    #    color ="#36859A",
-    #),
     hover_data = {
         'circle size': False,
         'Responses': True,
@@ -44,13 +41,17 @@ map_fig = px.scatter_geo(countries,
 map_fig.update_layout(
     margin=dict(l=0, r=0, t=0, b=0),
 )
+map_fig.update_traces(
+    marker = dict(
+        color ="#36859A",
+    ),
+)
 map_fig.update_geos(
     # resolution=50,
     showcoastlines=False, 
     # coastlinecolor="RebeccaPurple",
     # showland=True, 
     landcolor="#B8C8D3",
-    #color="#36859A",
     # showocean=False,#True, oceancolor="LightBlue",
     # showlakes=True, lakecolor="Blue",
     # showrivers=True, rivercolor="Blue"
