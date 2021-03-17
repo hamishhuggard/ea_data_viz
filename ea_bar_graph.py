@@ -6,7 +6,7 @@ import plotly.express as px
 
 class EABarGraph(dcc.Graph):
 
-    def __init__(self, df, height, title=''):
+    def __init__(self, df, height, title=None):
 
         self.bar = px.bar(
 
@@ -20,7 +20,7 @@ class EABarGraph(dcc.Graph):
             # Don't provide any hover data
             hover_data={
                 'x': False,
-                'y': False
+                'y': False,
             },
 
             # These are the labels shown in the hoverdata:
@@ -33,6 +33,7 @@ class EABarGraph(dcc.Graph):
         self.bar.update_traces(
             # The color of the bars
             marker_color="#0c869b",
+            hoverinfo='skip',
 
             # Template for hovertext
             # hovertemplate = '%{hover} %{Percent:$.2f} %{label}<extra></extra>',
@@ -40,6 +41,7 @@ class EABarGraph(dcc.Graph):
 
         self.bar.update_layout(
             margin=dict(l=0, r=0, t=30, b=0),
+            hovermode=False,
             xaxis=dict(
                 title='',
                 fixedrange=True
