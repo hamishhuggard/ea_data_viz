@@ -1,5 +1,40 @@
 # Effective Altruism Dashboard
 
+## TODO:
+- Add percentage to country bar
+- Per capital country bar
+- Make a floating top bar
+- Blurb of EA survey data sources
+- OpenPhilanthropy
+ - Total grants
+ - Grants over time
+ - Grants by cause area
+ - Grants by org
+ - Most recent grants
+- EA Funds
+ - Grants over time
+ - Grants by fund
+ - Grants by org
+ - Most recent grants
+- Founders pledge
+ - Member over time
+ - Commitments over time
+ - Pledges over time
+- Giving what we can
+ - Member over time
+ - Donations over time
+ - Pledges over time
+- 80,000 Hours
+ - Latest podcasts
+ - Podcast downloads
+ - Latest posts
+ - Pageviews
+ - 80,000 hours pageviews
+- EA Forums
+ - Views
+ - Posts
+ - Most recent posts
+
 This is a dashboard to provide a quick overview of some key statistics of the [effective altruism](https://www.effectivealtruism.org/) (EA) movement.
 
 ## Precedents:
@@ -35,21 +70,14 @@ We'd also like to do a map in the style of [Gapminder](https://www.gapminder.org
 ### Global Poverty
  - [Global poverty](https://sdg-tracker.org/no-poverty)
 
-## TODO:
 
-- Fix heroku
-- Read more link
-- Improve hover text
-- Bar charts line up in height
-
-## Also maybe:
+## Maybe TODOs
 - Find hex values of colors that represent:
   - EA in general
   - Open Philanthropy
   - GiveWell?
   - AMF?
 - Graphical representations of growth
-- Apply EA colours to everything
 - Apply org-specific colors to sankey diagram
 - Choose growth data
 - Create growth plot
