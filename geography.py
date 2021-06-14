@@ -12,29 +12,52 @@ from countryinfo import CountryInfo
 
 # source: https://plotly.com/python/bubble-maps/
 
+# country = CountryInfo()
+# country_list = country.all().keys()
+# country_list = [
+#     country for country in country_list if hasattr(CountryInfo(country), 'population')
+# ]
+# print(country_list)
+
 countries = pd.read_csv('./data/rp_survey_data/country2.csv')
+
+# null_countries = [ country for country in country_list if country not in countries['Country'] ]
+# for null_country in null_countries:
+#     countries.loc[len(countries), :] = [null_country, 0]
 countries['Responses'] = countries['Responses'].astype('int')
+
+print(countries)
+
 countries.loc[countries['Country']=='United States of America', 'Country'] = 'United States'
-MINIMUM_CIRCLE_SIZE = 20
+
+MINIMUM_CIRCLE_SIZE = 0 # 20
 countries['circle size'] = countries['Responses'] + MINIMUM_CIRCLE_SIZE
+
 countries = countries.sort_values('Responses', ascending=True)
 
-countries['population'] = countries['Country'].apply(lambda country: CountryInfo(country).population())
+def get_population(country):
+    try:
+        return CountryInfo(country).population()
+    except:
+        return 1e9
+
+countries['population'] = countries['Country'].apply(get_population)
 countries['Density (per million)'] = countries['Responses'] / countries['population'] * 1e6
+# countries['density plus'] = countries['Density (per million)']
 # print(countries['density'])
 
 # https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo.html
 map_fig = px.choropleth(
     countries,
     locations="Country",
-    #color="continent",
     hover_name="Country",
     # hover_data=['Country', 'Responses'],
     locationmode='country names',
     # size="Responses",
     # size="circle size",
     color='Density (per million)',
-    # color_continuous_scale=px.colors.sequential.Plasma,
+    # color='density plus',
+    color_continuous_scale=["#dfe3ee", "#007a8f"],
     hover_data = {
         'circle size': False,
         'Responses': True,
@@ -42,28 +65,26 @@ map_fig = px.choropleth(
     },
     projection="equirectangular", # 'orthographic' is fun
     # height=250,
-    # config={
-    #     'displayModeBar': False,
-    # },
 )
+
 map_fig.update_layout(
     margin=dict(l=0, r=0, t=0, b=0),
     coloraxis_showscale=False,
 )
+
 # map_fig.update_traces(
 #     marker = dict(
 #         color ="#36859A",
 #     ),
 # )
+
 map_fig.update_geos(
-    # resolution=50,
     showcoastlines=False, 
-    # coastlinecolor="RebeccaPurple",
     # showland=True, 
-    landcolor="#B8C8D3",
-    # showocean=False,#True, oceancolor="LightBlue",
-    # showlakes=True, lakecolor="Blue",
-    # showrivers=True, rivercolor="Blue"
+    # landcolor="#B8C8D3",
+    # landcolor="#ffffff",
+    # marker_line_color='white',
+    landcolor="#dfe3ee",
 )
 
 countries['x'] = countries['Country'] + countries['Responses'].apply(lambda x: f'{x:>5}')
