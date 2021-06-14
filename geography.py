@@ -5,6 +5,7 @@ import plotly.express as px
 import pandas as pd
 from ea_bar_graph import EABarGraph
 from countryinfo import CountryInfo
+from math import log
 
 ##################################
 ###         WORLD MAP          ###
@@ -43,6 +44,7 @@ def get_population(country):
 
 countries['population'] = countries['Country'].apply(get_population)
 countries['Density (per million)'] = countries['Responses'] / countries['population'] * 1e6
+countries['log density'] = countries['Density (per million)'].apply(lambda x: 1 + log(x+1))
 # countries['density plus'] = countries['Density (per million)']
 # print(countries['density'])
 
@@ -55,13 +57,16 @@ map_fig = px.choropleth(
     locationmode='country names',
     # size="Responses",
     # size="circle size",
-    color='Density (per million)',
+    # color='Density (per million)',
+    color='log density',
     # color='density plus',
     color_continuous_scale=["#dfe3ee", "#007a8f"],
     hover_data = {
         'circle size': False,
         'Responses': True,
         'Country': False,
+        'log density': False,
+        'Density (per million)': True,
     },
     projection="equirectangular", # 'orthographic' is fun
     # height=250,
