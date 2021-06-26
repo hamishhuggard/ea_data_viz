@@ -20,6 +20,14 @@
 
 .section-heading {
     width: 100%;
+    height: 20vh;
     font-family: RaleWay;
     text-align: center;
+}
+
+.section-heading:after
+{
+    content:' ';
+    display:block;
+    border:2px solid #0c869b;
 }
