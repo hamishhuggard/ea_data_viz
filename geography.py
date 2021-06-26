@@ -13,12 +13,12 @@ from math import log
 
 # source: https://plotly.com/python/bubble-maps/
 
-# country = CountryInfo()
-# country_list = country.all().keys()
+country = CountryInfo()
+country_list = country.all().keys()
 # country_list = [
 #     country for country in country_list if hasattr(CountryInfo(country), 'population')
 # ]
-# print(country_list)
+print(country_list)
 
 countries = pd.read_csv('./data/rp_survey_data/country2.csv')
 
@@ -26,8 +26,6 @@ countries = pd.read_csv('./data/rp_survey_data/country2.csv')
 # for null_country in null_countries:
 #     countries.loc[len(countries), :] = [null_country, 0]
 countries['Responses'] = countries['Responses'].astype('int')
-
-print(countries)
 
 countries.loc[countries['Country']=='United States of America', 'Country'] = 'United States'
 
@@ -45,12 +43,19 @@ def get_population(country):
 countries['population'] = countries['Country'].apply(get_population)
 countries['Density (per million)'] = countries['Responses'] / countries['population'] * 1e6
 countries['log density'] = countries['Density (per million)'].apply(lambda x: 1 + log(x+1))
+
+countries_for_map = countries.copy()
+for country in country_list:
+    if country in [ c.lower() for c in countries['Country'] ]:
+        continue
+    i = len(countries_for_map)
+    countries_for_map.loc[i, ['Country', 'Responses', 'Density (per million)', 'log density']] = (country, 0, 0, 0)
 # countries['density plus'] = countries['Density (per million)']
 # print(countries['density'])
 
 # https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo.html
 map_fig = px.choropleth(
-    countries,
+    countries_for_map,
     locations="Country",
     hover_name="Country",
     # hover_data=['Country', 'Responses'],
