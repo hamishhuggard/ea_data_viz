@@ -44,7 +44,7 @@ total_div = html.Div([
 ###          LAYOUT            ###
 ##################################
 
-app.layout = html.Div(children=[
+app.layout = html.Div([
 
     ## HEADING ##
 
@@ -82,12 +82,33 @@ app.layout = html.Div(children=[
                   style = {
                     'font-family': 'Raleway',
                   }
-                )
+                ),
+                html.Div(
+                    [
+                        html.P(
+                            'Effective altruism is about answering one simple question: how can we use our resources to help others the most?'
+                        ),
+                        html.P([
+                            'Learn more at ',
+                            dcc.Link(
+                                "effectivaltruism.org",
+                                href="https://www.effectivealtruism.org/"
+                            ),
+                            "."
+                        ]),
+                        html.P(
+                            'This website visualises some data relating to effective altruism.'
+                        )
+                    ],
+                    style = {
+                      'font-family': 'Raleway',
+                    }
+                ),
             ],
             style = {
               'margin': '0',
               'position': 'absolute',
-              'top': '35%',
+              'top': '45%',
               'left': '50%',
               '-ms-transform': 'translate(-50%, -50%)',
               'transform': 'translate(-50%, -50%)',
@@ -98,7 +119,7 @@ app.layout = html.Div(children=[
       style={
           'margin': '0 auto',
           'width': '100%',
-          'height': '60vh',
+          'height': '100vh',
       }
     ),
 

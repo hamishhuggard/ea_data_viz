@@ -172,7 +172,10 @@ demo_div = html.Div(
                 ['32.5%', '32.5%', '35%']
         #     ) + \
             ),
-            style={'overflow': 'auto'}
+            style={
+                'overflow': 'auto',
+                'height': '100vh',
+            }
         ),
 
         html.Div(
@@ -193,7 +196,10 @@ demo_div = html.Div(
             create_row(
                 ['subject', 'employment'],
             ),
-            style={'overflow': 'auto'}
+            style={
+                'overflow': 'auto',
+                'height': '100vh',
+            }
         ),
 
     ],
