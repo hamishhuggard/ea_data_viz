@@ -107,7 +107,7 @@ app.layout = html.Div([
             ],
             style = {
               'margin': '0',
-              'position': 'absolute',
+              # 'position': 'absolute',
               'top': '45%',
               'left': '50%',
               '-ms-transform': 'translate(-50%, -50%)',
@@ -115,7 +115,7 @@ app.layout = html.Div([
             }
           )
       ],
-      className='big-box',
+      className='section',
       style={
           'margin': '0 auto',
           'width': '100%',
@@ -124,25 +124,44 @@ app.layout = html.Div([
     ),
 
     # Demographics
-    demo_div,
+    html.Div(
+        html.Div(
+            demo_div,
+            className='section-content',
+        ),
+        className='section',
+    ),
 
     # Geography
-    geo_div,
+    html.Div(
+        html.Div(
+            geo_div,
+            className='section-content',
+        ),
+        className='section',
+    ),
 
     # Donations
-    donation_div,
+    html.Div(
+        html.Div(
+            donation_div,
+            className='section-content',
+        ),
+        className='section',
+    ),
 
     # Growth
-    growth_div,
+    html.Div(
+        html.Div(
+            growth_div,
+            className='section-content',
+        ),
+        className='section',
+    ),
 
     ],
 
-    style={
-      'width': '90%',
-      'margin': '0 auto',
-      'text-align': 'center',
-      # 'padding': '10px',
-    }
+    className = 'scroll-snapper',
 )
 
 if __name__ == '__main__':
