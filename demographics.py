@@ -153,6 +153,14 @@ demo_div = html.Div(
                     html.H2('Demographics and Beliefs'),
                     className='section-heading',
                 ),
+                html.P('Hover over the bars for more details.'),
+                html.P([
+                    'Data source: ',
+                    dcc.Link(
+                        '2019 Rethink Priorities Survey',
+                        href='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
+                    ),
+                ]),
             ] + \
 #        html.P(
 #            'There are about {} active members of the '.format(6500) + \
