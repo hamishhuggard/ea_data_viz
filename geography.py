@@ -42,6 +42,7 @@ def get_population(country):
 
 countries['population'] = countries['Country'].apply(get_population)
 countries['Density (per million)'] = countries['Responses'] / countries['population'] * 1e6
+countries['Density (per million)'] = countries['Density (per million)'].apply(lambda x: round(x, 2))
 countries['log density'] = countries['Density (per million)'].apply(lambda x: 1 + log(x+1))
 
 countries_for_map = countries.copy()
@@ -113,7 +114,7 @@ countries_capita_sort['y'] = countries_capita_sort['Density (per million)']
 per_capita_bar = EABarGraph(
     countries_capita_sort,
     height = 20*len(countries),
-    title = 'EAs per Million Capitas'
+    title = 'EAs per Capita (Million)'
 )
 
 # countries_bar = px.bar(
@@ -140,7 +141,6 @@ geo_div = html.Div(
         html.Div(
             html.H2('Countries'),
             className='section-heading',
-            style={'height': '20%'},
         ),
         html.Div([
             html.Div(
@@ -159,7 +159,7 @@ geo_div = html.Div(
                countries_bar,
                style={
                    'width': '20%',
-                   'height': '425px',
+                   'height': '85vh',
 #                   'background-color': 'blue',
                    'overflow-y': 'scroll',
                },
@@ -170,7 +170,7 @@ geo_div = html.Div(
                per_capita_bar,
                style={
                    'width': '20%',
-                   'height': '425px',
+                   'height': '85vh',
                    'background-color': 'blue',
                    'overflow-y': 'scroll',
                },
@@ -179,7 +179,10 @@ geo_div = html.Div(
             ),
         ], style={'height': '80%'}),
     ],
-    style = {'overflow': 'auto'}
+    style = {
+        # 'overflow': 'auto',
+        'height': '100vh',
+    }
     #className='big-box'
 #    style = {
 #        'height': '100vh',
