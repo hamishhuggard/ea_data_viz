@@ -1,8 +1,33 @@
 # Effective Altruism Dashboard
 
+## Plan for next few weeks:
+1. Cosmetics
+ - Redoop spacing
+ - Add explanatory text
+ - Fix hovertext
+2. Create visualisations for OP grants
+3. Format the visualisations
+4. Set up auto-scraping of OP grants
+
 ## TODO:
+- Redoop the spacing
+ - Alternating background colors
+ - fig.update_layout(paper_bgcolor="black")
+- Fix the hovertext on the map
+- Fix the plot titles
+- Add writing
+ - How to interact
+ - Where the data comes from
+ - What are these things
+- OP grants
+ - Chuck in vizs
+ - Sort out layout
+ - Auto data updates
+- Growth metrics
+
+
+- Toggle for per capita / total
 - Add percentage to country bar
-- Per capital country bar
 - Make a floating top bar
 - Blurb of EA survey data sources
 - OpenPhilanthropy
