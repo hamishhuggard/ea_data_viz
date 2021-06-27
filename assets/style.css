@@ -14,13 +14,9 @@
     height: 100%;
 }
 
-.big-box {
-    height: 80vh
-}
-
 .section-heading {
     width: 100%;
-    height: 20vh;
+    height: 10vh;
     font-family: RaleWay;
     text-align: center;
 }
@@ -30,4 +26,21 @@
     content:' ';
     display:block;
     border:2px solid #0c869b;
+}
+
+.scroll-snapper {
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    height: 100vh;
+}
+
+.section {
+    height: 100vh;
+    scroll-snap-align: start;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-content {
+    width: 90%;
 }
