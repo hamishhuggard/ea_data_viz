@@ -10,9 +10,8 @@
 4. Set up auto-scraping of OP grants
 
 ## TODO:
+- Refactor
 - Redoop the spacing
- - Alternating background colors
- - fig.update_layout(paper_bgcolor="black")
 - Fix the hovertext on the map
 - Fix the plot titles
 - Add writing
@@ -59,6 +58,7 @@
  - Views
  - Posts
  - Most recent posts
+- On the title: X EAs have donated Y amount and pledged a further Z.
 
 This is a dashboard to provide a quick overview of some key statistics of the [effective altruism](https://www.effectivealtruism.org/) (EA) movement.
 

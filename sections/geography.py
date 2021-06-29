@@ -3,7 +3,7 @@ import dash_html_components as html
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
-from ea_bar_graph import EABarGraph
+from utils.ea_bar_graph import EABarGraph
 from countryinfo import CountryInfo
 from math import log
 
@@ -15,16 +15,9 @@ from math import log
 
 country = CountryInfo()
 country_list = country.all().keys()
-# country_list = [
-#     country for country in country_list if hasattr(CountryInfo(country), 'population')
-# ]
-print(country_list)
 
 countries = pd.read_csv('./data/rp_survey_data/country2.csv')
 
-# null_countries = [ country for country in country_list if country not in countries['Country'] ]
-# for null_country in null_countries:
-#     countries.loc[len(countries), :] = [null_country, 0]
 countries['Responses'] = countries['Responses'].astype('int')
 
 countries.loc[countries['Country']=='United States of America', 'Country'] = 'United States'
@@ -51,8 +44,6 @@ for country in country_list:
         continue
     i = len(countries_for_map)
     countries_for_map.loc[i, ['Country', 'Responses', 'Density (per million)', 'log density']] = (country, 0, 0, 0)
-# countries['density plus'] = countries['Density (per million)']
-# print(countries['density'])
 
 # https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo.html
 map_fig = px.choropleth(
@@ -136,7 +127,7 @@ per_capita_bar = EABarGraph(
 #     )
 # )
 
-geo_div = html.Div(
+content = html.Div(
     [
         html.Div(
             html.H2('Countries'),
@@ -179,10 +170,7 @@ geo_div = html.Div(
             ),
         ], style={'height': '80%'}),
     ],
-    style = {
-        # 'overflow': 'auto',
-        'height': '100vh',
-    }
+    className = 'section',
     #className='big-box'
 #    style = {
 #        'height': '100vh',

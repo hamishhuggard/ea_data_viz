@@ -102,12 +102,12 @@ growing_figs = [
     for fig in growing_figs
 ]
 
-growth_div = html.Div(
+content = html.Div(
     [
         html.Div(
             html.H2('Growth'),
             className='section-heading',
         ),
     ] + growing_figs,
-    style = {'overflow': 'auto'}
+    className = 'section'
 )

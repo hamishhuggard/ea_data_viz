@@ -6,7 +6,7 @@ import plotly.express as px
 import pandas as pd
 import re
 from glob import glob
-from ea_bar_graph import EABarGraph
+from utils.ea_bar_graph import EABarGraph
 
 ##################################
 ###       DEMOGRAPHICS         ###
@@ -145,7 +145,7 @@ def create_row(demo_names, widths=None):
 
     return bars
 
-demo_div = html.Div(
+content = html.Div(
     [
         html.Div(
             [
@@ -180,10 +180,7 @@ demo_div = html.Div(
                 ['32.5%', '32.5%', '35%']
         #     ) + \
             ),
-            style={
-                'overflow': 'auto',
-                'height': '100vh',
-            }
+            className = 'section',
         ),
 
         html.Div(
@@ -196,18 +193,10 @@ demo_div = html.Div(
             create_row(
                 ['education2', 'career_path']
             ) + \
-        #     ),
-        #     style={'overflow': 'auto'}
-        # ),
-
-        # html.Div(
             create_row(
                 ['subject', 'employment'],
             ),
-            style={
-                'overflow': 'auto',
-                'height': '100vh',
-            }
+            className = 'section',
         ),
 
     ],

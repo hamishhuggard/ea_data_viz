@@ -218,7 +218,7 @@ funding_fig.update_layout(
   margin=dict(l=0, r=0, t=0, b=0),
 )
 
-donation_div = html.Div(
+content = html.Div(
     [
         html.Div(
             html.H2('Donation Channels'),
@@ -231,7 +231,7 @@ donation_div = html.Div(
             )
         ),
     ],
-    style = {'overflow': 'auto'}
+    className = 'section'
 )
 
 ##################################
