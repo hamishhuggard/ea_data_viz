@@ -125,19 +125,13 @@ app.layout = html.Div([
 
     # Demographics
     html.Div(
-        html.Div(
-            demo_div,
-            className='section-content',
-        ),
+        demo_div,
         className='section',
     ),
 
     # Geography
     html.Div(
-        html.Div(
-            geo_div,
-            className='section-content',
-        ),
+        geo_div,
         className='section',
     ),
 
