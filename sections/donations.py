@@ -224,6 +224,29 @@ content = html.Div(
             html.H2('Donation Channels'),
             className='section-heading',
         ),
+        html.P([
+            'Data source: ',
+            dcc.Link(
+                'Open Philanthropy Grants Database',
+                href='https://www.openphilanthropy.org/giving/grants'
+            ),
+            ', ',
+            dcc.Link(
+                'Effective Altruism Funds Payout Reports',
+                href='https://funds.effectivealtruism.org/'
+            ),
+            ', ',
+            dcc.Link(
+                'Founders Pledge Homepage',
+                href='https://founderspledge.com/'
+            ),
+            ', ',
+            dcc.Link(
+                'Giving What We Can Homepage',
+                href='https://www.givingwhatwecan.org/'
+            ),
+            '.'
+        ]),
         html.Div(
             dcc.Graph(
                 id='Donations',

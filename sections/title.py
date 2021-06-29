@@ -75,8 +75,11 @@ content = html.Div(
             subtitle,
                 html.Div(
                     [
+                        # html.P(
+                        #     'Effective altruism is about answering one simple question: how can we use our resources to help others the most?'
+                        # ),
                         html.P(
-                            'Effective altruism is about answering one simple question: how can we use our resources to help others the most?'
+                            'This website visualises some data relating to effective altruism.'
                         ),
                         html.P([
                             'Learn more at ',
@@ -87,8 +90,8 @@ content = html.Div(
                             "."
                         ]),
                         html.P(
-                            'This website visualises some data relating to effective altruism.'
-                        )
+                            'Created by Hamish Huggard.'
+                        ),
                     ],
                     style = {
                       'font-family': 'Raleway',

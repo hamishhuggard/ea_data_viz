@@ -19,6 +19,7 @@
     height: 10vh;
     font-family: RaleWay;
     text-align: center;
+    vertical-align: center;
 }
 
 .section-heading:after

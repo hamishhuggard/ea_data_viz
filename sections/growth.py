@@ -108,6 +108,13 @@ content = html.Div(
             html.H2('Growth'),
             className='section-heading',
         ),
+        html.P([
+            'Data source: ',
+            dcc.Link(
+                '2019 Rethink Priorities Survey',
+                href='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
+            ),
+        ]),
     ] + growing_figs,
     className = 'section'
 )
