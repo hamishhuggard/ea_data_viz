@@ -12,7 +12,8 @@ lightbulb_img = html.Img(
     src = lightbulb_img_url,
     height = 60,
     style = {
-        'float': 'center',
+        # 'float': 'center',
+        'grid-column': '1',
     }
 )
 
@@ -34,7 +35,8 @@ title = html.H1(
         )
     ],
     style = {
-        'float': 'center',
+        # 'float': 'center',
+        'grid-column': '2',
     }
 )
 
@@ -54,6 +56,7 @@ content = html.Div(
             }
         ),
         html.Div(
+            html.Div(
             [
                 # html.Div('.', style={'width': '35%', 'float': 'left', 'font-color': 'white'}),
                 lightbulb_img,
@@ -61,10 +64,21 @@ content = html.Div(
                 # html.Div(style={'width': '40%'}),
             ],
             style = {
+                'display': 'grid',
+            }
+            ),
+            style = {
+                'width': '450px',
+                'display': 'block',
+                'margin': 'auto',
+
+                # 'display': 'grid',
+                # 'grid-template-columns': '60px,1fr',
+                # 'margin': '0 auto',
+
                 # 'height': '10vh',
                 # 'width': '40%',
                 # 'float': 'center',
-                # 'margin': '0 auto',
                 # 'margin-right': 'auto',
                 # 'margin-lrft': 'auto',
             }

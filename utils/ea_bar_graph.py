@@ -39,6 +39,8 @@ class EABarGraph(dcc.Graph):
             # hovertemplate = '%{hover} %{Percent:$.2f} %{label}<extra></extra>',
         )
 
+        self.bar.update_xaxes(side='top')
+
         self.bar.update_layout(
             margin=dict(l=0, r=0, t=30, b=0),
             hovermode=False,

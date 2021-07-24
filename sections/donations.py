@@ -22,6 +22,7 @@ funding = pd.DataFrame(columns=['Source', 'Cause Area', 'Organization', 'Amount'
 ##################################
 
 op_grants = pd.read_csv('./data/openphil_grants.csv')
+# op_grants = pd.read_csv('https://www.openphilanthropy.org/giving/grants/spreadsheet')
 
 # Standardize cause area names
 # standard names from https://80000hours.org/topic/causes/

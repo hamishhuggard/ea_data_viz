@@ -8,6 +8,8 @@ dash = "*"
 pandas = "*"
 gunicorn = "*"
 countryinfo = "*"
+bs4 = "*"
+requests = "*"
 
 [dev-packages]
 
