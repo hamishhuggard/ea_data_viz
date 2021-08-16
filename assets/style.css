@@ -1,12 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
 
-.demo-column {
-/*    width: 20%; */
-    float: left;
-/*    padding: 1%; */
-/*    height: 100%; */
+body {
+    font-family: "Raleway", Helvetica, sans-serif;
 }
+
+.center {
+    display: grid;
+    place-items: center;
+}
+
+
+/* Title */
+
+.effective {
+    font-family: "Roboto Slab", "Times New Roman", serif;
+    font-weight: 700;
+}
+
+.altruism {
+    font-family: "Roboto Slab", "Times New Roman", serif;
+    font-weight: 400;
+}
+
+/* @media screen and (max-width: 1000px) {
+    .title {
+        height: 500px;
+    }
+} */
+
+.title {
+    padding: 50px;
+}
+
+/* Demographics section */
+
+.demographics-container {
+    display: grid;
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    /* overflow: scroll; */
+}
+
+.demographics-panel {
+    padding: 10px;
+}
+
+/* @media screen and (max-width: 700px) {
+    .demographics-panel {
+        height: 300px;
+    }
+} */
+.grid-1-cols {
+    grid-template-columns: repeat(1, 1fr);
+    height: auto;
+}
+
+@media screen and (min-width: 700px) {
+    .grid-2-cols {
+        grid-template-columns: repeat(2, 1fr);
+        height: auto;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .grid-3-cols {
+        grid-template-columns: repeat(3, 1fr);
+        height: 80vh;
+    }
+}
+
+/*  section */
 
 .floaty-boi {
     float: left;
@@ -17,7 +83,6 @@
 .section-heading {
     width: 100%;
     height: 10vh;
-    font-family: RaleWay;
     text-align: center;
     vertical-align: center;
 }
@@ -29,10 +94,12 @@
     border:2px solid #0c869b;
 }
 
-.scroll-snapper {
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    height: 100vh;
+@media screen and (min-width: 1000px) {
+    .scroll-snapper {
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+        height: 100vh;
+    }
 }
 
 .section {
@@ -41,6 +108,13 @@
     margin: 0 auto;
     text-align: center;
 }
+
+@media screen and (max-width: 1000px) {
+    .section {
+        height: auto;
+    }
+}
+
 
 .section-content {
     width: 90%;
