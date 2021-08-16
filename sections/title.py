@@ -8,123 +8,55 @@ from plotly.subplots import make_subplots
 import plotly.express as px
 
 lightbulb_img_url = 'https://effectivealtruism.nz/wp-content/uploads/2018/02/lightbulblogo-1.png'
-lightbulb_img = html.Img(
-    src = lightbulb_img_url,
-    height = 60,
-    style = {
-        # 'float': 'center',
-        'grid-column': '1',
-    }
-)
 
-title = html.H1(
+heading = html.Div(
     [
-        html.Span(
-            'Effective ',
+        html.Img(
+            src = lightbulb_img_url,
+            height = 60,
             style = {
-                'font-family': 'Roboto Slab',
-                'font-weight': '700',
+                'grid-column': '1',
             }
         ),
-        html.Span(
-            'Altruism',
+        html.H1(
+            [
+                html.Span(
+                    'Effective ',
+                    className = 'effective',
+                ),
+                html.Span(
+                    'Altruism ',
+                    className = 'altruism',
+                ),
+                html.Span(
+                    'Data Visualizer',
+                ),
+            ],
             style = {
-                'font-family': 'Roboto Slab',
-                'font-weight': '400',
+                'grid-column': '2',
             }
         )
     ],
     style = {
-        # 'float': 'center',
-        'grid-column': '2',
+        'display': 'grid',
     }
 )
 
-subtitle = html.H3(
-    'Data Visualizer',
-    style = {
-        'font-family': 'Raleway',
-    }
-)
 
 content = html.Div(
-    [
-        # lightbulb_img,
-        html.Div(
-            style = {
-                'height': '35vh',
-            }
-        ),
-        html.Div(
-            html.Div(
-            [
-                # html.Div('.', style={'width': '35%', 'float': 'left', 'font-color': 'white'}),
-                lightbulb_img,
-                title,
-                # html.Div(style={'width': '40%'}),
-            ],
-            style = {
-                'display': 'grid',
-            }
+    html.Div([
+        heading,
+        html.P([
+            'This website visualises some data relating to ',
+            dcc.Link(
+                "effective altruism",
+                href="https://www.effectivealtruism.org/"
             ),
-            style = {
-                'width': '450px',
-                'display': 'block',
-                'margin': 'auto',
-
-                # 'display': 'grid',
-                # 'grid-template-columns': '60px,1fr',
-                # 'margin': '0 auto',
-
-                # 'height': '10vh',
-                # 'width': '40%',
-                # 'float': 'center',
-                # 'margin-right': 'auto',
-                # 'margin-lrft': 'auto',
-            }
+            "."
+        ]),
+        html.P(
+            'Feedback welcome at hamish.huggard@gmail.com.'
         ),
-
-          html.Div(
-            [
-            subtitle,
-                html.Div(
-                    [
-                        # html.P(
-                        #     'Effective altruism is about answering one simple question: how can we use our resources to help others the most?'
-                        # ),
-                        html.P(
-                            'This website visualises some data relating to effective altruism.'
-                        ),
-                        html.P([
-                            'Learn more at ',
-                            dcc.Link(
-                                "effectivaltruism.org",
-                                href="https://www.effectivealtruism.org/"
-                            ),
-                            "."
-                        ]),
-                        html.P(
-                            'Created by Hamish Huggard.'
-                        ),
-                    ],
-                    style = {
-                      'font-family': 'Raleway',
-                    }
-                ),
-            ],
-            # style = {
-            #   'margin': '0',
-            #   'position': 'absolute',
-            #   'top': '45%',
-            #   'left': '50%',
-            #   '-ms-transform': 'translate(-50%, -50%)',
-            #   'transform': 'translate(-50%, -50%)',
-            # }
-          )
-    ],
-    className='section',
-    style = {
-        'vertical-align': 'center',
-        'text-align': 'center',
-    }
+    ]),
+    className='section center title',
 )
