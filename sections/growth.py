@@ -1,4 +1,5 @@
 import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
 import string
@@ -6,12 +7,14 @@ import dash_core_components as dcc
 import dash_html_components as html
 
 commiting = pd.read_csv('data/is_ea_growing/is_ea_growing_commiting.csv')
-
 doing = pd.read_csv('data/is_ea_growing/is_ea_growing_doing.csv')
-
 joining = pd.read_csv('data/is_ea_growing/is_ea_growing_joining.csv')
-
 reading = pd.read_csv('data/is_ea_growing/is_ea_growing_reading.csv')
+
+
+# "Founder's Pledge pledges" makes more sense in "doing" than in "commiting"
+doing = doing.append( commiting[ commiting['Type of data']=='Founder’s Pledge pledges' ], ignore_index=True )
+commiting = commiting[ ~(commiting['Type of data']=='Founder’s Pledge pledges') ]
 
 
 
@@ -20,8 +23,8 @@ growing_dfs = [commiting, doing, joining, reading]
 for df in growing_dfs:
 
    # Convert column names from 'Jan-Dec 2014' to '2014'
-   df.columns = [ 
-      col.replace('Jan-Dec ', '') for col in df.columns 
+   df.columns = [
+      col.replace('Jan-Dec ', '') for col in df.columns
    ]
 
    # Replace 'Didn’t exist', 'No data', 'No data yet', 
@@ -76,45 +79,94 @@ for df in [commiting, doing, joining, reading]:
 
 commiting, doing, joining, reading = long_dfs
 
-commiting_fig = px.line(commiting, x='year', y='value', color='label', title='Committing', )
-# commiting_fig.update_layout(yaxis_type="log")
+HEIGHT = 600
+WIDTH = 600
 
-doing_fig = px.line(doing, x='year', y='value', color='label', title='Doing', )
-# doing_fig.update_layout(yaxis_type="log")
-
-joining_fig = px.line(joining, x='year', y='value', color='label', title='Joining', )
-# joining_fig.update_layout(yaxis_type="log")
-
-reading_fig = px.line(reading, x='year', y='value', color='label', title='Reading', )
-# reading_fig.update_layout(yaxis_type="log")
-
-growing_figs = [commiting_fig, doing_fig, joining_fig, reading_fig]
-growing_figs = [
-    html.Div(
-        dcc.Graph(
-            figure=fig,
-        ),
-        style = {
-            'width': '45%',
-            'float': 'left',
-        }
-    )
-    for fig in growing_figs
-]
-
-content = html.Div(
+growing_figs = []
+for table, table_name in zip(
     [
+        reading,
+        joining,
+        commiting,
+        doing,
+    ],
+    [
+        'low engaged',
+        'medium engaged',
+        'highly engaged',
+        'money',
+    ]
+):
+    fig = go.Figure()
+    for val in table['label'].unique():
+        val_df = table.loc[ table['label']==val ]
+        fig.add_trace(
+            go.Scatter(
+                x=val_df['year'],
+                y=val_df['value'],
+                name=val,
+            )
+        )
+        fig.update_layout(
+            title=table_name,
+            height=HEIGHT,
+            # width=WIDTH,
+        )
+        # fig.update_layout(yaxis_type="log")
+
+    fig.update_layout(
+
+        autosize = True,
+
+        # Top-left corner:
+
+        # legend = dict(
+        #     yanchor="top",
+        #     y=0.99,
+        #     xanchor="left",
+        #     x=0.01,
+        #     title_text='',
+        # )
+
+        # Below:
+
+        legend = {
+              'xanchor': "center",
+              'yanchor': "top",
+              'y': -0.3, # play with it
+              'x': 0.5,   # play with it
+              'title_text': '',
+        }
+
+    )
+
+    growing_figs.append(
         html.Div(
-            html.H2('Growth'),
-            className='section-heading',
-        ),
-        html.P([
-            'Data source: ',
-            dcc.Link(
-                '2019 Rethink Priorities Survey',
-                href='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
+            dcc.Graph(
+                figure=fig,
             ),
-        ]),
-    ] + growing_figs,
-    className = 'section'
-)
+        )
+    )
+
+class Growth(html.Div):
+    def __init__(self):
+        super(Growth, self).__init__(
+            [
+                html.Div(
+                    html.H2('Growth'),
+                    className='section-heading',
+                ),
+                html.P([
+                    'Data source: ',
+                    dcc.Link(
+                        '2019 Rethink Priorities Survey',
+                        href='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
+                    ),
+                ]),
+                html.Div(
+                    growing_figs,
+                    className = 'demographics-container grid-2-cols grid-4-cols',
+                ),
+            ],
+            className = 'section'
+        )
