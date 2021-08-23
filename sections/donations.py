@@ -252,7 +252,11 @@ content = html.Div(
             dcc.Graph(
                 id='Donations',
                 figure=funding_fig,
-            )
+            ),
+            className = 'center',
+            style = {
+                'padding': '5px',
+            }
         ),
     ],
     className = 'section'
