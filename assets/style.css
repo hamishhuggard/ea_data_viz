@@ -12,6 +12,21 @@ body {
 }
 
 
+/* Night mode */
+
+/*
+
+body {
+    background-color: black;
+}
+
+p, h1, h2, h3 {
+    color: white;
+}
+
+*/
+
+
 /* Title */
 
 .effective {
@@ -24,11 +39,11 @@ body {
     font-weight: 400;
 }
 
-/* @media screen and (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
     .title {
         height: 500px;
     }
-} */
+}
 
 .title {
     padding: 50px;
@@ -53,6 +68,9 @@ body {
         height: 300px;
     }
 } */
+
+/* Responsive columns */
+
 .grid-1-cols {
     grid-template-columns: repeat(1, 1fr);
     height: auto;
@@ -69,6 +87,44 @@ body {
     .grid-3-cols {
         grid-template-columns: repeat(3, 1fr);
         height: 80vh;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .grid-4-cols {
+        grid-template-columns: repeat(4, 1fr);
+        height: 80vh;
+    }
+}
+
+
+/* Countries */
+
+.map-container {
+/* 	width: 60%; */
+    height: 80%;
+}
+
+.countries-bar-container {
+    height: 85vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.countries-bar {
+/*    width: 20%; */
+    height: 85vh;
+    overflow-y: scroll;
+}
+
+.countries-container {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 1000px) {
+    .countries-container {
+        grid-template-columns: 3fr 2fr;
     }
 }
 
@@ -119,3 +175,6 @@ body {
 .section-content {
     width: 90%;
 }
+
+
+
