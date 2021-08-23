@@ -89,98 +89,67 @@ map_fig.update_geos(
     landcolor="#dfe3ee",
 )
 
-countries['x'] = countries['Country'] + countries['Responses'].apply(lambda x: f'{x:>5}')
+countries['x'] = countries['Country']
+countries['text'] = countries['Responses'].apply(lambda x: f'{x:}')
 countries['y'] = countries['Responses']
 
 countries_bar = EABarGraph(
     countries,
-    height = 20*len(countries),
+    height = 23*len(countries),
     title = 'Number of EAs'
 )
 
 countries_capita_sort = countries.sort_values(by='Density (per million)')
-countries_capita_sort['x'] = countries_capita_sort['Country'] + countries_capita_sort['Density (per million)'].apply(lambda x: f'{x:>5.1f}')
+countries_capita_sort['x'] = countries_capita_sort['Country']
 countries_capita_sort['y'] = countries_capita_sort['Density (per million)']
+countries_capita_sort['text'] = countries_capita_sort['Density (per million)'].apply(lambda x: f'{x:.1f}')
 
 per_capita_bar = EABarGraph(
     countries_capita_sort,
-    height = 20*len(countries),
-    title = 'EAs per Capita (Million)'
+    height = 23*len(countries),
+    title = 'EAs per Million People'
 )
 
-# countries_bar = px.bar(
-#      countries,
-#      y = 'Country',
-#      x = 'Responses',
-#      orientation = 'h',
-#      height = 20 * len(countries),
-# #     title = 'no title',
-# )
-# countries_bar.update_layout(
-#     margin=dict(l=0, r=0, t=0, b=0),
-#     xaxis=dict(title=''),
-#     yaxis=dict(title=''),
-#     font=dict(
-#         # family="Courier New, monospace",
-#         # size=8,
-#         # color="RebeccaPurple"
-#     )
-# )
-
-content = html.Div(
-    [
-        html.Div(
-            html.H2('Countries'),
-            className='section-heading',
-        ),
-        html.P([
-            'Data source: ',
-            dcc.Link(
-                '2019 Rethink Priorities Survey',
-                href='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
-            ),
-        ]),
-        html.Div([
-            html.Div(
-                    dcc.Graph(
-                        id='map_fig',
-                        figure=map_fig
+class Geography(html.Div):
+    def __init__(self):
+        super(Geography, self).__init__(
+            [
+                html.Div(
+                    html.H2('Countries'),
+                    className='section-heading',
+                ),
+                html.P([
+                    'Data source: ',
+                    dcc.Link(
+                        '2019 Rethink Priorities Survey',
+                        href='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
                     ),
-                    style={
-                        'width': '60%',
-#                        'background-color': 'red'
-                    },
-#                    className='floaty-boi'
-                    className='demo-column'
-            ),
-            html.Div(
-               countries_bar,
-               style={
-                   'width': '20%',
-                   'height': '85vh',
-#                   'background-color': 'blue',
-                   'overflow-y': 'scroll',
-               },
-#               className='floaty-boi'
-               className='demo-column'
-            ),
-            html.Div(
-               per_capita_bar,
-               style={
-                   'width': '20%',
-                   'height': '85vh',
-                   'background-color': 'blue',
-                   'overflow-y': 'scroll',
-               },
-#               className='floaty-boi'
-               className='demo-column'
-            ),
-        ], style={'height': '80%'}),
-    ],
-    className = 'section',
-    #className='big-box'
-#    style = {
-#        'height': '100vh',
-#        'background-color': 'yellow'
-#    }
-)
+                ]),
+                html.Div(
+                    [
+                        html.Div(
+                            dcc.Graph(
+                                id='map_fig',
+                                figure=map_fig
+                            ),
+                            className='map-container'
+                        ),
+                        html.Div(
+                            [
+                                html.Div(
+                                   countries_bar,
+                                   className='countries-bar'
+                                ),
+                                html.Div(
+                                   per_capita_bar,
+                                   className='countries-bar'
+                                ),
+                            ],
+                            className = 'countries-bar-container',
+                        ),
+                    ],
+                    className = 'countries-container',
+                ),
+            ],
+            className = 'section',
+        )
