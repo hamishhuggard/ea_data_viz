@@ -101,20 +101,15 @@ p, h1, h2, h3 {
 /* Countries */
 
 .map-container {
-/* 	width: 60%; */
-    height: 80%;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .countries-bar-container {
-    height: 85vh;
+    padding: 10px
+    box-sizing: border-box;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.countries-bar {
-/*    width: 20%; */
-    height: 85vh;
-    overflow-y: scroll;
+    grid-template-columns: 1fr;
 }
 
 .countries-container {
@@ -122,9 +117,22 @@ p, h1, h2, h3 {
     grid-template-columns: 1fr;
 }
 
+@media screen and (min-width: 700px) {
+    .countries-bar-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 @media screen and (min-width: 1000px) {
     .countries-container {
         grid-template-columns: 3fr 2fr;
+    }
+    .countries-bar {
+        height: 85vh;
+        overflow-y: scroll;
+    }
+    .countries-bar-container {
+        height: 85vh;
     }
 }
 
