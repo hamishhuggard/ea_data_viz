@@ -43,20 +43,22 @@ heading = html.Div(
 )
 
 
-content = html.Div(
-    html.Div([
-        heading,
-        html.P([
-            'This website visualises some data relating to ',
-            dcc.Link(
-                "effective altruism",
-                href="https://www.effectivealtruism.org/"
-            ),
-            "."
-        ]),
-        html.P(
-            'Feedback welcome at hamish.huggard@gmail.com.'
-        ),
-    ]),
-    className='section center title',
-)
+class Title(html.Div):
+    def __init__(self):
+        super(Title, self).__init__(
+            html.Div([
+                heading,
+                html.P([
+                    'This website visualises some data relating to ',
+                    dcc.Link(
+                        "effective altruism",
+                        href="https://www.effectivealtruism.org/"
+                    ),
+                    "."
+                ]),
+                html.P(
+                    'Feedback welcome at hamish.huggard@gmail.com.'
+                ),
+            ]),
+            className='section center title',
+        )

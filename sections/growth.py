@@ -98,6 +98,8 @@ for table, table_name in zip(
     ]
 ):
     fig = go.Figure()
+    annotations = []
+    print(table['label'].unique())
     for val in table['label'].unique():
         val_df = table.loc[ table['label']==val ]
         fig.add_trace(
@@ -111,12 +113,29 @@ for table, table_name in zip(
             title=table_name,
             height=HEIGHT,
             # width=WIDTH,
+            showlegend=False,
+            # yaxis_type="log",
         )
-        # fig.update_layout(yaxis_type="log")
+        annotations.append(dict(
+            xref='paper',
+            x=int(val_df['year'].max()),
+            y=int(val_df['value'].max()),
+            xanchor='left',
+            yanchor='middle',
+            text=f'{val}',
+            font={
+                'family': 'Arial',
+                'size': 16,
+            },
+            showarrow=False
+        ))
+    import json
+    print(json.dumps(annotations, indent=3))
+    fig.update_layout(annotations=annotations)
 
-    fig.update_layout(
+    # fig.update_layout(
 
-        autosize = True,
+        # autosize = True,
 
         # Top-left corner:
 
@@ -130,15 +149,15 @@ for table, table_name in zip(
 
         # Below:
 
-        legend = {
-              'xanchor': "center",
-              'yanchor': "top",
-              'y': -0.3, # play with it
-              'x': 0.5,   # play with it
-              'title_text': '',
-        }
+        # legend = {
+        #       'xanchor': "center",
+        #       'yanchor': "top",
+        #       'y': -0.3, # play with it
+        #       'x': 0.5,   # play with it
+        #       'title_text': '',
+        # }
 
-    )
+    # )
 
     growing_figs.append(
         html.Div(
@@ -166,6 +185,7 @@ class Growth(html.Div):
                 html.Div(
                     growing_figs,
                     className = 'demographics-container grid-2-cols grid-4-cols',
+                    # className = 'demographics-container',
                 ),
             ],
             className = 'section'
