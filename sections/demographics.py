@@ -49,8 +49,17 @@ def get_demo_table(demo_name):
     demo_table['label_original'] = demo_table[title]
     demo_table['label'] = demo_table[title].map(subs).fillna(demo_table[title])
 
+    demo_table = demo_table.iloc[::-1]
     if title == 'Moral View':
         demo_table = demo_table.loc[[ 4, 2, 3, 1, 0, ], :]
+    elif title == 'Race/Ethnicity':
+        inds = list(range(6))
+        inds.insert(0, inds.pop(3))
+        demo_table = demo_table.loc[inds, :]
+    elif title == 'Diet ':
+        inds = list(range(6))
+        inds.insert(0, inds.pop(4))
+        demo_table = demo_table.loc[inds, :]
 
     return demo_table
 
