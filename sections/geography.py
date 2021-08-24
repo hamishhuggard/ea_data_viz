@@ -37,6 +37,8 @@ countries['population'] = countries['Country'].apply(get_population)
 countries['Density (per million)'] = countries['Responses'] / countries['population'] * 1e6
 countries['Density (per million)'] = countries['Density (per million)'].apply(lambda x: round(x, 2))
 countries['log density'] = countries['Density (per million)'].apply(lambda x: 1 + log(x+1))
+MINIMUM_CIRCLE_SIZE = 15
+countries['circle size'] = countries['Responses'] + MINIMUM_CIRCLE_SIZE
 
 countries_for_map = countries.copy()
 for country in country_list:
@@ -45,18 +47,48 @@ for country in country_list:
     i = len(countries_for_map)
     countries_for_map.loc[i, ['Country', 'Responses', 'Density (per million)', 'log density']] = (country, 0, 0, 0)
 
-# https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo.html
-map_fig = px.choropleth(
+# Population map
+
+pop_map = px.scatter_geo(
+    countries,
+    locations="Country",
+    hover_name="Country",
+    locationmode='country names',
+    size="circle size",
+    hover_data = {
+        'circle size': False,
+        'Responses': True,
+        'Country': False,
+        'log density': False,
+        'Density (per million)': True,
+    },
+    projection="equirectangular", # 'orthographic' is fun
+    height=250,
+)
+
+pop_map.update_layout(
+    margin=dict(l=0, r=0, t=0, b=0),
+)
+
+pop_map.update_traces(
+    marker = dict(
+        color ="#36859A",
+    ),
+)
+
+pop_map.update_geos(
+    showcoastlines=False,
+    landcolor="#dfe3ee",
+)
+
+# Density map
+
+density_map = px.choropleth(
     countries_for_map,
     locations="Country",
     hover_name="Country",
-    # hover_data=['Country', 'Responses'],
     locationmode='country names',
-    # size="Responses",
-    # size="circle size",
-    # color='Density (per million)',
     color='log density',
-    # color='density plus',
     color_continuous_scale=["#dfe3ee", "#007a8f"],
     hover_data = {
         'circle size': False,
@@ -66,26 +98,16 @@ map_fig = px.choropleth(
         'Density (per million)': True,
     },
     projection="equirectangular", # 'orthographic' is fun
-    # height=250,
+    height=250,
 )
 
-map_fig.update_layout(
+density_map.update_layout(
     margin=dict(l=0, r=0, t=0, b=0),
     coloraxis_showscale=False,
 )
 
-# map_fig.update_traces(
-#     marker = dict(
-#         color ="#36859A",
-#     ),
-# )
-
-map_fig.update_geos(
+density_map.update_geos(
     showcoastlines=False, 
-    # showland=True, 
-    # landcolor="#B8C8D3",
-    # landcolor="#ffffff",
-    # marker_line_color='white',
     landcolor="#dfe3ee",
 )
 
@@ -128,11 +150,17 @@ class Geography(html.Div):
                 html.Div(
                     [
                         html.Div(
-                            dcc.Graph(
-                                id='map_fig',
-                                figure=map_fig
-                            ),
-                            className='map-container'
+                            [
+                                dcc.Graph(
+                                    id='density_map',
+                                    figure=density_map
+                                ),
+                                dcc.Graph(
+                                    id='pop_map',
+                                    figure=pop_map
+                                ),
+                            ],
+                            className='map-container center'
                         ),
                         html.Div(
                             [

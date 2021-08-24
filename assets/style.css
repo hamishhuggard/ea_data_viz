@@ -103,10 +103,13 @@ p, h1, h2, h3 {
 .map-container {
     padding: 10px;
     box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100%;
 }
 
 .countries-bar-container {
-    padding: 10px
+    padding: 20px
     box-sizing: border-box;
     display: grid;
     grid-template-columns: 1fr;
@@ -126,6 +129,7 @@ p, h1, h2, h3 {
 @media screen and (min-width: 1000px) {
     .countries-container {
         grid-template-columns: 3fr 2fr;
+        grid-template-columns: 1fr 1fr;
     }
     .countries-bar {
         height: 85vh;
@@ -134,7 +138,7 @@ p, h1, h2, h3 {
     .countries-bar-container {
         height: 85vh;
     }
-}
+
 
 /*  section */
 
@@ -151,8 +155,7 @@ p, h1, h2, h3 {
     vertical-align: center;
 }
 
-.section-heading:after
-{
+.section-heading:after {
     content:' ';
     display:block;
     border:2px solid #0c869b;
