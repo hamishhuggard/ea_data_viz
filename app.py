@@ -10,12 +10,21 @@ from sections.demographics import Demographics
 # from sections.growth import Growth
 from sections.geography import Geography
 from sections.title import Title
-from sections.open_phil import content as open_phil
+from sections.open_phil import OpenPhil
 from utils.refresh_data import refresh_data
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(
+    __name__,
+    external_stylesheets=external_stylesheets,
+    meta_tags = [
+        {
+            'name': 'viewport',
+            'content': 'width=device-width, initial-scale=1.0',
+        }
+    ],
+)
 app.title = 'Effective Altruism Data Viewer'
 server = app.server
 
@@ -26,11 +35,11 @@ app.layout = html.Div(
 #     return html.Div(
         [
             Title(),
+            # OpenPhil(),
             Demographics(),
             Geography(),
-            # open_phil,
             Donations(),
-            # Growth(),
+            Growth(),
         ],
         className = 'scroll-snapper',
     )
@@ -38,4 +47,5 @@ app.layout = html.Div(
 # app.layout = serve_layout
 
 if __name__ == '__main__':
+    # app.run_server(debug=True)
     app.run_server(debug=False)
