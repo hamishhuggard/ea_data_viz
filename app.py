@@ -7,7 +7,7 @@ import dash
 import dash_html_components as html
 from sections.donations import Donations
 from sections.demographics import Demographics
-# from sections.growth import Growth
+from sections.growth import Growth
 from sections.geography import Geography
 from sections.title import Title
 from sections.open_phil import OpenPhil
