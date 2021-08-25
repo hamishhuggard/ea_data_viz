@@ -19,38 +19,9 @@ op_grants['Grant'] = op_grants['Grant']# .apply(lambda x: x.split('(')[0])
 
 op_grants['Organization Name'] = op_grants['Organization Name'].apply(lambda x: x.strip() if type(x)==str else x)
 op_grants['Organization Name'] = op_grants['Organization Name'].apply(lambda x: 'Helen Keller International' if x=='Hellen Keller International' else x)
-
-def force_length(string, length):
-    if len(string) < length:
-        pad = (length - len(string))
-        lpad = math.floor( pad / 2 )
-        rpad = math.ceil( pad / 2 )
-        return '_'*lpad + string + '_'*rpad
-        return string.rjust(length)
-    else:
-        return string[:length-3] + '...'
-
-def display_row(row):
-    grant = force_length(
-        row['Grant'].split('(')[0].split('—')[-1],
-        25
-    )
-    org = force_length( row['Organization Name'], 45 )
-    amount = str(int(row['Amount']))
-    amount = '_'*(8 - len(amount)) + '$' + amount
-    date = row['Date']
-    string = f"{grant}_{org}_{amount}__{date}".lstrip('_')
-    print(string)
-    return string
-
-op_grants['x'] = op_grants.apply(display_row, axis=1)
-op_grants['y'] = op_grants['Amount']
-height_per_bar = 25 if len(op_grants) > 10 else 28
-height = height_per_bar * len(op_grants) + 30
-grant_bar_graph = EABarGraph(op_grants, height=height, title='Grants')
+op_grants['Organization Name'] = op_grants['Organization Name'].apply(lambda x: 'Alliance for Safety and Justice Action Fund' if x=='Alliance for Safety and Justice' else x)
 
 op_orgs = op_grants.groupby(by='Organization Name', as_index=False).sum().sort_values(by='Amount')
-print(op_orgs.loc[::-1].iloc[:10])
 op_orgs['x'] = op_orgs['Organization Name'].apply(lambda x: x if len(x) < 30 else x[:27]+'...')
 op_orgs['y'] = op_orgs['Amount']
 height_per_bar = 25 if len(op_orgs) > 10 else 28
@@ -66,52 +37,57 @@ height = height_per_bar * len(op_causes) + 20
 cause_bar_graph = EABarGraph(op_causes, height=height, title='Focus Area')
 
 
-content = html.Div(
-    [
-        html.Div(
-            html.H2('Open Philanthropy Grants'),
-            className='section-heading',
-        ),
-        html.P([
-            'Data source: ',
-            dcc.Link(
-                'Open Philanthropy Grants Database',
-                href='https://www.openphilanthropy.org/giving/grants'
-            ),
-        ]),
-        html.Div(
-            grant_bar_graph,
-            style = {
-                'width': '70%',
-                'height': '85vh',
-                'overflow-y': 'scroll',
-                'float': 'left',
-            }
-        ),
-        html.Div(
+class OpenPhil(html.Div):
+    def __init__(self):
+        super(OpenPhil, self).__init__(
             [
                 html.Div(
-                    cause_bar_graph,
+                    html.H2('Open Philanthropy Grants'),
+                    className='section-heading',
+                ),
+                html.P([
+                    'Data source: ',
+                    dcc.Link(
+                        'Open Philanthropy Grants Database',
+                        href='https://www.openphilanthropy.org/giving/grants'
+                    ),
+                ]),
+                html.Div(
+                    [
+                        html.Div(
+                            [
+                                html.Div(
+                                ),
+                                html.Div(
+                                    [
+                                        html.Div(
+                                            cause_bar_graph,
+                                            style = {
+                                                'height': '50%',
+                                                'overflow-y': 'scroll',
+                                            }
+                                        ),
+                                        html.Div(
+                                            org_bar_graph,
+                                            style = {
+                                                'height': '50%',
+                                                'overflow-y': 'scroll',
+                                            }
+                                        )
+                                    ],
+                                ),
+                            ],
+                            className = 'grid-cols-3-1',
+                        ),
+                        html.Div(
+                            # datatable
+                        ),
+                    ],
+                    className = 'grid-rows-2-1',
                     style = {
-                        'height': '50%',
-                        # 'overflow-y': 'scroll',
+                        'height': '85vh',
                     }
                 ),
-                html.Div(
-                    org_bar_graph,
-                    style = {
-                        'height': '50%',
-                        'overflow-y': 'scroll',
-                    }
-                )
-            ],
-            style = {
-                'width': '30%',
-                'height': '85vh',
-                # 'overflow-y': 'scroll',
-                'float': 'left',
-            }
+            ], # + growing_figs,
+            className = 'section'
         )
-    ], # + growing_figs,
-    className = 'section'
-)
