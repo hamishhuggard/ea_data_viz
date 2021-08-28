@@ -8,12 +8,40 @@ data_source_details = {
         url='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
     ),
 
+    'open_phil': dict(
+        name='Open Philanthropy Grants Database',
+        url='https://www.openphilanthropy.org/giving/grants'
+    ),
+
+    'funds_payout': dict(
+        name='Effective Altruism Funds Payout Reports',
+        url='https://funds.effectivealtruism.org/'
+    ),
+
+    'founders_pledge': dict(
+        name='Founders Pledge Homepage',
+        url='https://founderspledge.com/'
+    ),
+
+    'gwwc': dict(
+        name='Giving What We Can Homepage',
+        url='https://www.givingwhatwecan.org/'
+    ),
+
+    'growth': dict(
+        name='EA Growth Metrics for 2018',
+        url='https://forum.effectivealtruism.org/posts/MBJvDDw2sFGkFCA29/is-ea-growing-ea-growth-metrics-for-2018',
+    ),
+
 }
 
-def get_subtitle(data_sources):
+def get_subtitle(data_sources, can_zoom=True, hover='bars', extra_text=[]):
 
     if type(data_sources)==str:
         data_sources = [ data_sources ]
+
+    if type(extra_text)==str:
+        extra_text = [ extra_text ]
 
     data_links = [
         dcc.Link(
@@ -25,17 +53,37 @@ def get_subtitle(data_sources):
 
     links_and_commas = [
         link_or_comma
-        for link_and_comma in zip(data_links, [',']*len(data_links))
+        for link_and_comma in zip(data_links, [', ']*len(data_links))
         for link_or_comma in link_and_comma
     ]
     links_and_commas = links_and_commas[:-1]
 
-    return html.Div(
-        [
+    content = []
+
+    if len(data_sources) > 0:
+        content.append(
             html.P( ['Data source: '] + links_and_commas + ['.'] ),
-            html.P('Hover over the bars for more details.'),
+        )
+
+    if hover:
+        content.append(
+            html.P(f'Hover over the {hover} for more details.'),
+        )
+
+    if can_zoom:
+        content.append(
             html.P('Click and drag to zoom. Double click to unzoom.'),
-        ],
+        )
+
+    content.extend(
+        [
+            html.P(text)
+            for text in extra_text
+        ]
+    )
+
+    return html.Div(
+        content,
         className='section-subtitle',
     )
 
