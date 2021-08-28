@@ -5,12 +5,15 @@
 
 import dash
 import dash_html_components as html
-from sections.donations import Donations
-from sections.demographics import Demographics
-from sections.growth import Growth
-from sections.geography import Geography
+from sections.donations import donations_section
+from sections.demographics import demographics_section
+from sections.demographics import beliefs_section
+from sections.demographics import education_section
+from sections.demographics import career_section
+# from sections.growth import Growth
+# from sections.geography import Geography
 from sections.title import Title
-from sections.open_phil import OpenPhil
+from sections.open_phil import openphil_section
 from utils.refresh_data import refresh_data
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -31,15 +34,22 @@ server = app.server
 # refresh_data()
 
 # def serve_layout():
-app.layout = html.Div(
 #     return html.Div(
+app.layout = html.Div(
         [
             Title(),
-            # OpenPhil(),
-            Demographics(),
-            Geography(),
-            Donations(),
-            Growth(),
+
+            demographics_section(),
+            beliefs_section(),
+            education_section(),
+            career_section(),
+
+            openphil_section(),
+
+            donations_section(),
+
+            # Geography(),
+            # Growth(),
         ],
         className = 'scroll-snapper',
     )

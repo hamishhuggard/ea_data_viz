@@ -1,12 +1,11 @@
 import plotly.express as px
 import pandas as pd
 import numpy as np
-import string
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_table
 from utils.ea_bar_graph import EABarGraph
-import math
+from utils.subtitle import get_subtitle
 
 def get_op_grants():
 
