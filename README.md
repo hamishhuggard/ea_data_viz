@@ -8,7 +8,7 @@ This Deployed at [EffectiveAltruismData.com](https://effectivealtruismdata.com).
 
 How to run:
 1. Install [pipenv](https://pipenv.pypa.io/en/latest/)
-2. In the terminal enter
+2. In the terminal:
 ```
 git clone https://github.com/hamishhuggard/ea_data_viz.git
 cd ea_data_viz
@@ -23,23 +23,23 @@ pipenv run python app.py
 - Make a floating top bar
 - OP: grant table
 - Founders pledge
- - Member over time
- - Commitments over time
- - Pledges over time
+   - Member over time
+   - Commitments over time
+   - Pledges over time
 - Giving what we can
- - Member over time
- - Donations over time
- - Pledges over time
+   - Member over time
+   - Donations over time
+   - Pledges over time
 - 80,000 Hours
- - Latest podcasts
- - Podcast downloads
- - Latest posts
- - Pageviews
- - 80,000 hours pageviews
+   - Latest podcasts
+   - Podcast downloads
+   - Latest posts
+   - Pageviews
+   - 80,000 hours pageviews
 - EA Forums
- - Views
- - Posts
- - Most recent posts
+   - Views
+   - Posts
+   - Most recent posts
 - On the title: X EAs have donated Y amount and pledged a further Z.
 - [Gapminder-style](https://www.gapminder.org/tools/#$chart-type=bubbles) animation of EA orgs
 
