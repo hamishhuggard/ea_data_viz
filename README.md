@@ -1,12 +1,16 @@
-# Effective Altruism Dashboard
+# [EffectiveAltruismData.com](https://effectivealtruismdata.com)
 
-This is a dashboard to provide a quick overview of some key statistics of the [effective altruism](https://www.effectivealtruism.org/) (EA) movement.
+[Effective Altruism](https://www.effectivealtruism.org/) is a loose collective of quantitatively-minded philanthropists and do-gooders.
 
-Built with Dash and Plotly.
+There are several EA organisations which collect data on grants, donors, and pledges, so I built this website to aggregate and visualise this data.
 
-This Deployed at [EffectiveAltruismData.com](https://effectivealtruismdata.com).
+The website is coded in Python using Dash and Plotly, plus a bunch of HTML and CSS. It is currently deployed with Heroku at [EffectiveAltruismData.com](https://effectivealtruismdata.com).
 
-How to run:
+Everything is responsive, but some of the plots are too detailed to to useful on mobile.
+
+There may be some overlap between this project and the [EA hub map](https://eahub.org/) or [EA Funds dashboard](https://app.effectivealtruism.org/funds/about/stats).
+
+## How to Run
 1. Install [pipenv](https://pipenv.pypa.io/en/latest/)
 2. In the terminal:
 ```
@@ -42,23 +46,3 @@ pipenv run python app.py
    - Most recent posts
 - On the title: X EAs have donated Y amount and pledged a further Z.
 - [Gapminder-style](https://www.gapminder.org/tools/#$chart-type=bubbles) animation of EA orgs
-
-
-## Precedents:
-
-We are aware of the following existing dashboards relating to EA
- - [EA hub map](https://eahub.org/)
- - [EA funds dashboard](https://app.effectivealtruism.org/funds/about/stats)
-
-## Data sources
-
-### Demographics
- - [EA growth](https://forum.effectivealtruism.org/posts/MBJvDDw2sFGkFCA29/is-ea-growing-ea-growth-metrics-for-2018)
- 
-### Donations and Grants
- - [Giving what we can donations](https://www.givingwhatwecan.org/) - Current total pledged and donated
- - [Rethink Priorities Survey](https://www.rethinkpriorities.org/blog/2020/2/14/ea-survey-2019-series-donation-data) - Year, amount, charity, cause area
- - [Founders pledge](https://founderspledge.com/) - Current total pledged and donated
- - [Open Philanthropy Grant Database](https://www.openphilanthropy.org/giving/grants) - CSV of grant amount, date, cause area
- - [EA Funds](https://app.effectivealtruism.org/funds/global-development#payout-reports) - Total balance, total donated, history of grants, cause area
-
