@@ -7,6 +7,7 @@ import pandas as pd
 import re
 from glob import glob
 from utils.ea_bar_graph import EABarGraph
+from utils.subtitle import get_subtitle
 
 ##################################
 ###       DEMOGRAPHICS         ###
@@ -22,7 +23,6 @@ def get_demo_table(demo_name):
     demo_table = demo_table[ ~demo_table[title].isin(['Total', 'Total respondents']) ]
     # convert '5%' to 5
     demo_table['Percent'] = demo_table['Percent'].apply(lambda x: float(x[:-1]))
-
 
 
     # Substitute the long labels for something shorter
@@ -53,123 +53,146 @@ def get_demo_table(demo_name):
     if title == 'Moral View':
         demo_table = demo_table.loc[[ 4, 2, 3, 1, 0, ], :]
     elif title == 'Race/Ethnicity':
-        inds = list(range(6))
+        # Move "other" to the bottom
+        inds = list(range(6, -1, -1))
         inds.insert(0, inds.pop(3))
         demo_table = demo_table.loc[inds, :]
+    elif title == 'Education':
+        # Move "other" to the bottom
+        inds = list(range(4, -1, -1))
+        inds.insert(0, inds.pop(4))
+        demo_table = demo_table.loc[inds, :]
     elif title == 'Diet ':
+        # Move "other" to the bottom
         inds = list(range(6))
         inds.insert(0, inds.pop(4))
         demo_table = demo_table.loc[inds, :]
 
+    demo_table['x'] = demo_table['label']
+    demo_table['y'] = demo_table['Percent']
+    demo_table['text'] = demo_table['Percent'].apply(lambda x: f'{x:.1f}%')
+
+    def hover(row):
+        label = row['label_original']
+        responses = row['Responses']
+        percent = row['Percent']
+        return f'<b>{label}</b><br>{responses} responses ({percent}%)'
+
+    demo_table['hover'] = demo_table.apply(hover, axis=1)
+
     return demo_table
 
-def create_row(demo_names, widths=None):
+def get_bar_chart(demo_name):
+    demo_table = get_demo_table(demo_name)
+    title = demo_table.columns[0]
+    return EABarGraph(demo_table, title=title)
 
-    if not widths:
-        widths = [ f'{100/len(demo_names)}%' ] * len(demo_names)
 
-    demo_tables = []
-    demo_heights = []
-
-    for demo_name in demo_names:
-
-        demo_table = get_demo_table(demo_name)
-        demo_tables.append(demo_table)
-
-        height_per_bar = 25 if len(demo_table) > 10 else 28
-        height = height_per_bar * len(demo_table) + 30
-        demo_heights.append(height)
-
-    height = max(demo_heights)
-    bars = []
-
-    for width, demo_table in zip(widths, demo_tables):
-
-        title = demo_table.columns[0]
-        demo_table['x'] = demo_table['label']
-        demo_table['y'] = demo_table['Percent']
-        demo_table['text'] = demo_table['Percent'].apply(lambda x: f'{x:.1f}%')
-
-        def hover(row):
-            label = row['label_original']
-            responses = row['Responses']
-            percent = row['Percent']
-            return f'<b>{label}</b><br>{responses} responses ({percent}%)'
-
-        demo_table['hover'] = demo_table.apply(hover, axis=1)
-
-        bar = EABarGraph(demo_table, height, title)
-        bars.append(
+def demographics_section():
+    return html.Div(
+        [
             html.Div(
-                bar,
-                className='demographics-panel',
+                html.H2('EA Demographics'),
+                className='section-title',
+            ),
+            get_subtitle('rethink19'),
+            html.Div(
+                [
+                    html.Div(
+                        get_bar_chart('gender'),
+                        className='plot-container'
+                    ),
+                    html.Div(
+                        get_bar_chart('age_group'),
+                        className='plot-container'
+                    ),
+                    html.Div(
+                        get_bar_chart('ethnicity'),
+                        className='plot-container tab-span-2-cols'
+                    ),
+                ],
+                className = 'grid tab-cols-2 desk-cols-3 section-body',
             )
-        )
+        ],
+        className = 'section',
+    )
 
-    return bars
 
-class Demographics(html.Div):
-    def __init__(self):
-        super(Demographics, self).__init__(
-            [
-                html.Div(
-                    [
-                        html.Div(
-                            html.H2('Demographics and Beliefs'),
-                            className='section-heading',
-                        ),
-                        html.P([
-                            'Data source: ',
-                            dcc.Link(
-                                '2019 Rethink Priorities Survey',
-                                href='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
-                            ),
-                            '. Hover over the bars for more details.',
-                        ]),
-                        html.Div(
-                            html.Div(
-                                create_row(
-                                    ['gender', 'age_group', 'ethnicity'],
-                                    ['32.5%', '32.5%', '35%']
-                                ) + \
-                                create_row(
-                                    ['political_belief', 'diet', 'moral_view', ],
-                                    ['32.5%', '32.5%', '35%']
-                                ),
-                                className = 'demographics-container grid-1-cols grid-2-cols grid-3-cols',
-                            )
-                        )
-                    ],
-                    className = 'section',
-                ),
+def beliefs_section():
+    return html.Div(
+        [
+            html.Div(
+                html.H2('EA Beliefs and Lifestyle'),
+                className='section-title',
+            ),
+            get_subtitle('rethink19'),
+            html.Div(
+                [
+                    html.Div(
+                        get_bar_chart('political_belief'),
+                        className='plot-container'
+                    ),
+                    html.Div(
+                        get_bar_chart('diet'),
+                        className='plot-container'
+                    ),
+                    html.Div(
+                        get_bar_chart('moral_view'),
+                        className='plot-container tab-span-2-cols'
+                    ),
+                ],
+                className = 'grid tab-cols-2 desk-cols-3 section-body',
+            )
+        ],
+        className = 'section',
+    )
 
-                html.Div(
-                    [
-                        html.Div(
-                            html.H2('Education and Career'),
-                            className='section-heading',
-                        ),
-                        html.P([
-                            'Data source: ',
-                            dcc.Link(
-                                '2019 Rethink Priorities Survey',
-                                href='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
-                            ),
-                        ]),
-                        html.Div(
-                            html.Div(
-                                create_row(
-                                    ['education2', 'career_path']
-                                ) + \
-                                create_row(
-                                    ['subject', 'employment'],
-                                ),
-                                className = 'demographics-container grid-1-cols grid-2-cols',
-                            )
-                        )
-                    ],
-                    className = 'section',
-                ),
+def education_section():
+    return html.Div(
+        [
+            html.Div(
+                html.H2('EA Education'),
+                className='section-title',
+            ),
+            get_subtitle('rethink19'),
+            html.Div(
+                [
+                    html.Div(
+                        get_bar_chart('education2'),
+                        className='plot-container'
+                    ),
+                    html.Div(
+                        get_bar_chart('subject'),
+                        className='plot-container'
+                    ),
+                ],
+                className = 'grid tab-cols-2 desk-cols-2 section-body',
+            )
+        ],
+        className = 'section',
+    )
 
-            ],
-        )
+def career_section():
+    return html.Div(
+        [
+            html.Div(
+                html.H2('EA Careers'),
+                className='section-title',
+            ),
+            get_subtitle('rethink19'),
+            html.Div(
+                [
+                    html.Div(
+                        get_bar_chart('career_path'),
+                        className='plot-container'
+                    ),
+                    html.Div(
+                        get_bar_chart('employment'),
+                        className='plot-container'
+                    ),
+                ],
+                className = 'grid tab-cols-2 desk-cols-2 section-body',
+            )
+        ],
+        className = 'section',
+    )
