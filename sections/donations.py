@@ -8,6 +8,7 @@ import pandas as pd
 import re
 from glob import glob
 import os
+from utils.subtitle import get_subtitle
 
 ##################################
 ###         FUNDING            ###
@@ -133,16 +134,18 @@ funding = pd.concat([ea_funds, funding])
 # Each row represents a connection between two entities.
 # The last column will be used for coloring the connections.
 
+funding['Amount'] = funding['Amount'] / 1e6
+
 funding_long = pd.DataFrame(columns=['From', 'To', 'Amount', 'Source'])
 
 for source, cause in set(zip(
-    funding['Source'], 
+    funding['Source'],
     funding['Cause Area']
   )):
 
-  source_cause_df = funding[ 
+  source_cause_df = funding[
     (funding['Source']==source) & \
-    (funding['Cause Area']==cause) 
+    (funding['Cause Area']==cause)
   ]
   total_funding = source_cause_df['Amount'].sum()
   funding_long.loc[len(funding_long)] = [
@@ -158,7 +161,8 @@ for source, cause in set(zip(
       (source_cause_df['Organization']==org)
     ]
     total_funding = org_df['Amount'].sum()
-    if total_funding < 2*10**7:
+    if total_funding < 2*10**1:
+    # if total_funding < 2*10**7:
       other_total += total_funding
       continue
     funding_long.loc[len(funding_long)] = [
@@ -192,11 +196,14 @@ entities += ["$100M (for scale)"]
 froms += [ len(entity2idx) ]
 tos += [ len(entity2idx) ]
 
-values = funding_long['Amount'].to_list() + [1e8]
+# values = funding_long['Amount'].to_list() + [1e8]
+values = funding_long['Amount'].to_list() + [1e2]
 
 # Create Sankey diagram
 funding_fig = go.Figure(
   data=[go.Sankey(
+    valueformat = ",.1f",
+    valuesuffix = "M USD",
     node = dict(
       pad = 15,
       thickness = 20,
@@ -216,57 +223,38 @@ funding_fig = go.Figure(
   # }
 )
 funding_fig.update_layout(
-  margin=dict(l=0, r=0, t=0, b=0),
+  margin=dict(l=10, r=10, t=30, b=10),
 )
 
-class Donations(html.Div):
-    def __init__(self):
-        super(Donations, self).__init__(
-            [
-                html.Div(
-                    html.H2('Donation Channels'),
-                    className='section-heading',
-                ),
-                html.P([
-                    'Data source: ',
-                    dcc.Link(
-                        'Open Philanthropy Grants Database',
-                        href='https://www.openphilanthropy.org/giving/grants'
-                    ),
-                    ', ',
-                    dcc.Link(
-                        'Effective Altruism Funds Payout Reports',
-                        href='https://funds.effectivealtruism.org/'
-                    ),
-                    ', ',
-                    dcc.Link(
-                        'Founders Pledge Homepage',
-                        href='https://founderspledge.com/'
-                    ),
-                    ', ',
-                    dcc.Link(
-                        'Giving What We Can Homepage',
-                        href='https://www.givingwhatwecan.org/'
-                    ),
-                    '.'
-                ]),
+def donations_section():
+    return html.Div(
+        [
+            html.Div(
+                html.H2('Donation Flows'),
+                className='section-title',
+            ),
+            get_subtitle(
+                [
+                    'open_phil',
+                    'funds_payout',
+                    'founders_pledge',
+                    'gwwc',
+                ],
+                can_zoom=False,
+                hover='rectangles or lines',
+                extra_text = 'Rectangles can be rearranged by dragging.',
+            ),
+            html.Div(
                 html.Div(
                     dcc.Graph(
                         id='Donations',
                         figure=funding_fig,
+                        responsive=True,
                     ),
-                    className = 'center',
-                    style = {
-                        'padding': '5px',
-                    }
+                    className = 'plot-container',
                 ),
-            ],
-            className = 'section'
-        )
-
-##################################
-###           TOTALS           ###
-##################################
-
-TOTAL_PLEDGED = 100
-TOTAL_DONATED = 1
+                className = 'section-body',
+            ),
+        ],
+        className = 'section'
+    )
