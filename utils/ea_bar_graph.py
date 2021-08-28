@@ -29,9 +29,7 @@ class EABarGraph(dcc.Graph):
         )
 
         self.bar.update_traces(
-            # The color of the bars
             marker_color="#0c869b",
-
             hovertext = df[hover_col],
             hovertemplate = '%{hovertext}<extra></extra>',
         )
@@ -42,13 +40,13 @@ class EABarGraph(dcc.Graph):
             margin=dict(l=0, r=0, t=30, b=0),
             xaxis=dict(
                 title='',
-                fixedrange=True
+                # fixedrange=True
             ),
             yaxis=dict(
                 title='',
-                fixedrange=True
+                # fixedrange=True
             ),
-            # title_x=0.5,
+            title_x=0.5,
             font=dict(
                 family="Raleway",
                 size=12,
