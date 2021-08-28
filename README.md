@@ -26,6 +26,7 @@ pipenv run python app.py
 ## Future work ideas:
 - Make a floating top bar
 - OP: grant table
+- Disable the menu on the Sankey plot
 - Founders pledge
    - Member over time
    - Commitments over time
