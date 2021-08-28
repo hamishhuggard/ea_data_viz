@@ -6,7 +6,7 @@ import plotly.express as px
 
 class EABarGraph(dcc.Graph):
 
-    def __init__(self, df, height, title=None):
+    def __init__(self, df, height=None, title=None):
 
         if 'text' in df.columns:
             text_col = 'text'
@@ -24,7 +24,7 @@ class EABarGraph(dcc.Graph):
             x='y',
             text=text_col,
             title=title,
-            height=height,
+            # height=height,
             orientation='h',
         )
 
@@ -56,6 +56,7 @@ class EABarGraph(dcc.Graph):
         super().__init__(
             id=title,
             figure=self.bar,
+            responsive=True,
             config={
                 'displayModeBar': False,
             },
