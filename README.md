@@ -24,6 +24,7 @@ pipenv run python app.py
 - EA Funds visualisations like OP
 
 ## Future work ideas:
+- Routing
 - Make a floating top bar
 - OP: grant table
 - Disable the menu on the Sankey plot

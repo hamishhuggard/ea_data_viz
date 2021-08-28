@@ -17,12 +17,6 @@ body {
     place-items: center;
 }
 
-/*
-* {
-    margin: 0px !important;
-}
-*/
-
 /* Night mode */
 
 /*
@@ -77,12 +71,13 @@ p, h1, h2, h3 {
 */
 
 .section-subtitle {
-    padding: 10px;
+    padding: 0px 10px;
 }
 
 .section-body {
     flex: 1;
-    padding: 10px;
+    padding: 20px;
+    box-sizing: border-box;
     min-height: 0;
     min-width: 0;  
 }
@@ -153,12 +148,16 @@ etc
     .tab-cols-1 { grid-template-columns: repeat(1, 1fr); }
     .tab-cols-2 { grid-template-columns: repeat(2, 1fr); }
     .tab-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .tab-span-2-cols { grid-column: span 2; }
 }
 
 @media only screen and (min-width: 1000px) {
     .desk-rows-2-1 { grid-template-rows: 2fr 1fr; }
     .desk-rows-2 { grid-template-rows: repeat(2, 1fr); }
     .desk-cols-2-1 { grid-template-columns: 2fr 1fr; }
+    .desk-cols-1 { grid-template-columns: repeat(1, 1fr); }
+    .desk-cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .desk-cols-3 { grid-template-columns: repeat(3, 1fr); }
 }
 
 
