@@ -20,13 +20,15 @@ pipenv run python app.py
 ```
 
 ## TODOs
-- Fix the hovertext on the map
 - EA Funds visualisations like OP
+- "storytelling with data" style line plots
 
 ## Future work ideas:
-- Routing
-- Make a floating top bar
-- OP: grant table
+- Multipage routing
+- Navigation bar
+- OP grant table
+- Reimplement in chart.js or D3.js for performance
+   - With better zoom controls
 - Disable the menu on the Sankey plot
 - Founders pledge
    - Member over time
