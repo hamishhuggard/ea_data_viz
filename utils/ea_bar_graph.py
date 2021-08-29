@@ -24,7 +24,7 @@ class EABarGraph(dcc.Graph):
             x='y',
             text=text_col,
             title=title,
-            # height=height,
+            height=height,
             orientation='h',
         )
 
@@ -44,6 +44,7 @@ class EABarGraph(dcc.Graph):
             ),
             yaxis=dict(
                 title='',
+                # dtick=1,
                 # fixedrange=True
             ),
             title_x=0.5,
