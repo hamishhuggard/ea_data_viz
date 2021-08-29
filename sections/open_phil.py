@@ -197,71 +197,54 @@ def grants_scatter(op_grants):
 # )
 
 
-def openphil_section():
+def openphil_grants_scatter_section():
 
     op_grants = get_op_grants()
 
     return html.Div(
         [
             html.Div(
-                html.H2('Open Philanthropy Grants'),
+                html.H2('Scatter Plot of Open Philanthropy Grants'),
                 className='section-title',
             ),
+            get_subtitle('open_phil', hover='points'),
             html.Div(
-                html.P([
-                    'Data source: ',
-                    dcc.Link(
-                        'Open Philanthropy Grants Database',
-                        href='https://www.openphilanthropy.org/giving/grants'
+                [
+                    html.Div(
+                        grants_scatter(op_grants),
+                        className='plot-container',
                     ),
-                ]),
-                className='section-subtitle',
+                ],
+                className='section-body'
             ),
+        ],
+        className = 'section'
+    )
+
+def openphil_grants_categories_section():
+
+    op_grants = get_op_grants()
+
+    return html.Div(
+        [
+            html.Div(
+                html.H2('Open Philanthropy Grants by Donee and Focus Area'),
+                className='section-title',
+            ),
+            get_subtitle('open_phil'),
             html.Div(
                 html.Div(
                     [
                         html.Div(
-                            [
-                                html.Div(
-                                #    [
-                                        html.Div(
-                                            grants_scatter(op_grants),
-                                            className='plot-container',
-                                        ),
-                                #        html.Div(
-                                #            grants_cumulative_scatter(op_grants),
-                                #            className='plot-container',
-                                #        ),
-                                #    ],
-                                #    className='grid rows-2',
-                                    className='grid',
-                                ),
-                                html.Div(
-                                    [
-                                        html.Div(
-                                            cause_bar_chart(op_grants),
-                                            className='plot-container',
-                                        ),
-                                        html.Div(
-                                            org_bar_chart(op_grants),
-                                            className='plot-container',
-                                        ),
-                                    ],
-                                    className='grid desk-rows-2 tab-cols-2',
-                                ),
-                            ],
-                            className='grid desk-cols-2-1'
+                            cause_bar_chart(op_grants),
+                            className='plot-container',
                         ),
-                        # html.Div(
-                        #     grants_table,
-                        #     style = {
-                        #         'background-color': 'green',
-                        #     },
-                        #     className='plot-container',
-                        # ),
+                        html.Div(
+                            org_bar_chart(op_grants),
+                            className='plot-container',
+                        ),
                     ],
-                    # className='grid desk-rows-1-1',
-                    className='grid',
+                    className='grid desk-cols-2 tab-cols-2',
                 ),
                 className='section-body'
             ),
