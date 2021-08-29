@@ -22,9 +22,11 @@ pipenv run python app.py
 ## TODOs
 - EA Funds visualisations like OP
 - "storytelling with data" style line plots
+- Contents with links
 
 ## Future work ideas:
 - Multipage routing
+- [Better bar charts](https://dkane.net/2020/better-horizontal-bar-charts-with-plotly/?utm_source=pocket_mylist)
 - Navigation bar
 - OP grant table
 - Reimplement in chart.js or D3.js for performance
