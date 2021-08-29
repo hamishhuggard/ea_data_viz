@@ -41,12 +41,21 @@ countries['log density'] = countries['Density (per million)'].apply(lambda x: 1 
 MINIMUM_CIRCLE_SIZE = 15
 countries['circle size'] = countries['Responses'] + MINIMUM_CIRCLE_SIZE
 
+def hover(row):
+    country = row['Country']
+    responses = row['Responses']
+    density = row['Density (per million)']
+    return f'<b>{country}</b><br>{responses:,.0f} survey responses<br>{density:.2f} millionths of the population'
+countries['hover'] = countries.apply(hover, axis=1)
+
 countries_for_map = countries.copy()
 for country in country_list:
     if country in [ c.lower() for c in countries['Country'] ]:
         continue
     i = len(countries_for_map)
     countries_for_map.loc[i, ['Country', 'Responses', 'Density (per million)', 'log density']] = (country, 0, 0, 0)
+
+countries_for_map['hover'] = countries_for_map.apply(hover, axis=1)
 
 # Population map
 
@@ -76,6 +85,8 @@ pop_map.update_traces(
     marker = dict(
         color ="#36859A",
     ),
+    hovertext = countries['hover'],
+    hovertemplate = '%{hovertext}<extra></extra>',
 )
 
 pop_map.update_geos(
@@ -107,6 +118,11 @@ density_map.update_layout(
     margin=dict(l=0, r=0, t=80, b=0),
     coloraxis_showscale=False,
     title_x=0.5,
+)
+
+density_map.update_traces(
+    hovertext = countries_for_map['hover'],
+    hovertemplate = '%{hovertext}<extra></extra>',
 )
 
 density_map.update_geos(
