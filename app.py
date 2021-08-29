@@ -5,17 +5,24 @@
 
 import dash
 import dash_html_components as html
+
+from sections.title import title_section
+
 from sections.donations import donations_section
+
 from sections.demographics import demographics_section
 from sections.demographics import beliefs_section
 from sections.demographics import education_section
 from sections.demographics import career_section
+
 # from sections.growth import Growth
+
 from sections.geography import country_total_section
 from sections.geography import country_per_capita_section
-from sections.title import title_section
+
 from sections.open_phil import openphil_grants_scatter_section
 from sections.open_phil import openphil_grants_categories_section
+
 from utils.refresh_data import refresh_data
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -46,13 +53,13 @@ app.layout = html.Div(
             #education_section(),
             #career_section(),
 
-            openphil_grants_scatter_section(),
-            openphil_grants_categories_section(),
+            #openphil_grants_scatter_section(),
+            #openphil_grants_categories_section(),
 
             #donations_section(),
 
-            #country_total_section(),
-            #country_per_capita_section(),
+            country_total_section(),
+            country_per_capita_section(),
 
             # growth(),
         ],

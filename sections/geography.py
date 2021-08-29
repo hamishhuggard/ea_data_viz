@@ -6,6 +6,7 @@ import pandas as pd
 from utils.ea_bar_graph import EABarGraph
 from countryinfo import CountryInfo
 from math import log
+from utils.subtitle import get_subtitle
 
 ##################################
 ###         WORLD MAP          ###
@@ -55,6 +56,7 @@ pop_map = px.scatter_geo(
     hover_name="Country",
     locationmode='country names',
     size="circle size",
+    title="Map of EAs Numbers",
     hover_data = {
         'circle size': False,
         'Responses': True,
@@ -63,11 +65,11 @@ pop_map = px.scatter_geo(
         'Density (per million)': True,
     },
     projection="equirectangular", # 'orthographic' is fun
-    height=250,
 )
 
 pop_map.update_layout(
-    margin=dict(l=0, r=0, t=0, b=0),
+    margin=dict(l=0, r=0, t=80, b=0),
+    title_x=0.5,
 )
 
 pop_map.update_traces(
@@ -89,6 +91,7 @@ density_map = px.choropleth(
     hover_name="Country",
     locationmode='country names',
     color='log density',
+    title="EA Density (Darker is Denser)",
     color_continuous_scale=["#dfe3ee", "#007a8f"],
     hover_data = {
         'circle size': False,
@@ -97,13 +100,13 @@ density_map = px.choropleth(
         'log density': False,
         'Density (per million)': True,
     },
-    projection="equirectangular", # 'orthographic' is fun
-    height=250,
+    projection="equirectangular", # 'orthographic' is fun. "natural earth" is quite nice
 )
 
 density_map.update_layout(
-    margin=dict(l=0, r=0, t=0, b=0),
+    margin=dict(l=0, r=0, t=80, b=0),
     coloraxis_showscale=False,
+    title_x=0.5,
 )
 
 density_map.update_geos(
@@ -117,7 +120,6 @@ countries['y'] = countries['Responses']
 
 countries_bar = EABarGraph(
     countries,
-    height = 23*len(countries),
     title = 'Number of EAs'
 )
 
@@ -128,60 +130,68 @@ countries_capita_sort['text'] = countries_capita_sort['Density (per million)'].a
 
 per_capita_bar = EABarGraph(
     countries_capita_sort,
-    height = 23*len(countries),
     title = 'EAs per Million People'
 )
 
 def country_total_section():
-    pass
-
-def country_per_capita_section():
-    pass
-
-def geograph_section():
     return html.Div(
         [
             html.Div(
-                html.H2('Countries'),
+                html.H2('Number of EAs by Country'),
                 className='section-heading',
             ),
-            html.P([
-                'Data source: ',
-                dcc.Link(
-                    '2019 Rethink Priorities Survey',
-                    href='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
-                ),
-            ]),
+            get_subtitle('rethink19', hover='countries or bars'),
             html.Div(
-                [
-                    html.Div(
-                        [
-                            dcc.Graph(
-                                id='density_map',
-                                figure=density_map
-                            ),
+                html.Div(
+                    [
+                        html.Div(
                             dcc.Graph(
                                 id='pop_map',
-                                figure=pop_map
+                                figure=pop_map,
+                                responsive=True,
                             ),
-                        ],
-                        className='map-container center'
-                    ),
-                    html.Div(
-                        [
-                            html.Div(
-                               countries_bar,
-                               className='countries-bar'
+                            className='plot-container'
+                        ),
+                        html.Div(
+                            countries_bar,
+                            className='plot-container',
+                        ),
+                    ],
+                    className='grid desk-cols-2-1',
+                ),
+                className='section-body',
+            ),
+        ],
+        className = 'section',
+    )
+
+def country_per_capita_section():
+    return html.Div(
+        [
+            html.Div(
+                html.H2('EAs per Capita by Country'),
+                className='section-heading',
+            ),
+            get_subtitle('rethink19', hover='countries or bars'),
+            html.Div(
+                html.Div(
+                    [
+                        html.Div(
+                            dcc.Graph(
+                                id='density_map',
+                                figure=density_map,
+                                responsive=True,
                             ),
-                            html.Div(
-                               per_capita_bar,
-                               className='countries-bar'
-                            ),
-                        ],
-                        className = 'countries-bar-container',
-                    ),
-                ],
-                className = 'countries-container',
+                            className='plot-container'
+                        ),
+                        html.Div(
+                            per_capita_bar,
+                            className='plot-container'
+                        ),
+                    ],
+                    className='grid desk-cols-2-1',
+                ),
+                className='section-body',
             ),
         ],
         className = 'section',
