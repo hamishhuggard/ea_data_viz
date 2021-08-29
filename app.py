@@ -15,7 +15,10 @@ from sections.demographics import beliefs_section
 from sections.demographics import education_section
 from sections.demographics import career_section
 
-# from sections.growth import Growth
+from sections.growth import growth1
+from sections.growth import growth2
+from sections.growth import growth3
+from sections.growth import growth4
 
 from sections.geography import country_total_section
 from sections.geography import country_per_capita_section
@@ -46,22 +49,26 @@ server = app.server
 #     return html.Div(
 app.layout = html.Div(
         [
-            #title_section(),
+            title_section(),
 
-            #demographics_section(),
-            #beliefs_section(),
-            #education_section(),
-            #career_section(),
+            demographics_section(),
+            beliefs_section(),
+            education_section(),
+            career_section(),
 
-            #openphil_grants_scatter_section(),
-            #openphil_grants_categories_section(),
+            openphil_grants_scatter_section(),
+            openphil_grants_categories_section(),
 
-            #donations_section(),
+            donations_section(),
 
             country_total_section(),
             country_per_capita_section(),
 
-            # growth(),
+            growth1(),
+            growth2(),
+            growth3(),
+            growth4(),
+
         ],
         className = 'scroll-snapper',
     )
@@ -69,5 +76,5 @@ app.layout = html.Div(
 # app.layout = serve_layout
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
-    #app.run_server(debug=False)
+    #app.run_server(debug=True)
+    app.run_server(debug=False)
