@@ -5,6 +5,7 @@ import numpy as np
 import string
 import dash_core_components as dcc
 import dash_html_components as html
+from utils.subtitle import get_subtitle
 
 commiting = pd.read_csv('data/is_ea_growing/is_ea_growing_commiting.csv')
 doing = pd.read_csv('data/is_ea_growing/is_ea_growing_doing.csv')
@@ -68,7 +69,7 @@ for df in [commiting, doing, joining, reading]:
          'year': years,
          'value': values,
       })
-      row_df['label'] = label[:30]
+      row_df['label'] = label#[:30]
       row_dfs.append(row_df)
    long_df = pd.concat(row_dfs, ignore_index=True)
    # remove rows with value=0 to avoid singularity in log scale
@@ -91,102 +92,167 @@ for table, table_name in zip(
         doing,
     ],
     [
-        'low engaged',
-        'medium engaged',
-        'highly engaged',
-        'money',
+        '','','',''
+        #'low engaged',
+        #'medium engaged',
+        #'highly engaged',
+        #'money',
     ]
 ):
     fig = go.Figure()
     annotations = []
-    print(table['label'].unique())
     for val in table['label'].unique():
         val_df = table.loc[ table['label']==val ]
+
+        hover_texts = []
+        def hover(row):
+            label =row['label']
+            value = row['value']
+            year = row['year']
+            return f'<b>{label}</b><br>{value:,.0f}<br><i>{year}</i>'
+        hover_texts.extend(
+            val_df.apply(hover, axis=1).tolist()
+        )
+
         fig.add_trace(
             go.Scatter(
                 x=val_df['year'],
                 y=val_df['value'],
                 name=val,
+                hovertext = hover_texts,
+                hovertemplate = '%{hovertext}<extra></extra>',
             )
         )
         fig.update_layout(
             title=table_name,
-            height=HEIGHT,
+            #height=HEIGHT,
             # width=WIDTH,
-            showlegend=False,
+            showlegend=True,
+            #showlegend=False,
             # yaxis_type="log",
         )
+
+        # Annotations
+        # These aren't working?
+        val_df = val_df[ val_df['value'].notnull() ].reset_index()
+        last_row = val_df.iloc[len(val_df)-1]
         annotations.append(dict(
             xref='paper',
-            x=int(val_df['year'].max()),
-            y=int(val_df['value'].max()),
+            yref='paper',
+            x=int(last_row['year']),
+            y=int(last_row['value']),
             xanchor='left',
             yanchor='middle',
-            text=f'{val}',
+            text='hello',
             font={
-                'family': 'Arial',
+                #'family': 'Arial',
                 'size': 16,
             },
             showarrow=False
         ))
-    import json
-    print(json.dumps(annotations, indent=3))
-    fig.update_layout(annotations=annotations)
 
-    # fig.update_layout(
+    fig.update_layout(
+        annotations=annotations,
+        #margin=dict(l=0, r=0, t=30, b=0),
+        margin=dict(l=0, r=0, t=0, b=0),
+        title_x=0.5,
+    )
 
-        # autosize = True,
+    fig.update_layout(
 
-        # Top-left corner:
+      # autosize = True,
 
-        # legend = dict(
-        #     yanchor="top",
-        #     y=0.99,
-        #     xanchor="left",
-        #     x=0.01,
-        #     title_text='',
-        # )
+      # Top-left corner:
 
-        # Below:
+      legend = dict(
+          yanchor="top",
+          y=0.99,
+          xanchor="left",
+          x=0.01,
+          title_text='',
+      )
 
-        # legend = {
-        #       'xanchor': "center",
-        #       'yanchor': "top",
-        #       'y': -0.3, # play with it
-        #       'x': 0.5,   # play with it
-        #       'title_text': '',
-        # }
+      # Below:
 
-    # )
+      # legend = {
+      #       'xanchor': "center",
+      #       'yanchor': "top",
+      #       'y': -0.3, # play with it
+      #       'x': 0.5,   # play with it
+      #       'title_text': '',
+      # }
+
+    )
 
     growing_figs.append(
         html.Div(
             dcc.Graph(
                 figure=fig,
+                responsive=True
             ),
         )
     )
 
-class Growth(html.Div):
-    def __init__(self):
-        super(Growth, self).__init__(
-            [
-                html.Div(
-                    html.H2('Growth'),
-                    className='section-heading',
-                ),
-                html.P([
-                    'Data source: ',
-                    dcc.Link(
-                        '2019 Rethink Priorities Survey',
-                        href='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
-                    ),
-                ]),
-                html.Div(
-                    growing_figs,
-                    className = 'demographics-container grid-2-cols grid-4-cols',
-                    # className = 'demographics-container',
-                ),
-            ],
-            className = 'section'
-        )
+def growth1():
+    return html.Div(
+        [
+            html.Div(
+                html.H2('Growth in EA Reading'),
+                className='section-heading',
+            ),
+            get_subtitle('growth', hover='points'),
+            html.Div(
+                growing_figs[0],
+                className = 'section-body',
+            ),
+        ],
+        className = 'section'
+    )
+
+def growth2():
+    return html.Div(
+        [
+            html.Div(
+                html.H2('Growth in EA Joining'),
+                className='section-heading',
+            ),
+            get_subtitle('growth', hover='points'),
+            html.Div(
+                growing_figs[1],
+                className = 'section-body',
+            ),
+        ],
+        className = 'section'
+    )
+
+def growth3():
+    return html.Div(
+        [
+            html.Div(
+                html.H2('Growth in EA Committing'),
+                className='section-heading',
+            ),
+            get_subtitle('growth', hover='points'),
+            html.Div(
+                growing_figs[2],
+                className = 'section-body',
+            ),
+        ],
+        className = 'section'
+    )
+
+def growth4():
+    return html.Div(
+        [
+            html.Div(
+                html.H2('Growth in EA Committing'),
+                className='section-heading',
+            ),
+            get_subtitle('growth', hover='points'),
+            html.Div(
+                growing_figs[3],
+                className = 'section-body',
+            ),
+        ],
+        className = 'section'
+    )
