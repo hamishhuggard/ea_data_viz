@@ -9,61 +9,90 @@ import plotly.express as px
 
 lightbulb_img_url = 'https://effectivealtruism.nz/wp-content/uploads/2018/02/lightbulblogo-1.png'
 
-heading = html.Div(
+heading = html.H1(
     [
         html.Img(
             src = lightbulb_img_url,
-            height = 60,
-            style = {
-                'grid-column': '1',
-            }
+            className='lightbulb',
         ),
-        html.H1(
+        html.Div(
             [
                 html.Span(
-                    'Effective ',
+                    'Effective',
                     className = 'effective',
                 ),
                 html.Span(
-                    'Altruism ',
+                    'Altruism',
                     className = 'altruism',
                 ),
+            ],
+            className='effective-altruism',
+        ),
+        html.Div(
+            [
                 html.Span(
-                    'Data Visualizer',
+                    'Data',
+                    className = 'data',
+                ),
+                html.Span(
+                    '.com',
+                    className = 'dot-com',
                 ),
             ],
-            style = {
-                'grid-column': '2',
-            }
-        )
+            className='data-dot-com',
+        ),
     ],
-    style = {
-        'display': 'grid',
-    }
+    className='ea-data-dot-com center',
 )
 
-
-class Title(html.Div):
-    def __init__(self):
-        super(Title, self).__init__(
-            html.Div(
-                [
-                    html.Div([
-                        heading,
-                        html.P([
-                            'This website visualises some data relating to ',
+def title_section():
+    return html.Div(
+        html.Div(
+            [
+                html.Div([
+                    # html.P('Welcome to'),
+                    heading,
+                    html.P(
+                        [
                             dcc.Link(
-                                "effective altruism",
+                                "Effective Altruism",
                                 href="https://www.effectivealtruism.org/"
                             ),
-                            "."
-                        ]),
-                        html.P(
-                            'Feedback welcome at hamish.huggard@gmail.com.'
-                        ),
-                    ]),
-                ],
-                className='section-body center',
-            ),
-            className='section',
-        )
+                            ' is a loose collective of quantitatively-minded philanthropists and do-gooders.',
+                        ]
+                    ),
+                    html.P(
+                        'There are several EA organisations which collect data on grants, donors, and pledges.',
+                    ),
+                    html.P(
+                        'This website to aggregates and visualizes that data.',
+                    ),
+                    html.P(
+                        [
+                            'Source code is available on ',
+                            dcc.Link(
+                                "Github",
+                                href="https://github.com/hamishhuggard/ea_data_viz"
+                            ),
+                            '.',
+                        ]
+                    ),
+                    html.P(
+                        [
+                            'Please send feedback to ',
+                            dcc.Link(
+                                "hamish.huggard@gmail.com",
+                                href="mailto:hamish.huggard@gmail.com"
+                            ),
+                            '.',
+                        ],
+                    ),
+                    html.H3(
+                        'Scroll down to see some data...'
+                    ),
+                ]),
+            ],
+            className='section-body center',
+        ),
+        className='section',
+    )
