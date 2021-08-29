@@ -107,7 +107,7 @@ density_map.update_layout(
 )
 
 density_map.update_geos(
-    showcoastlines=False, 
+    showcoastlines=False,
     landcolor="#dfe3ee",
 )
 
@@ -132,52 +132,57 @@ per_capita_bar = EABarGraph(
     title = 'EAs per Million People'
 )
 
-class Geography(html.Div):
-    def __init__(self):
-        super(Geography, self).__init__(
-            [
-                html.Div(
-                    html.H2('Countries'),
-                    className='section-heading',
+def country_total_section():
+    pass
+
+def country_per_capita_section():
+    pass
+
+def geograph_section():
+    return html.Div(
+        [
+            html.Div(
+                html.H2('Countries'),
+                className='section-heading',
+            ),
+            html.P([
+                'Data source: ',
+                dcc.Link(
+                    '2019 Rethink Priorities Survey',
+                    href='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
                 ),
-                html.P([
-                    'Data source: ',
-                    dcc.Link(
-                        '2019 Rethink Priorities Survey',
-                        href='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
+            ]),
+            html.Div(
+                [
+                    html.Div(
+                        [
+                            dcc.Graph(
+                                id='density_map',
+                                figure=density_map
+                            ),
+                            dcc.Graph(
+                                id='pop_map',
+                                figure=pop_map
+                            ),
+                        ],
+                        className='map-container center'
                     ),
-                ]),
-                html.Div(
-                    [
-                        html.Div(
-                            [
-                                dcc.Graph(
-                                    id='density_map',
-                                    figure=density_map
-                                ),
-                                dcc.Graph(
-                                    id='pop_map',
-                                    figure=pop_map
-                                ),
-                            ],
-                            className='map-container center'
-                        ),
-                        html.Div(
-                            [
-                                html.Div(
-                                   countries_bar,
-                                   className='countries-bar'
-                                ),
-                                html.Div(
-                                   per_capita_bar,
-                                   className='countries-bar'
-                                ),
-                            ],
-                            className = 'countries-bar-container',
-                        ),
-                    ],
-                    className = 'countries-container',
-                ),
-            ],
-            className = 'section',
-        )
+                    html.Div(
+                        [
+                            html.Div(
+                               countries_bar,
+                               className='countries-bar'
+                            ),
+                            html.Div(
+                               per_capita_bar,
+                               className='countries-bar'
+                            ),
+                        ],
+                        className = 'countries-bar-container',
+                    ),
+                ],
+                className = 'countries-container',
+            ),
+        ],
+        className = 'section',
+    )

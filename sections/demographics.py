@@ -9,10 +9,6 @@ from glob import glob
 from utils.ea_bar_graph import EABarGraph
 from utils.subtitle import get_subtitle
 
-##################################
-###       DEMOGRAPHICS         ###
-##################################
-
 def get_demo_table(demo_name):
 
     path = f"./data/rp_survey_data/{demo_name}.csv"
