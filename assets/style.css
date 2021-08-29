@@ -93,7 +93,7 @@ p, h1, h2, h3 {
     min-height: 0;
     */
 
-    max-height: 100vh;
+    max-height: 200vh;
 }
 
 /*
@@ -131,8 +131,10 @@ etc
     grid-gap: 10px;
     height: 100%;
     width: 100%;
+    /*
     min-height: 0;
     min-width: 0;  
+    */
 }
 
 .cols-2-1 { grid-template-columns: 2fr 1fr; }
@@ -156,6 +158,7 @@ etc
     .tab-cols-1 { grid-template-columns: repeat(1, 1fr); }
     .tab-cols-2 { grid-template-columns: repeat(2, 1fr); }
     .tab-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .tab-cols-2-1 { grid-template-columns: 2fr 1fr; }
     .tab-span-2-cols { grid-column: span 2; }
 }
 
@@ -166,6 +169,7 @@ etc
     .desk-cols-1 { grid-template-columns: repeat(1, 1fr); }
     .desk-cols-2 { grid-template-columns: repeat(2, 1fr); }
     .desk-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .desk-span-2-cols { grid-column: span 2; }
 }
 
 
