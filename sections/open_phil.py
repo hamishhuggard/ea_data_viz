@@ -204,7 +204,7 @@ def openphil_grants_scatter_section():
     return html.Div(
         [
             html.Div(
-                html.H2('Scatter Plot of Open Philanthropy Grants'),
+                html.H2('Open Philanthropy Grants'),
                 className='section-title',
             ),
             get_subtitle('open_phil', hover='points'),
