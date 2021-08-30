@@ -8,7 +8,7 @@ import dash_html_components as html
 
 from sections.title import title_section
 
-from sections.donations import donations_section
+from sections.donations_sankey import donations_sankey_section
 
 from sections.demographics import demographics_section
 from sections.demographics import beliefs_section
@@ -56,13 +56,13 @@ app.layout = html.Div(
             education_section(),
             career_section(),
 
+            country_total_section(),
+            country_per_capita_section(),
+
             openphil_grants_scatter_section(),
             openphil_grants_categories_section(),
 
-            donations_section(),
-
-            country_total_section(),
-            country_per_capita_section(),
+            donations_sankey_section(),
 
             growth1(),
             growth2(),
@@ -76,5 +76,5 @@ app.layout = html.Div(
 # app.layout = serve_layout
 
 if __name__ == '__main__':
-    #app.run_server(debug=True)
-    app.run_server(debug=False)
+    app.run_server(debug=True)
+    #app.run_server(debug=False)
