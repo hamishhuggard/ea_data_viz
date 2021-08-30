@@ -51,6 +51,11 @@ app.layout = html.Div(
         [
             title_section(),
 
+            donations_sankey_section(),
+
+            openphil_grants_scatter_section(),
+            openphil_grants_categories_section(),
+
             demographics_section(),
             beliefs_section(),
             education_section(),
@@ -58,11 +63,6 @@ app.layout = html.Div(
 
             country_total_section(),
             country_per_capita_section(),
-
-            openphil_grants_scatter_section(),
-            openphil_grants_categories_section(),
-
-            donations_sankey_section(),
 
             growth1(),
             growth2(),
