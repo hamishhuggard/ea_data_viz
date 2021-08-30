@@ -218,7 +218,8 @@ def openphil_grants_scatter_section():
                 className='section-body'
             ),
         ],
-        className = 'section'
+        className = 'section',
+        id='op-grants-scatter-section',
     )
 
 def openphil_grants_categories_section():
@@ -249,5 +250,6 @@ def openphil_grants_categories_section():
                 className='section-body'
             ),
         ],
-        className = 'section'
+        className = 'section',
+        id='op-grants-categories',
     )

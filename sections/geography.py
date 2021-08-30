@@ -179,6 +179,7 @@ def country_total_section():
             ),
         ],
         className = 'section',
+        id='countries',
     )
 
 def country_per_capita_section():
@@ -211,4 +212,5 @@ def country_per_capita_section():
             ),
         ],
         className = 'section',
+        id='countries-per-capita',
     )

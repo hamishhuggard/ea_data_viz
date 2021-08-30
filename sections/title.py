@@ -50,6 +50,29 @@ def heading():
 def contents():
     return html.Ul(
         [
+            html.P('Contents:'),
+            html.Li(
+                [
+                    html.A(
+                        "Donation Flows Sankey Diagram",
+                        href="#donations-sankey"
+                    ),
+                ],
+            ),
+            html.Li(
+                [
+                    'Open Philanthropy grants: ',
+                    html.A(
+                        "Scatter Plot",
+                        href="#op-grants-scatter-section"
+                    ),
+                    ', ',
+                    html.A(
+                        "Organisations and Focus Areas",
+                        href="#op-grants-categories"
+                    ),
+                ],
+            ),
             html.Li(
                 [
                     'Rethink Priorities survey results: ',
@@ -76,10 +99,41 @@ def contents():
             ),
             html.Li(
                 [
+                    'Rethink Priorities survey results: ',
                     html.A(
-                        "Donation Flows Sankey Diagram",
-                        href="#donations-sankey"
+                        "Countries (total)",
+                        href="#countries"
                     ),
+                    ', ',
+                    html.A(
+                        "Countries (per Capita)",
+                        href="#countries"
+                    ),
+                ],
+            ),
+            html.Li(
+                [
+                    'EA Growth Metrics: ',
+                    html.A(
+                        "Reading",
+                        href="#growth-reading"
+                    ),
+                    ', ',
+                    html.A(
+                        "Joining",
+                        href="#growth-joining"
+                    ),
+                    ', ',
+                    html.A(
+                        "Committing",
+                        href="#growth-committing"
+                    ),
+                    ', ',
+                    html.A(
+                        "Donating",
+                        href="#growth-donating"
+                    ),
+                    ', ',
                 ],
             ),
         ]
@@ -91,23 +145,24 @@ def title_section():
             [
                 html.Div([
                     heading(),
-                    html.P(
-                        [
-                            dcc.Link(
-                                "Effective Altruism",
-                                href="https://www.effectivealtruism.org/"
-                            ),
-                            ' is a loose collective of quantitatively-minded philanthropists and do-gooders.',
-                        ]
-                    ),
                     html.Div(
                         [
+                            html.P(
+                                [
+                                    dcc.Link(
+                                        "Effective Altruism",
+                                        href="https://www.effectivealtruism.org/"
+                                    ),
+                                    ' is a loose collective of quantitatively-minded philanthropists and do-gooders.',
+                                ]
+                            ),
                             html.P(
                                 'There are several EA organisations which collect data on grants, donors, and pledges.',
                             ),
                             html.P(
                                 'This website aggregates and visualizes that data.',
                             ),
+                            contents(),
                             html.P(
                                 [
                                     'Source code is available on ',
@@ -128,7 +183,6 @@ def title_section():
                                     '.',
                                 ],
                             ),
-                            contents(),
                         ],
                         style={
                             'text-align': 'left',

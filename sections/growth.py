@@ -206,7 +206,8 @@ def growth1():
                 className = 'section-body',
             ),
         ],
-        className = 'section'
+        className = 'section',
+        id='growth-reading',
     )
 
 def growth2():
@@ -222,7 +223,8 @@ def growth2():
                 className = 'section-body',
             ),
         ],
-        className = 'section'
+        className = 'section',
+        id='growth-joining',
     )
 
 def growth3():
@@ -238,14 +240,15 @@ def growth3():
                 className = 'section-body',
             ),
         ],
-        className = 'section'
+        className = 'section',
+        id='growth-committing',
     )
 
 def growth4():
     return html.Div(
         [
             html.Div(
-                html.H2('Growth in EA Committing'),
+                html.H2('Growth in EA Donating'),
                 className='section-heading',
             ),
             get_subtitle('growth', hover='points'),
@@ -254,5 +257,6 @@ def growth4():
                 className = 'section-body',
             ),
         ],
-        className = 'section'
+        className = 'section',
+        id='growth-donating',
     )
