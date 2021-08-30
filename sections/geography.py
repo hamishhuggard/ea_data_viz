@@ -65,7 +65,7 @@ pop_map = px.scatter_geo(
     hover_name="Country",
     locationmode='country names',
     size="circle size",
-    title="Map of EAs Numbers",
+    title="Number of EAs by Country",
     hover_data = {
         'circle size': False,
         'Responses': True,
