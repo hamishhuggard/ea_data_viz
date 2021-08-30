@@ -111,6 +111,7 @@ def demographics_section():
             )
         ],
         className = 'section',
+        id='demographics',
     )
 
 
@@ -141,6 +142,7 @@ def beliefs_section():
             )
         ],
         className = 'section',
+        id='beliefs-lifestyle',
     )
 
 def education_section():
@@ -166,6 +168,7 @@ def education_section():
             )
         ],
         className = 'section',
+        id='education',
     )
 
 def career_section():
@@ -191,4 +194,5 @@ def career_section():
             )
         ],
         className = 'section',
+        id='careers',
     )
