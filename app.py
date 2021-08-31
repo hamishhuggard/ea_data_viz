@@ -56,13 +56,13 @@ app.layout = html.Div(
             openphil_grants_scatter_section(),
             openphil_grants_categories_section(),
 
+            country_total_section(),
+            country_per_capita_section(),
+
             demographics_section(),
             beliefs_section(),
             education_section(),
             career_section(),
-
-            country_total_section(),
-            country_per_capita_section(),
 
             growth1(),
             growth2(),
