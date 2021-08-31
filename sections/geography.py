@@ -45,15 +45,11 @@ def hover(row):
     country = row['Country']
     responses = row['Responses']
     density = row['Density (per million)']
-    return f'<b>{country}</b><br>{responses:,.0f} survey responses<br>{density:.2f} millionths of the population'
+    return f'<b>{country}</b><br>{responses:,.0f} survey responses<br>{density:.2f} per million people'
 countries['hover'] = countries.apply(hover, axis=1)
 
 countries_for_map = countries.copy()
-for country in country_list:
-    if country in [ c.lower() for c in countries['Country'] ]:
-        continue
-    i = len(countries_for_map)
-    countries_for_map.loc[i, ['Country', 'Responses', 'Density (per million)', 'log density']] = (country, 0, 0, 0)
+countries_for_map.loc[len(countries_for_map), ['Country', 'Responses', 'Density (per million)', 'log density']] = ('Antarctica', 0, 0, 0)
 
 countries_for_map['hover'] = countries_for_map.apply(hover, axis=1)
 
@@ -123,6 +119,7 @@ density_map.update_layout(
 density_map.update_traces(
     hovertext = countries_for_map['hover'],
     hovertemplate = '%{hovertext}<extra></extra>',
+    marker_line_width=0,
 )
 
 density_map.update_geos(
@@ -137,7 +134,7 @@ countries_truncated = countries.iloc[len(countries)*2//3:]
 
 countries_bar = EABarGraph(
     countries_truncated,
-    title = f'Number of EAs (Top {len(countries_truncated)} Countries)',
+    title = f'Countries with Most EAs',
 )
 
 countries_capita_sort = countries.sort_values(by='Density (per million)')
@@ -148,7 +145,7 @@ countries_capita_sort_truncated = countries_capita_sort.iloc[len(countries)*2//3
 
 per_capita_bar = EABarGraph(
     countries_capita_sort_truncated,
-    title = f'EAs per Million People (Top {len(countries_truncated)} Countries)',
+    title = f'Countries with Most EAs per Capita (×1M)',
 )
 
 def country_total_section():
@@ -158,7 +155,7 @@ def country_total_section():
                 html.H2('EAs by Country'),
                 className='section-heading',
             ),
-            get_subtitle('rethink19', hover='countries or bars'),
+            get_subtitle('rethink19', hover='countries or bars', extra_text='Scroll to zoom on map.'),
             html.Div(
                 html.Div(
                     [
@@ -191,7 +188,7 @@ def country_per_capita_section():
                 html.H2('EAs per Capita by Country'),
                 className='section-heading',
             ),
-            get_subtitle('rethink19', hover='countries or bars'),
+            get_subtitle('rethink19', hover='countries or bars', extra_text='Scroll to zoom on map.'),
             html.Div(
                 html.Div(
                     [
