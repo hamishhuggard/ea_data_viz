@@ -21,8 +21,6 @@ pipenv run python app.py
 
 ## TODOs
 - EA Funds visualisations like OP
-- "storytelling with data" style line plots
-- Contents with links
 
 ## Future work ideas:
 - Multipage routing
