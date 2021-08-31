@@ -208,7 +208,7 @@ def donations_sankey_section():
     return html.Div(
         [
             html.Div(
-                html.H2('Donation Flows'),
+                html.H2('Donations Overview'),
                 className='section-title',
             ),
             get_subtitle(
@@ -218,7 +218,6 @@ def donations_sankey_section():
                     'founders_pledge',
                     'gwwc',
                 ],
-                can_zoom=False,
                 hover='rectangles or lines',
                 extra_text = 'Rectangles can be rearranged by dragging.',
             ),
