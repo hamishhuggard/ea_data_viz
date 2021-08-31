@@ -35,7 +35,7 @@ data_source_details = {
 
 }
 
-def get_subtitle(data_sources, can_zoom=True, hover='bars', extra_text=[]):
+def get_subtitle(data_sources, zoom=False, hover='bars', extra_text=[]):
 
     if type(data_sources)==str:
         data_sources = [ data_sources ]
@@ -70,7 +70,7 @@ def get_subtitle(data_sources, can_zoom=True, hover='bars', extra_text=[]):
             html.P(f'Hover over the {hover} for more details.'),
         )
 
-    if can_zoom:
+    if zoom:
         content.append(
             html.P('Click and drag to zoom. Double click to unzoom.'),
         )
