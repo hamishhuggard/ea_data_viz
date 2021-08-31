@@ -40,7 +40,7 @@ app = dash.Dash(
         }
     ],
 )
-app.title = 'Effective Altruism Data Viewer'
+app.title = 'Effective Altruism Data'
 server = app.server
 
 # refresh_data()
