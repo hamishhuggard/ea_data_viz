@@ -54,7 +54,7 @@ def contents():
             html.Li(
                 [
                     html.A(
-                        "Donation Flows Sankey Diagram",
+                        "Donations Overview",
                         href="#donations-sankey"
                     ),
                 ],
@@ -63,13 +63,27 @@ def contents():
                 [
                     'Open Philanthropy grants: ',
                     html.A(
-                        "Scatter Plot",
+                        "Individual Grants Plot",
                         href="#op-grants-scatter-section"
                     ),
                     ', ',
                     html.A(
-                        "Organisations and Focus Areas",
+                        "Focus Area and Donee Organization",
                         href="#op-grants-categories"
+                    ),
+                ],
+            ),
+            html.Li(
+                [
+                    'Rethink Priorities survey results: ',
+                    html.A(
+                        "Countries (total)",
+                        href="#countries"
+                    ),
+                    ', ',
+                    html.A(
+                        "Countries (per Capita)",
+                        href="#countries"
                     ),
                 ],
             ),
@@ -94,20 +108,6 @@ def contents():
                     html.A(
                         "Careers",
                         href="#careers"
-                    ),
-                ],
-            ),
-            html.Li(
-                [
-                    'Rethink Priorities survey results: ',
-                    html.A(
-                        "Countries (total)",
-                        href="#countries"
-                    ),
-                    ', ',
-                    html.A(
-                        "Countries (per Capita)",
-                        href="#countries"
                     ),
                 ],
             ),
