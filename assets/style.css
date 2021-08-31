@@ -78,31 +78,13 @@ p, h1, h2, h3 {
     flex: 1;
     padding: 20px;
     box-sizing: border-box;
-    /*
-    min-height: 0;
-    min-width: 0;  
-    */
 }
 
 .plot-container {
     height: 100%;
     width: 100%;
-    /* 
-    overflow: scroll;
-    min-width: 0;
-    min-height: 0;
-    */
-
     max-height: 100vh;
 }
-
-/*
-@media only screen and (max-width: 1000px) {
-    .plot-container {
-        max-height: 100vh;
-    }
-}
-*/
 
 /*------------------
       GRIDS
