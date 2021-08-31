@@ -137,7 +137,7 @@ countries_truncated = countries.iloc[len(countries)*2//3:]
 
 countries_bar = EABarGraph(
     countries_truncated,
-    title = f'Number of EAs (top {len(countries_truncated)})',
+    title = f'Number of EAs (Top {len(countries_truncated)} Countries)',
 )
 
 countries_capita_sort = countries.sort_values(by='Density (per million)')
@@ -148,14 +148,14 @@ countries_capita_sort_truncated = countries_capita_sort.iloc[len(countries)*2//3
 
 per_capita_bar = EABarGraph(
     countries_capita_sort_truncated,
-    title = f'EAs per Million People (top {len(countries_truncated)})',
+    title = f'EAs per Million People (Top {len(countries_truncated)} Countries)',
 )
 
 def country_total_section():
     return html.Div(
         [
             html.Div(
-                html.H2('EAs per Capita'),
+                html.H2('EAs by Country'),
                 className='section-heading',
             ),
             get_subtitle('rethink19', hover='countries or bars'),
