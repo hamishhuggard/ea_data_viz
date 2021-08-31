@@ -102,7 +102,7 @@ density_map = px.choropleth(
     hover_name="Country",
     locationmode='country names',
     color='log density',
-    title="EA Density (Darker is Denser)",
+    title="EAs Per Capita (Darker/Greener is Higher)",
     color_continuous_scale=["#dfe3ee", "#007a8f"],
     hover_data = {
         'circle size': False,
@@ -148,7 +148,7 @@ countries_capita_sort_truncated = countries_capita_sort.iloc[len(countries)*2//3
 
 per_capita_bar = EABarGraph(
     countries_capita_sort_truncated,
-    title = f'EAs per Millionth of Population (top {len(countries_truncated)})',
+    title = f'EAs per Million People (top {len(countries_truncated)})',
 )
 
 def country_total_section():
