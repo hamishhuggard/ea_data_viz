@@ -133,27 +133,29 @@ density_map.update_geos(
 countries['x'] = countries['Country']
 countries['text'] = countries['Responses'].apply(lambda x: f'{x:}')
 countries['y'] = countries['Responses']
+countries_truncated = countries.iloc[len(countries)*2//3:]
 
 countries_bar = EABarGraph(
-    countries,
-    title = 'Number of EAs'
+    countries_truncated,
+    title = f'Number of EAs (top {len(countries_truncated)})',
 )
 
 countries_capita_sort = countries.sort_values(by='Density (per million)')
 countries_capita_sort['x'] = countries_capita_sort['Country']
 countries_capita_sort['y'] = countries_capita_sort['Density (per million)']
 countries_capita_sort['text'] = countries_capita_sort['Density (per million)'].apply(lambda x: f'{x:.1f}')
+countries_capita_sort_truncated = countries_capita_sort.iloc[len(countries)*2//3:]
 
 per_capita_bar = EABarGraph(
-    countries_capita_sort,
-    title = 'EAs per Million People'
+    countries_capita_sort_truncated,
+    title = f'EAs per Millionth of Population (top {len(countries_truncated)})',
 )
 
 def country_total_section():
     return html.Div(
         [
             html.Div(
-                html.H2('Number of EAs by Country'),
+                html.H2('EAs per Capita'),
                 className='section-heading',
             ),
             get_subtitle('rethink19', hover='countries or bars'),
