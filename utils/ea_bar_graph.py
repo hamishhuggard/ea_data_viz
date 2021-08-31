@@ -40,12 +40,12 @@ class EABarGraph(dcc.Graph):
             margin=dict(l=0, r=0, t=30, b=0),
             xaxis=dict(
                 title='',
-                # fixedrange=True
+                fixedrange=True
             ),
             yaxis=dict(
                 title='',
                 # dtick=1,
-                # fixedrange=True
+                fixedrange=True
             ),
             title_x=0.5,
             font=dict(
