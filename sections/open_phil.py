@@ -73,9 +73,9 @@ def org_bar_chart(op_grants):
         return f'<b>{org}</b><br>{grants} grants<br>{amount} total'
     op_orgs['hover'] = op_orgs.apply(hover, axis=1)
 
-    height_per_bar = 25 if len(op_orgs) > 10 else 28
-    height = height_per_bar * len(op_orgs) + 30
-    return EABarGraph(op_orgs, height=height, title='Donee Organization')
+    op_orgs_truncated = op_orgs.iloc[len(op_orgs)-25:]
+
+    return EABarGraph(op_orgs_truncated, title='Top 30 Donee Organizations')
 
 
 def cause_bar_chart(op_grants):
@@ -95,7 +95,7 @@ def cause_bar_chart(op_grants):
 
     height_per_bar = 25 if len(op_causes) > 10 else 28
     height = height_per_bar * len(op_causes) + 20
-    return EABarGraph(op_causes, height=height, title='Focus Area')
+    return EABarGraph(op_causes, height=height, title='Focus Areas')
 
 
 def grants_scatter(op_grants):
@@ -229,7 +229,7 @@ def openphil_grants_categories_section():
     return html.Div(
         [
             html.Div(
-                html.H2('Open Philanthropy Grants by Donee and Focus Area'),
+                html.H2('Open Philanthropy Grants by Focus Area and Donee Organization'),
                 className='section-title',
             ),
             get_subtitle('open_phil'),
