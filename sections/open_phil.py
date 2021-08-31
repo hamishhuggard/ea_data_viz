@@ -54,7 +54,7 @@ def org_bar_chart(op_grants):
     op_orgs = op_grants.groupby(by='Organization Name', as_index=False).sum()
     op_orgs = op_orgs.sort_values(by='Amount')
     op_orgs['x'] = op_orgs['Organization Name']
-    op_orgs['x'] = op_orgs['x'].apply(lambda x: x if len(x) < 30 else x[:27]+'...')
+    # op_orgs['x'] = op_orgs['x'].apply(lambda x: x if len(x) < 30 else x[:27]+'...')
     op_orgs['y'] = op_orgs['Amount']
     op_orgs['text'] = op_orgs['Amount'].apply(lambda x: f'${x:,.0f}')
 
@@ -207,7 +207,7 @@ def openphil_grants_scatter_section():
                 html.H2('Open Philanthropy Grants'),
                 className='section-title',
             ),
-            get_subtitle('open_phil', hover='points'),
+            get_subtitle('open_phil', hover='points', zoom=True),
             html.Div(
                 [
                     html.Div(
