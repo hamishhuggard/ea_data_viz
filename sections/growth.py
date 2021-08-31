@@ -41,8 +41,8 @@ for df in growing_dfs:
       field = field.replace('K', '*10**3')
       field = field.replace('M', '*10**6')
       valid_chars = '.*' + string.digits
-      field = ''.join([ 
-         char for char in field if char in valid_chars 
+      field = ''.join([
+         char for char in field if char in valid_chars
       ])
       return eval(field)
       return field
@@ -102,7 +102,6 @@ for table, table_name in zip(
 ):
     fig = go.Figure()
     annotations = []
-    print(table['label'].unique())
     for val in table['label'].unique():
 
         if val in [
@@ -247,7 +246,7 @@ def growth1():
                 html.H2('Growth in EA Reading'),
                 className='section-heading',
             ),
-            get_subtitle('growth', hover='points'),
+            get_subtitle('growth', hover='points', zoom=True),
             html.Div(
                 growing_figs[0],
                 className = 'section-body',
@@ -264,7 +263,7 @@ def growth2():
                 html.H2('Growth in EA Joining'),
                 className='section-heading',
             ),
-            get_subtitle('growth', hover='points'),
+            get_subtitle('growth', hover='points', zoom=True),
             html.Div(
                 growing_figs[1],
                 className = 'section-body',
@@ -281,7 +280,7 @@ def growth3():
                 html.H2('Growth in EA Committing'),
                 className='section-heading',
             ),
-            get_subtitle('growth', hover='points'),
+            get_subtitle('growth', hover='points', zoom=True),
             html.Div(
                 growing_figs[2],
                 className = 'section-body',
@@ -298,7 +297,7 @@ def growth4():
                 html.H2('Growth in EA Donating'),
                 className='section-heading',
             ),
-            get_subtitle('growth', hover='points'),
+            get_subtitle('growth', hover='points', zoom=True),
             html.Div(
                 growing_figs[3],
                 className = 'section-body',
