@@ -4,9 +4,15 @@ import dash_core_components as dcc
 data_source_details = {
 
     'rethink19': dict(
-        name='2019 Rethink Priorities Survey',
+        name='EA Survey 2019 (Rethink Priorities)',
         url='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
     ),
+
+    'rethink19-geo': dict(
+        name='EA Survey 2019 (Rethink Priorities)',
+        url='https://rethinkpriorities.org/publications/eas2019-geographic-distribution-of-eas'
+    ),
+
 
     'open_phil': dict(
         name='Open Philanthropy Grants Database',

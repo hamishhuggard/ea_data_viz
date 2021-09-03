@@ -155,7 +155,7 @@ def country_total_section():
                 html.H2('EAs by Country'),
                 className='section-heading',
             ),
-            get_subtitle('rethink19', hover='countries or bars', extra_text='Scroll to zoom on map.'),
+            get_subtitle('rethink19-geo', hover='countries or bars', extra_text='Scroll to zoom on map.'),
             html.Div(
                 html.Div(
                     [
@@ -188,7 +188,7 @@ def country_per_capita_section():
                 html.H2('EAs per Capita by Country'),
                 className='section-heading',
             ),
-            get_subtitle('rethink19', hover='countries or bars', extra_text='Scroll to zoom on map.'),
+            get_subtitle('rethink19-geo', hover='countries or bars', extra_text='Scroll to zoom on map.'),
             html.Div(
                 html.Div(
                     [
