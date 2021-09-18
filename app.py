@@ -53,27 +53,28 @@ server = app.server
 app.layout = html.Div(
         [
 
-            forum_scatter_section(),
 
-            # title_section(),
+            title_section(),
 
-            # donations_sankey_section(),
+            donations_sankey_section(),
 
-            # openphil_grants_scatter_section(),
-            # openphil_grants_categories_section(),
+            openphil_grants_scatter_section(),
+            openphil_grants_categories_section(),
 
-            # country_total_section(),
-            # country_per_capita_section(),
+            country_total_section(),
+            country_per_capita_section(),
 
-            # demographics_section(),
-            # beliefs_section(),
-            # education_section(),
-            # career_section(),
+            demographics_section(),
+            beliefs_section(),
+            education_section(),
+            career_section(),
 
-            # growth1(),
-            # growth2(),
-            # growth3(),
-            # growth4(),
+            growth1(),
+            growth2(),
+            growth3(),
+            growth4(),
+
+            # forum_scatter_section(),
 
         ],
         className = 'scroll-snapper',
@@ -82,5 +83,5 @@ app.layout = html.Div(
 # app.layout = serve_layout
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
-    #app.run_server(debug=False)
+    #app.run_server(debug=True)
+    app.run_server(debug=False)

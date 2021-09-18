@@ -124,6 +124,8 @@ for table, table_name in zip(
             #'# donors in EA Survey',
             #'Founder’s Pledge pledges',
             'EA Funds payouts[y]',
+
+            'Google interest in “effective altruism” (relative scoring)',
         ]:
             continue
 
