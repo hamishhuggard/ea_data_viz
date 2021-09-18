@@ -8,6 +8,9 @@ import dash_html_components as html
 
 from sections.title import title_section
 
+from sections.forum import forum_scatter_section
+from sections.forum import forum_leaderboard_section
+
 from sections.donations_sankey import donations_sankey_section
 
 from sections.demographics import demographics_section
@@ -49,25 +52,28 @@ server = app.server
 #     return html.Div(
 app.layout = html.Div(
         [
-            title_section(),
 
-            donations_sankey_section(),
+            forum_scatter_section(),
 
-            openphil_grants_scatter_section(),
-            openphil_grants_categories_section(),
+            # title_section(),
 
-            country_total_section(),
-            country_per_capita_section(),
+            # donations_sankey_section(),
 
-            demographics_section(),
-            beliefs_section(),
-            education_section(),
-            career_section(),
+            # openphil_grants_scatter_section(),
+            # openphil_grants_categories_section(),
 
-            growth1(),
-            growth2(),
-            growth3(),
-            growth4(),
+            # country_total_section(),
+            # country_per_capita_section(),
+
+            # demographics_section(),
+            # beliefs_section(),
+            # education_section(),
+            # career_section(),
+
+            # growth1(),
+            # growth2(),
+            # growth3(),
+            # growth4(),
 
         ],
         className = 'scroll-snapper',
@@ -76,5 +82,5 @@ app.layout = html.Div(
 # app.layout = serve_layout
 
 if __name__ == '__main__':
-    #app.run_server(debug=True)
-    app.run_server(debug=False)
+    app.run_server(debug=True)
+    #app.run_server(debug=False)
