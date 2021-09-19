@@ -9,32 +9,6 @@ from utils.ea_bar_graph import EABarGraph
 from utils.subtitle import get_subtitle
 import json
 
-'''
-the forum data was retrieved from https://forum.effectivealtruism.org/graphiql
-with the following query:
-query {
-  posts
-  {
-    results {
-      title
-      postedAt
-      user {
-        username
-        displayName
-      }
-      coauthors {
-        username
-        displayName
-      }
-      pageUrl
-      wordCount
-      baseScore
-      commentCount
-    }
-  }
-}
-'''
-
 def get_forum_data():
 
     with open('./data/forum.json', 'r') as forum_file:
