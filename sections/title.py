@@ -9,7 +9,7 @@ import plotly.express as px
 
 def heading():
 
-    lightbulb_img_url = 'https://effectivealtruism.nz/wp-content/uploads/2018/02/lightbulblogo-1.png'
+    lightbulb_img_url = '/assets/logo.png'
 
     return html.H1(
         [
@@ -20,37 +20,17 @@ def heading():
             html.Div(
                 [
                     html.Span(
-                        'Effective',
-                        className = 'effective',
-                    ),
-                    html.Span(
-                        'Altruism',
-                        className = 'altruism',
-                    ),
-                ],
-                className='effective-altruism',
-            ),
-            html.Div(
-                [
-                    html.Span(
-                        'Data',
-                        className = 'data',
-                    ),
-                    html.Span(
-                        '.com',
-                        className = 'dot-com',
-                    ),
-                ],
-                className='data-dot-com',
-            ),
+                        'Effective Altruism Data'
+                    )
+                ]
+            )
         ],
-        className='ea-data-dot-com center',
     )
 
 def contents():
     return html.Ul(
         [
-            html.P('Contents:'),
+            html.H2('Contents:'),
             html.Li(
                 [
                     html.A(
@@ -61,7 +41,7 @@ def contents():
             ),
             html.Li(
                 [
-                    'Open Philanthropy grants: ',
+                    'Open Philanthropy: ',
                     html.A(
                         "Individual Grants Plot",
                         href="#op-grants-scatter-section"
@@ -75,7 +55,7 @@ def contents():
             ),
             html.Li(
                 [
-                    'Rethink Priorities survey results: ',
+                    'Rethink Priorities Survey: ',
                     html.A(
                         "Countries (total)",
                         href="#countries"
@@ -85,16 +65,20 @@ def contents():
                         "Countries (per Capita)",
                         href="#countries"
                     ),
-                ],
-            ),
-            html.Li(
-                [
-                    'Rethink Priorities survey results: ',
+                    ', ',
                     html.A(
                         "Demographics",
                         href="#demographics"
                     ),
                     ', ',
+                    html.Span(
+                        html.Br(),
+                        className="space",
+                    ),
+                    html.Span(
+                        '‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎  ‏‏‎',
+                        className="space",
+                    ), 
                     html.A(
                         "Beliefs and Lifestyle",
                         href="#beliefs-lifestyle"
@@ -153,21 +137,18 @@ def title_section():
                                         "Effective Altruism",
                                         href="https://www.effectivealtruism.org/"
                                     ),
-                                    ' is a loose collective of quantitatively-minded philanthropists and do-gooders.',
+                                    ' (EA) is a movement that uses reason and evidence to do the most good.',
                                 ]
                             ),
                             html.P(
-                                'There are several EA organisations which collect data on grants, donors, and pledges.',
-                            ),
-                            html.P(
-                                'This website aggregates and visualizes that data.',
+                                'This website aggregates and visualizes data from several EA organisations!',
                             ),
                             contents(),
                             html.P(
                                 [
-                                    'Source code is available on ',
+                                    'All of the source code is available on ',
                                     dcc.Link(
-                                        "Github",
+                                        "GitHub",
                                         href="https://github.com/hamishhuggard/ea_data_viz"
                                     ),
                                     '.',
@@ -175,7 +156,7 @@ def title_section():
                             ),
                             html.P(
                                 [
-                                    'Please send feedback to ',
+                                    'Got any feedback? Please send it to ',
                                     dcc.Link(
                                         "hamish.huggard@gmail.com",
                                         href="mailto:hamish.huggard@gmail.com"
@@ -188,8 +169,11 @@ def title_section():
                             'text-align': 'left',
                         },
                     ),
+                    html.Br(),
+                    html.Br(),
                     html.H3(
-                        '⬇️  Scroll down. ⬇️ '
+                        'Scroll down.',
+                        className="scrolldown"
                     ),
                 ]),
             ],
