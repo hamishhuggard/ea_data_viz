@@ -89,7 +89,7 @@ def contents():
             ),
             html.Li(
                 [
-                    'Rethink Priorities survey results: ',
+                    'EA Survey Results ',
                     html.A(
                         "Demographics",
                         href="#demographics"
