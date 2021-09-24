@@ -9,7 +9,7 @@ import plotly.express as px
 
 def heading():
 
-    lightbulb_img_url = 'https://effectivealtruism.nz/wp-content/uploads/2018/02/lightbulblogo-1.png'
+    lightbulb_img_url = '/assets/logo.png'
 
     return html.H1(
         [
@@ -89,7 +89,7 @@ def contents():
             ),
             html.Li(
                 [
-                    'Rethink Priorities survey results: ',
+                    'EA Survey Results ',
                     html.A(
                         "Demographics",
                         href="#demographics"
@@ -153,7 +153,7 @@ def title_section():
                                         "Effective Altruism",
                                         href="https://www.effectivealtruism.org/"
                                     ),
-                                    ' is a loose collective of quantitatively-minded philanthropists and do-gooders.',
+                                    ' (EA) is a movement that uses reason and evidence to do the most good.',
                                 ]
                             ),
                             html.P(

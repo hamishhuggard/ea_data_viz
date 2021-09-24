@@ -6,10 +6,18 @@
       GLOBAL
 ------------------*/
 
+:root {
+    --main-color: #0e7a8e;
+}
+
 body {
     font-family: "Raleway", Helvetica, sans-serif;
     margin: 0px;
     padding: 0px;
+}
+
+a {
+    color: var(--main-color);
 }
 
 .center {
