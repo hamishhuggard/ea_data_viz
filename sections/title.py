@@ -20,17 +20,37 @@ def heading():
             html.Div(
                 [
                     html.Span(
-                        'Effective Altruism Data'
-                    )
-                ]
-            )
+                        'Effective',
+                        className = 'effective',
+                    ),
+                    html.Span(
+                        'Altruism',
+                        className = 'altruism',
+                    ),
+                ],
+                className='effective-altruism',
+            ),
+            html.Div(
+                [
+                    html.Span(
+                        'Data',
+                        className = 'data',
+                    ),
+                    html.Span(
+                        '.com',
+                        className = 'dot-com',
+                    ),
+                ],
+                className='data-dot-com',
+            ),
         ],
+        className='ea-data-dot-com center',
     )
 
 def contents():
     return html.Ul(
         [
-            html.H2('Contents:'),
+            html.P('Contents:'),
             html.Li(
                 [
                     html.A(
@@ -41,7 +61,7 @@ def contents():
             ),
             html.Li(
                 [
-                    'Open Philanthropy: ',
+                    'Open Philanthropy grants: ',
                     html.A(
                         "Individual Grants Plot",
                         href="#op-grants-scatter-section"
@@ -55,7 +75,7 @@ def contents():
             ),
             html.Li(
                 [
-                    'Rethink Priorities Survey: ',
+                    'Rethink Priorities survey results: ',
                     html.A(
                         "Countries (total)",
                         href="#countries"
@@ -65,20 +85,16 @@ def contents():
                         "Countries (per Capita)",
                         href="#countries"
                     ),
-                    ', ',
+                ],
+            ),
+            html.Li(
+                [
+                    'Rethink Priorities survey results: ',
                     html.A(
                         "Demographics",
                         href="#demographics"
                     ),
                     ', ',
-                    html.Span(
-                        html.Br(),
-                        className="space",
-                    ),
-                    html.Span(
-                        '‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎  ‏‏‎',
-                        className="space",
-                    ), 
                     html.A(
                         "Beliefs and Lifestyle",
                         href="#beliefs-lifestyle"
@@ -141,14 +157,17 @@ def title_section():
                                 ]
                             ),
                             html.P(
-                                'This website aggregates and visualizes data from several EA organisations!',
+                                'There are several EA organisations which collect data on grants, donors, and pledges.',
+                            ),
+                            html.P(
+                                'This website aggregates and visualizes that data.',
                             ),
                             contents(),
                             html.P(
                                 [
-                                    'All of the source code is available on ',
+                                    'Source code is available on ',
                                     dcc.Link(
-                                        "GitHub",
+                                        "Github",
                                         href="https://github.com/hamishhuggard/ea_data_viz"
                                     ),
                                     '.',
@@ -156,7 +175,7 @@ def title_section():
                             ),
                             html.P(
                                 [
-                                    'Got any feedback? Please send it to ',
+                                    'Please send feedback to ',
                                     dcc.Link(
                                         "hamish.huggard@gmail.com",
                                         href="mailto:hamish.huggard@gmail.com"
@@ -169,11 +188,8 @@ def title_section():
                             'text-align': 'left',
                         },
                     ),
-                    html.Br(),
-                    html.Br(),
                     html.H3(
-                        'Scroll down.',
-                        className="scrolldown"
+                        '⬇️  Scroll down. ⬇️ '
                     ),
                 ]),
             ],
