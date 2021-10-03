@@ -10,6 +10,7 @@ gunicorn = "*"
 countryinfo = "*"
 bs4 = "*"
 requests = "*"
+dash-dangerously-set-inner-html = "*"
 
 [dev-packages]
 

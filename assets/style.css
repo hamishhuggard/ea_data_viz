@@ -61,6 +61,8 @@ p, h1, h2, h3 {
     height: 100%;
     overflow: scroll;
     padding: 30px;
+    background-color: white;
+    z-index:100;
 }
 
 .section-list {
@@ -71,6 +73,13 @@ p, h1, h2, h3 {
     height: 100%;
     overflow: scroll;
     padding: 30px;
+}
+
+@media only screen and (max-width: 700px) {
+    .content {
+        position: absolute;
+        left: 0;
+    }
 }
 
 
@@ -200,8 +209,37 @@ etc
 
 
 /*------------------
+     ANIMATION
+------------------*/
+
+body {
+    overflow-x: hidden;
+}
+
+
+.sidebar {
+    -webkit-transition-duration: 600ms;
+    transition-duration: 600ms;
+}
+
+.sidebar.hidden { 
+    transform: translate(-100%);
+    /* display: none; */
+}
+
+/*------------------
       TITLE
 ------------------*/
+
+.hamburger {
+    height: 50px;
+    padding: 10px 10px;
+    border-radius: 50%;
+}
+
+.hamburger:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
 
 .lightbulb {
     height: 60px;
