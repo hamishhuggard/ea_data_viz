@@ -1,17 +1,14 @@
 function toggleSidebarVisible() {
+
 	const sidebar = document.getElementById("sidebar");
-    let display;
+	const buttress = document.getElementById("sidebar-buttress");
+
     if (sidebar.classList.contains("hidden")) {
-        sidebar.style.display = "initial";
-        sidebar.classList.add("hidden");
         sidebar.classList.remove("hidden");
-        display = "initial";
+        buttress.style.display = "block";
     } else {
         sidebar.classList.add("hidden");
-        setTimeout(function()
-            {
-                sidebar.style.display = "none";
-
-        }, 600);
+        buttress.style.display = "none";
     }
+
 }
