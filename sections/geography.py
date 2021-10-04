@@ -145,7 +145,7 @@ countries_capita_sort_truncated = countries_capita_sort.iloc[len(countries)*2//3
 
 per_capita_bar = EABarGraph(
     countries_capita_sort_truncated,
-    title = f'Countries with Most EAs per Capita (×1M)',
+    title = f'Top EAs per Capita (×1M)',
 )
 
 def country_total_section():
