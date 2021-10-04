@@ -72,6 +72,10 @@ p, h1, h2, h3 {
     height: var(--body-height);
 }
 
+#sidebar-buttress.hidden {
+    display: none;
+}
+
 .section-list {
 }
 
@@ -246,6 +250,7 @@ body {
 
 .hamburger:hover {
     background-color: rgba(0, 0, 0, 0.08);
+    cursor: pointer;
 }
 
 .lightbulb {
@@ -297,6 +302,10 @@ body {
 
     .long-title {
         display: none;
+    }
+
+    :root {
+        --header-height: 10vh;
     }
 
 }

@@ -25,6 +25,10 @@ def header():
                     >
                 '''),
             ),
+            html.Img(
+                src = lightbulb_img_url,
+                className='lightbulb',
+            ),
             html.H1(
                 [
                     html.Span(
@@ -32,11 +36,7 @@ def header():
                         className = 'data',
                     ),
                 ],
-                className = 'main-title short-title',
-            ),
-            html.Img(
-                src = lightbulb_img_url,
-                className='lightbulb',
+                className='main-title short-title',
             ),
             html.H1(
                 [
