@@ -6,28 +6,9 @@
 import dash
 import dash_html_components as html
 
-from sections.title import title_section
-
-from sections.forum import forum_scatter_section
-from sections.forum import forum_leaderboard_section
-
-from sections.donations_sankey import donations_sankey_section
-
-from sections.demographics import demographics_section
-from sections.demographics import beliefs_section
-from sections.demographics import education_section
-from sections.demographics import career_section
-
-from sections.growth import growth1
-from sections.growth import growth2
-from sections.growth import growth3
-from sections.growth import growth4
-
-from sections.geography import country_total_section
-from sections.geography import country_per_capita_section
-
-from sections.open_phil import openphil_grants_scatter_section
-from sections.open_phil import openphil_grants_categories_section
+from components.header import header
+from components.sidebar import sidebar
+from components.body import body
 
 from utils.refresh_data import refresh_data
 
@@ -52,36 +33,19 @@ server = app.server
 #     return html.Div(
 app.layout = html.Div(
         [
-
-
-            title_section(),
-
-            donations_sankey_section(),
-
-            openphil_grants_scatter_section(),
-            openphil_grants_categories_section(),
-
-            country_total_section(),
-            country_per_capita_section(),
-
-            demographics_section(),
-            beliefs_section(),
-            education_section(),
-            career_section(),
-
-            growth1(),
-            growth2(),
-            growth3(),
-            growth4(),
-
-            # forum_scatter_section(),
-
+            header(),
+            html.Div(
+                [
+                    sidebar(),
+                    body(),
+                ],
+                className = 'body',
+            )
         ],
-        className = 'scroll-snapper',
     )
 
 # app.layout = serve_layout
 
 if __name__ == '__main__':
-    #app.run_server(debug=True)
-    app.run_server(debug=False)
+    app.run_server(debug=True)
+    #app.run_server(debug=False)

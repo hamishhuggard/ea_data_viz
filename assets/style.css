@@ -8,6 +8,14 @@
 
 :root {
     --main-color: #0e7a8e;
+    --header-height: 15vh;
+    --body-height: 85vh;
+    --sidebar-width: 300px;
+}
+
+* {
+    scroll-behavior: smooth;
+    box-sizing: border-box;
 }
 
 body {
@@ -37,11 +45,61 @@ p, h1, h2, h3 {
 */
 
 /*------------------
+     COMPONENTS
+------------------*/
+
+.header {
+    height: var(--header-height);
+}
+
+.body {
+    height: var(--body-height);
+    display: flex;
+}
+
+#sidebar {
+    width: var(--sidebar-width);
+    height: var(--body-height);
+    overflow: scroll;
+    padding: 30px;
+    background-color: white;
+    z-index:100;
+    position: absolute;
+}
+
+#sidebar-buttress {
+    width: var(--sidebar-width);
+    height: var(--body-height);
+}
+
+#sidebar-buttress.hidden {
+    display: none;
+}
+
+/* .section-list {
+} */
+
+.content {
+    height: var(--body-height);
+    width: 100%;
+    overflow: scroll;
+    padding: 30px;
+}
+
+@media only screen and (max-width: 700px) {
+    .content {
+        position: absolute;
+        left: 0;
+    }
+}
+
+
+/*------------------
       SECTION
 ------------------*/
 
 .section {
-    height: 100vh;
+    height: var(--body-height);
     scroll-snap-align: start;
     margin: 0 auto;
     text-align: center;
@@ -59,14 +117,13 @@ p, h1, h2, h3 {
     .scroll-snapper {
         overflow-y: scroll;
         scroll-snap-type: y mandatory;
-        height: 100vh;
+        height: var(--body-height);
     }
 }
 
 .section-title {
     width: 100%;
     padding: 0px 20px;
-    box-sizing: border-box;
     text-align: center;
 }
 
@@ -85,7 +142,6 @@ p, h1, h2, h3 {
 .section-body {
     flex: 1;
     padding: 20px;
-    box-sizing: border-box;
 }
 
 .plot-container {
@@ -164,8 +220,43 @@ etc
 
 
 /*------------------
+     ANIMATION
+------------------*/
+
+body {
+    overflow-x: hidden;
+}
+
+
+#sidebar {
+    -webkit-transition-duration: 600ms;
+    transition-duration: 600ms;
+}
+
+#sidebar.hidden { 
+    transform: translate(-100%);
+    /* display: none; */
+}
+
+/*------------------
       TITLE
 ------------------*/
+
+.hamburger {
+    height: 50px;
+    padding: 10px 10px;
+    border-radius: 50%;
+}
+
+.hamburger:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+
+.lightbulb {
+    height: 60px;
+    padding: 0 10px;
+}
 
 .effective {
     font-family: "Roboto Slab", "Times New Roman", serif;
@@ -177,43 +268,58 @@ etc
     font-weight: 400;
 }
 
-.ea-data-dot-com    { display: grid; }
-.effective-altruism { display: grid; }
-.data-dot-com       { display: grid; }
 
-.lightbulb          { grid-column: 1; }
-.effective-altruism { grid-column: 2; }
-.data-dot-com       { grid-column: 3; }
+.main-title-and-bulb { 
+    display: flex; 
+    flex-direction: row;
+    padding-left: 20px;
+    /* justify-content: flex-start; */
+    /* justify-content: center; */
+}
 
-.effective { grid-column: 1; }
-.altruism  { grid-column: 2; }
-.data      { grid-column: 1; }
-.dot-com   { grid-column: 2; }
+.main-title { margin-top: 20px; }
 
-.lightbulb {
-    height: 60px;
-    padding: 0 10px;
+.short-title {
+    display: none;
+    padding-left: 10px;
+}
+
+.long-title {
+    display: block;
 }
 
 @media only screen and (max-width: 700px) {
-    .lightbulb          { grid-column: 1; }
-    .effective-altruism { grid-column: 1; }
-    .data-dot-com       { grid-column: 1; }
+
+    .lightbulb {
+        height: 40px;
+        padding: 0 5px;
+    }
+
+    .short-title {
+        display: block;
+        font-size: 2em;
+    }
+
+    .long-title {
+        display: none;
+    }
+
+    :root {
+        --header-height: 10vh;
+    }
+
+}
+
+/*
+@media only screen and (max-width: 700px) {
+    .main-title-and-bulb { 
+        flex-direction: column;
+    }
     .lightbulb { height: 120px; }
 }
 
-
-@media only screen and (max-width: 400px) {
-    .effective { grid-column: 1; }
-    .altruism  { grid-column: 1; }
-    .data      { grid-column: 1; }
-    .dot-com   { grid-column: 1; }
-}
-
-@media only screen and (max-width: 1000px) {
-    .ea-data-dot-com { margin-top: 75px; }
-}
-
 @media only screen and (max-width: 700px) {
-    .ea-data-dot-com { margin-top: 25px; }
+    .main-title { margin-top: 25px; }
 }
+
+*/

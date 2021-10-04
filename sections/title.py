@@ -11,40 +11,31 @@ def heading():
 
     lightbulb_img_url = '/assets/logo.png'
 
-    return html.H1(
+    return html.Div(
         [
             html.Img(
                 src = lightbulb_img_url,
                 className='lightbulb',
             ),
-            html.Div(
+            html.H1(
                 [
                     html.Span(
-                        'Effective',
+                        'Effective ',
                         className = 'effective',
                     ),
                     html.Span(
-                        'Altruism',
+                        'Altruism ',
                         className = 'altruism',
                     ),
-                ],
-                className='effective-altruism',
-            ),
-            html.Div(
-                [
                     html.Span(
                         'Data',
                         className = 'data',
                     ),
-                    html.Span(
-                        '.com',
-                        className = 'dot-com',
-                    ),
                 ],
-                className='data-dot-com',
+                className = 'main-title',
             ),
         ],
-        className='ea-data-dot-com center',
+        className='main-title-and-bulb center',
     )
 
 def contents():
