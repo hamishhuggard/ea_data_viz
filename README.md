@@ -1,28 +1,28 @@
-# [EffectiveAltruismData.com](https://effectivealtruismdata.com)
+# [Effective Altruism Data](https://effectivealtruismdata.com)
 
-[Effective Altruism](https://www.effectivealtruism.org/) is a loose collective of quantitatively-minded philanthropists and do-gooders.
+![Effective Altruism Data](eadata.png)
 
-There are several EA organisations which collect data on grants, donors, and pledges, so I built this website to aggregate and visualise this data.
+[Effective Altruism](https://www.effectivealtruism.org/) (EA) is a philosophy and social movement that uses reason and evidence to do the most good.
 
-The website is coded in Python using Dash and Plotly, plus a bunch of HTML and CSS. It is currently deployed with Heroku at [EffectiveAltruismData.com](https://effectivealtruismdata.com).
+There are several EA organisations which collect data on grants, donors, and pledges. This website aggregate and visualise that data.
 
-Everything is responsive, but some of the plots are too detailed to to useful on mobile.
+The website is coded in Python using [Dash](https://dash.plotly.com/) and [Plotly](https://plotly.com/). it is currently deployed with Heroku at [effectivealtruismaata.com](https://effectivealtruismdata.com).
 
-There may be some overlap between this project and the [EA hub map](https://eahub.org/) or [EA Funds dashboard](https://app.effectivealtruism.org/funds/about/stats).
+There may be some overlap between this project and with the [EA Hub map](https://eahub.org/) and the [EA Funds dashboard](https://app.effectivealtruism.org/funds/about/stats).
 
 ## How to Run
-1. Install [pipenv](https://pipenv.pypa.io/en/latest/)
-2. In the terminal:
+1. Install [pipenv](https://pipenv.pypa.io/en/latest/).
+2. Run the following in the terminal:
 ```
 git clone https://github.com/hamishhuggard/ea_data_viz.git
 cd ea_data_viz
 pipenv run python app.py
 ```
 
-## TODOs
+## To Do
 - EA Funds visualisations like OP
 
-## Future work ideas:
+## Ideas:
 - Multipage routing
 - [Better bar charts](https://dkane.net/2020/better-horizontal-bar-charts-with-plotly/?utm_source=pocket_mylist)
 - Navigation bar
