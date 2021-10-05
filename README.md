@@ -19,7 +19,7 @@ cd ea_data_viz
 pipenv run python app.py
 ```
 
-## To Do
+## To do
 - EA Funds visualisations like OP
 
 ## Ideas:
