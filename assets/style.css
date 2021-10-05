@@ -22,6 +22,7 @@ body {
     font-family: "Raleway", Helvetica, sans-serif;
     margin: 0px;
     padding: 0px;
+    overflow-x: hidden;
 }
 
 a {
@@ -73,14 +74,8 @@ p, h1, h2, h3 {
 #sidebar-buttress {
     width: var(--sidebar-width);
     height: var(--body-height);
+    display: block;
 }
-
-#sidebar-buttress.hidden {
-    display: none;
-}
-
-/* .section-list {
-} */
 
 .content {
     height: var(--body-height);
@@ -94,6 +89,49 @@ p, h1, h2, h3 {
         position: absolute;
         left: 0;
     }
+}
+
+/*------------------
+     ANIMATION
+------------------*/
+
+#sidebar {
+    -webkit-transition-duration: 600ms;
+    transition-duration: 600ms;
+}
+
+/* The sidebar is visible by default on desktop but hidden by default on mobile.  */
+
+@media only screen and (min-width: 800px) {
+
+    #sidebar.toggled { 
+        transform: translate(-100%);
+    }
+
+    #sidebar-buttress.toggled {
+        display: none;
+    }
+
+}
+
+@media only screen and (max-width: 800px) {
+
+    #sidebar { 
+        transform: translate(-100%);
+    }
+
+    #sidebar-buttress {
+        display: none;
+    }
+
+    #sidebar.toggled { 
+        transform: translate(0%);
+    }
+
+    #sidebar-buttress.toggled {
+        display: block;
+    }
+
 }
 
 /*------------------
@@ -279,23 +317,4 @@ etc
     .desk-span-2-cols { grid-column: span 2; }
 }
 
-
-/*------------------
-     ANIMATION
-------------------*/
-
-body {
-    overflow-x: hidden;
-}
-
-
-#sidebar {
-    -webkit-transition-duration: 600ms;
-    transition-duration: 600ms;
-}
-
-#sidebar.hidden { 
-    transform: translate(-100%);
-    /* display: none; */
-}
 

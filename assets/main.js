@@ -3,12 +3,12 @@ function toggleSidebarVisible() {
 	const sidebar = document.getElementById("sidebar");
 	const buttress = document.getElementById("sidebar-buttress");
 
-    if (sidebar.classList.contains("hidden")) {
-        sidebar.classList.remove("hidden");
-        buttress.style.display = "block";
+    if (sidebar.classList.contains("toggled")) {
+        sidebar.classList.remove("toggled");
+        buttress.classList.remove("toggled");
     } else {
-        sidebar.classList.add("hidden");
-        buttress.style.display = "none";
+        sidebar.classList.add("toggled");
+        buttress.classList.add("toggled");
     }
 
 }

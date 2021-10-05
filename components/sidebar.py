@@ -148,11 +148,9 @@ def sidebar():
             html.Div(
                 contents(),
                 id='sidebar',
-                className='hidden'
             ),
             html.Div(
                 id='sidebar-buttress',
-                className='hidden'
             ),
         ]
     )
