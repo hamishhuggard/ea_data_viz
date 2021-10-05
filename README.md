@@ -4,7 +4,7 @@
 
 [Effective Altruism](https://www.effectivealtruism.org/) (EA) is a philosophy and social movement that uses reason and evidence to do the most good.
 
-There are several EA organisations which collect data on grants, donors, and pledges. This website aggregate and visualise that data.
+There are several EA organisations that collect data on grants, donors, and pledges. This website aggregates and visualises that data.
 
 The website is coded in Python using [Dash](https://dash.plotly.com/) and [Plotly](https://plotly.com/). it is currently deployed with Heroku at [effectivealtruismaata.com](https://effectivealtruismdata.com).
 
