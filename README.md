@@ -10,7 +10,7 @@ The website is coded in Python using [Dash](https://dash.plotly.com/) and [Plotl
 
 There may be some overlap between this project and with the [EA Hub map](https://eahub.org/) and the [EA Funds dashboard](https://app.effectivealtruism.org/funds/about/stats).
 
-## How to Run
+## How to run
 1. Install [pipenv](https://pipenv.pypa.io/en/latest/).
 2. Run the following in the terminal:
 ```
