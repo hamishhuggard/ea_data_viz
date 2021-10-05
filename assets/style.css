@@ -8,7 +8,7 @@
 
 :root {
     --main-color: #0e7a8e;
-    --header-height: 15vh;
+    --header-height: 10vh;
     --body-height: 85vh;
     --sidebar-width: 300px;
 }
@@ -50,6 +50,9 @@ p, h1, h2, h3 {
 
 .header {
     height: var(--header-height);
+    display: flex;
+    gap: 8px;
+    padding: 30px;
 }
 
 .body {
@@ -93,6 +96,73 @@ p, h1, h2, h3 {
     }
 }
 
+/*------------------
+      TITLE
+------------------*/
+
+.hamburger {
+    height: 4rem;
+    padding: 8px 8px;
+    border-radius: 50%;
+}
+
+.hamburger:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+
+.lightbulb {
+    height: 4rem;
+    /* padding: 0 10px; */
+}
+
+.effective {
+    font-family: "Roboto Slab", "Times New Roman", serif;
+    font-weight: 700;
+}
+
+.altruism {
+    font-family: "Roboto Slab", "Times New Roman", serif;
+    font-weight: 400;
+}
+
+
+.main-title-and-bulb { 
+    display: flex; 
+    flex-direction: row;
+}
+
+.header h1 {
+    font-size: 4rem;
+    margin: 0;
+}
+
+
+.short-title {
+    display: none;
+    padding-left: 10px;
+}
+
+.long-title {
+    display: block;
+}
+
+@media only screen and (max-width: 700px) {
+
+    .lightbulb {
+        height: 40px;
+        padding: 0 5px;
+    }
+
+    .short-title {
+        display: block;
+    }
+
+    .long-title {
+        display: none;
+    }
+
+}
 
 /*------------------
       SECTION
@@ -123,17 +193,8 @@ p, h1, h2, h3 {
 
 .section-title {
     width: 100%;
-    padding: 0px 20px;
     text-align: center;
 }
-
-/*
-.section-title:after {
-    content:' ';
-    display:block;
-    border:2px solid #0c869b;
-}
-*/
 
 .section-subtitle {
     padding: 0px 10px;
@@ -238,88 +299,3 @@ body {
     /* display: none; */
 }
 
-/*------------------
-      TITLE
-------------------*/
-
-.hamburger {
-    height: 50px;
-    padding: 10px 10px;
-    border-radius: 50%;
-}
-
-.hamburger:hover {
-    background-color: rgba(0, 0, 0, 0.08);
-    cursor: pointer;
-}
-
-.lightbulb {
-    height: 60px;
-    padding: 0 10px;
-}
-
-.effective {
-    font-family: "Roboto Slab", "Times New Roman", serif;
-    font-weight: 700;
-}
-
-.altruism {
-    font-family: "Roboto Slab", "Times New Roman", serif;
-    font-weight: 400;
-}
-
-
-.main-title-and-bulb { 
-    display: flex; 
-    flex-direction: row;
-    padding-left: 20px;
-    /* justify-content: flex-start; */
-    /* justify-content: center; */
-}
-
-.main-title { margin-top: 20px; }
-
-.short-title {
-    display: none;
-    padding-left: 10px;
-}
-
-.long-title {
-    display: block;
-}
-
-@media only screen and (max-width: 700px) {
-
-    .lightbulb {
-        height: 40px;
-        padding: 0 5px;
-    }
-
-    .short-title {
-        display: block;
-        font-size: 2em;
-    }
-
-    .long-title {
-        display: none;
-    }
-
-    :root {
-        --header-height: 10vh;
-    }
-
-}
-
-/*
-@media only screen and (max-width: 700px) {
-    .main-title-and-bulb { 
-        flex-direction: column;
-    }
-    .lightbulb { height: 120px; }
-}
-
-@media only screen and (max-width: 700px) {
-    .main-title { margin-top: 25px; }
-}
-
-*/
