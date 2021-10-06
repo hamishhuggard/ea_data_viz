@@ -126,6 +126,18 @@ p, h1, h2, h3, h4 {
 
 }
 
+@media only screen and (max-width: 300px) {
+
+    .short-title {
+        display: none;
+    }
+
+    .long-title {
+        display: none;
+    }
+
+}
+
 /*------------------
        BODY
 ------------------*/
