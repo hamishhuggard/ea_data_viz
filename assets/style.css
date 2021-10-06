@@ -50,9 +50,8 @@ p, h1, h2, h3, h4 {
     background-color: black;
 }
 
-/* .nightmode .main-svg:first-child { */
-.nightmode .main-svg {
-    background: black;
+.nightmode div .modebar {
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .nightmode p, 
@@ -75,18 +74,22 @@ p, h1, h2, h3, h4 {
     padding: var(--header-padding);
 }
 
-.hamburger {
+.clickable-icon {
     padding: 8px 8px;
     border-radius: 50%;
 }
 
-.hamburger:hover {
+.clickable-icon:hover {
     background-color: rgba(0, 0, 0, 0.08);
     cursor: pointer;
 }
 
-.nightmode .hamburger:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+.nightmode .clickable-icon:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.nightmode .nightmode-invert {
+    filter: invert(1);
 }
 
 .header .icon {
