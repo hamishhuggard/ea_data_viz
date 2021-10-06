@@ -21,13 +21,14 @@ def header():
                     <img
                         src='/assets/hamburger-menu.svg'
                         onclick='toggleSidebarVisible()'
-                        class='hamburger'
+                        class='hamburger icon'
                     >
                 '''),
+                className='icon',
             ),
             html.Img(
                 src = lightbulb_img_url,
-                className='lightbulb',
+                className='icon',
             ),
             html.H1(
                 [
@@ -56,5 +57,5 @@ def header():
                 className = 'main-title long-title',
             ),
         ],
-        className='header main-title-and-bulb center',
+        className='header center',
     )
