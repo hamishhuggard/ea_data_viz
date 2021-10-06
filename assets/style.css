@@ -7,9 +7,11 @@
 ------------------*/
 
 :root {
-    --main-color: #0e7a8e;
-    --header-height: 10vh;
-    --body-height: 85vh;
+    --ea-color: #0e7a8e;
+    --header-content-height: 4rem;
+    --header-padding: 2rem;
+    --header-height: calc(var(--header-content-height) + 2*var(--header-padding));
+    --body-height: calc(100vh - var(--header-height));
     --sidebar-width: 300px;
 }
 
@@ -26,7 +28,7 @@ body {
 }
 
 a {
-    color: var(--main-color);
+    color: var(--ea-color);
 }
 
 .center {
@@ -46,29 +48,24 @@ p, h1, h2, h3 {
 */
 
 /*------------------
-     COMPONENTS
+      HEADER
 ------------------*/
 
 .header {
     height: var(--header-height);
     display: flex;
     gap: 8px;
-    padding: 30px;
+    padding: var(--header-padding);
 }
 
-.body {
-    height: var(--body-height);
-    display: flex;
+.hamburger {
+    padding: 8px 8px;
+    border-radius: 50%;
 }
 
-#sidebar {
-    width: var(--sidebar-width);
-    height: var(--body-height);
-    overflow: scroll;
-    padding: 30px;
-    background-color: white;
-    z-index:100;
-    position: absolute;
+.hamburger:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+    cursor: pointer;
 }
 
 #sidebar-buttress {
@@ -77,27 +74,84 @@ p, h1, h2, h3 {
     display: block;
 }
 
-.content {
-    height: var(--body-height);
-    width: 100%;
-    overflow: scroll;
-    padding: 30px;
+.header .icon {
+    height: var(--header-content-height);
+    width: var(--header-content-height);
+}
+
+.effective {
+    font-family: "Roboto Slab", "Times New Roman", serif;
+    font-weight: 700;
+}
+
+.altruism {
+    font-family: "Roboto Slab", "Times New Roman", serif;
+    font-weight: 400;
+}
+
+.header h1 {
+    font-size: var(--header-content-height);
+    margin: 0;
+    padding-left: 10px;
+}
+
+
+.short-title {
+    display: none;
+    padding-left: 10px;
+}
+
+.long-title {
+    display: block;
 }
 
 @media only screen and (max-width: 700px) {
-    .content {
-        position: absolute;
-        left: 0;
+
+    .lightbulb {
+        height: 40px;
+        padding: 0 5px;
     }
+
+    .short-title {
+        display: block;
+    }
+
+    .long-title {
+        display: none;
+    }
+
 }
 
 /*------------------
-     ANIMATION
+       BODY
+------------------*/
+
+.body {
+    height: var(--body-height);
+    display: flex;
+}
+
+
+/*------------------
+     SIDEBAR
 ------------------*/
 
 #sidebar {
+    width: var(--sidebar-width);
+    height: var(--body-height);
+    overflow: scroll;
+    padding: 30px;
+    z-index:100;
+    position: absolute;
+    background-color: var(--background-color);
     -webkit-transition-duration: 600ms;
     transition-duration: 600ms;
+}
+
+#sidebar-buttress {
+    width: var(--sidebar-width);
+    height: var(--body-height);
+    display: block;
 }
 
 /* The sidebar is visible by default on desktop but hidden by default on mobile.  */
@@ -135,76 +189,22 @@ p, h1, h2, h3 {
 }
 
 /*------------------
-      TITLE
+      CONTENT
 ------------------*/
 
-.hamburger {
-    height: 4rem;
-    padding: 8px 8px;
-    border-radius: 50%;
-}
-
-.hamburger:hover {
-    background-color: rgba(0, 0, 0, 0.08);
-    cursor: pointer;
-}
-
-.lightbulb {
-    height: 4rem;
-    /* padding: 0 10px; */
-}
-
-.effective {
-    font-family: "Roboto Slab", "Times New Roman", serif;
-    font-weight: 700;
-}
-
-.altruism {
-    font-family: "Roboto Slab", "Times New Roman", serif;
-    font-weight: 400;
-}
-
-
-.main-title-and-bulb { 
-    display: flex; 
-    flex-direction: row;
-}
-
-.header h1 {
-    font-size: 4rem;
-    margin: 0;
-}
-
-
-.short-title {
-    display: none;
-    padding-left: 10px;
-}
-
-.long-title {
-    display: block;
+.content {
+    height: var(--body-height);
+    width: 100%;
+    overflow: scroll;
+    padding: 30px;
 }
 
 @media only screen and (max-width: 700px) {
-
-    .lightbulb {
-        height: 40px;
-        padding: 0 5px;
+    .content {
+        position: absolute;
+        left: 0;
     }
-
-    .short-title {
-        display: block;
-    }
-
-    .long-title {
-        display: none;
-    }
-
 }
-
-/*------------------
-      SECTION
-------------------*/
 
 .section {
     height: var(--body-height);
