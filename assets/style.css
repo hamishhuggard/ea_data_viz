@@ -44,23 +44,8 @@ p, h1, h2, h3, h4 {
     color: black;
 }
 
-/* Night mode */
-
-.nightmode div {
-    background-color: black;
-}
-
-.nightmode div .modebar {
-    background-color: rgba(0, 0, 0, 0);
-}
-
-.nightmode p, 
-.nightmode h1, 
-.nightmode h2, 
-.nightmode h3, 
-.nightmode h4 
-{
-    color: white;
+.nightmode {
+    filter: invert(1);
 }
 
 /*------------------
