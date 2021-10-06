@@ -38,14 +38,31 @@ a {
 
 /* Night mode */
 
-/*
-body {
+div {
+    background-color: white;
+}
+
+p, h1, h2, h3, h4 {
+    color: black;
+}
+
+.nightmode div {
     background-color: black;
 }
-p, h1, h2, h3 {
+
+/* .nightmode .main-svg:first-child { */
+.nightmode .main-svg {
+    background: black;
+}
+
+.nightmode p, 
+.nightmode h1, 
+.nightmode h2, 
+.nightmode h3, 
+.nightmode h4 
+{
     color: white;
 }
-*/
 
 /*------------------
       HEADER
@@ -68,10 +85,8 @@ p, h1, h2, h3 {
     cursor: pointer;
 }
 
-#sidebar-buttress {
-    width: var(--sidebar-width);
-    height: var(--body-height);
-    display: block;
+.nightmode .hamburger:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .header .icon {
