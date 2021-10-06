@@ -29,3 +29,15 @@ function toggleNightMode() {
     }
 
 }
+
+function toggleAboutVisibility() {
+
+	const about = document.getElementById("about");
+
+    if (about.classList.contains("hidden")) {
+        about.classList.remove("hidden");
+    } else {
+        about.classList.add("hidden");
+    }
+
+}
