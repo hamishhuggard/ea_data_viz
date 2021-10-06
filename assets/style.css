@@ -70,7 +70,6 @@ p, h1, h2, h3, h4 {
 .header {
     height: var(--header-height);
     display: flex;
-    gap: 8px;
     padding: var(--header-padding);
 }
 
@@ -84,12 +83,14 @@ p, h1, h2, h3, h4 {
     cursor: pointer;
 }
 
+/* the hover-y circle is too faint in night mode */
 .nightmode .clickable-icon:hover {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-.nightmode .nightmode-invert {
-    filter: invert(1);
+.right-icons {
+    margin-left: auto;
+    display: flex;
 }
 
 .header .icon {
