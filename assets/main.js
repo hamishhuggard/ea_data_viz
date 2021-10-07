@@ -32,7 +32,7 @@ function toggleNightMode() {
 
 function toggleAboutVisibility() {
 
-	const about = document.getElementById("about");
+	const about = document.getElementById("about-box");
 
     if (about.classList.contains("hidden")) {
         about.classList.remove("hidden");

@@ -6,8 +6,6 @@
 import dash
 import dash_html_components as html
 
-from sections.title import title_section
-
 from sections.forum import forum_scatter_section
 from sections.forum import forum_leaderboard_section
 
