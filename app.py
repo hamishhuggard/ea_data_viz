@@ -8,15 +8,13 @@ import dash_html_components as html
 
 from components.header import header
 from components.sidebar import sidebar
+from components.about import about_box
 from components.body import body
 
 from utils.refresh_data import refresh_data
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
 app = dash.Dash(
     __name__,
-    external_stylesheets=external_stylesheets,
     meta_tags = [
         {
             'name': 'viewport',
@@ -37,6 +35,7 @@ app.layout = html.Div(
             html.Div(
                 [
                     sidebar(),
+                    about_box(),
                     body(),
                 ],
                 className = 'body',
@@ -47,5 +46,5 @@ app.layout = html.Div(
 # app.layout = serve_layout
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
-    #app.run_server(debug=False)
+    #app.run_server(debug=True)
+    app.run_server(debug=False)

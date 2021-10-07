@@ -17,7 +17,7 @@ from utils.subtitle import get_subtitle
 country = CountryInfo()
 country_list = country.all().keys()
 
-countries = pd.read_csv('./data/rp_survey_data/country2.csv')
+countries = pd.read_csv('./data/rp_survey_data_2019/country2.csv')
 
 countries['Responses'] = countries['Responses'].astype('int')
 
