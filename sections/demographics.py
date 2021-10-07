@@ -11,7 +11,7 @@ from utils.subtitle import get_subtitle
 
 def get_demo_table(demo_name):
 
-    path = f"./data/rp_survey_data/{demo_name}.csv"
+    path = f"./data/rp_survey_data_2019/{demo_name}.csv"
     demo_table = pd.read_csv(path, sep='\t')
     title = demo_table.columns[0]
 
