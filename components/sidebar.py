@@ -124,7 +124,7 @@ def growth_contents():
 def contents():
     return html.Div(
         [
-            html.H4('Contents:'),
+            html.H2('Contents'),
             html.Ul(
                 [
                     html.Li(
