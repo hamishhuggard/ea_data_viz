@@ -4,23 +4,23 @@ import dash_core_components as dcc
 data_source_details = {
 
     'rethink19': dict(
-        name='EA Survey 2019 (Rethink Priorities)',
+        name='EA Survey 2019',
         url='https://www.rethinkpriorities.org/blog/2019/12/5/ea-survey-2019-series-community-demographics-amp-characteristics'
     ),
 
     'rethink19-geo': dict(
-        name='EA Survey 2019 (Rethink Priorities)',
+        name='EA Survey 2019',
         url='https://rethinkpriorities.org/publications/eas2019-geographic-distribution-of-eas'
     ),
 
 
     'open_phil': dict(
-        name='Open Philanthropy Grants Database',
+        name='OP Grants Database',
         url='https://www.openphilanthropy.org/giving/grants'
     ),
 
     'funds_payout': dict(
-        name='Effective Altruism Funds Payout Reports',
+        name='EA Funds Payout Reports',
         url='https://funds.effectivealtruism.org/'
     ),
 
@@ -30,7 +30,7 @@ data_source_details = {
     ),
 
     'gwwc': dict(
-        name='Giving What We Can Homepage',
+        name='GWWC Homepage',
         url='https://www.givingwhatwecan.org/'
     ),
 
@@ -71,22 +71,22 @@ def get_subtitle(data_sources, zoom=False, hover='bars', extra_text=[]):
             html.P( ['Data source: '] + links_and_commas + ['.'] ),
         )
 
+    content.append([])
+
     if hover:
-        content.append(
-            html.P(f'Hover over the {hover} for more details.'),
-        )
+        content[-1].append( f'Hover for more details.' )
 
     if zoom:
-        content.append(
-            html.P('Click and drag to zoom. Double click to unzoom.'),
-        )
+        content[-1].append( 'Click and drag to zoom. Double click to unzoom.' )
 
-    content.extend(
+    content[-1].extend(
         [
-            html.P(text)
+            text
             for text in extra_text
         ]
     )
+
+    content[-1] = ' '.join(content[-1])
 
     return html.Div(
         content,
