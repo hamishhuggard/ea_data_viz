@@ -8,6 +8,7 @@
 
 :root {
     --ea-color: #0e7a8e;
+    --alt-ea-color: #46b6ca;
     --header-content-height: 2.5rem;
     --header-padding: 20px;
     --header-height: calc(var(--header-content-height) + 2*var(--header-padding));
@@ -29,6 +30,10 @@ body {
 
 a {
     color: var(--ea-color);
+}
+
+a:hover {
+    color: var(--alt-ea-color);
 }
 
 .center {
