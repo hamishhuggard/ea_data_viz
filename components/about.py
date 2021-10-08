@@ -10,7 +10,7 @@ def about_box():
             html.H4("About"),
             html.P(
                 [
-                    dcc.Link(
+                    html.A(
                         "Effective Altruism",
                         href="https://www.effectivealtruism.org/"
                     ),
@@ -26,8 +26,8 @@ def about_box():
             html.P(
                 [
                     'Source code is available on ',
-                    dcc.Link(
-                        "Github",
+                    html.A(
+                        "GitHub",
                         href="https://github.com/hamishhuggard/ea_data_viz"
                     ),
                     '.',
@@ -36,7 +36,7 @@ def about_box():
             html.P(
                 [
                     'Please send feedback to ',
-                    dcc.Link(
+                    html.A(
                         "hamish.huggard@gmail.com",
                         href="mailto:hamish.huggard@gmail.com"
                     ),
