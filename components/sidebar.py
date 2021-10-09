@@ -11,7 +11,7 @@ def open_phil_contents():
     return html.Li(
         [
             html.A(
-                'Open Philanthropy grants:',
+                'Open Philanthropy Grants',
                 href="#op-grants-scatter-section"
             ),
             html.Ul(
@@ -87,7 +87,7 @@ def growth_contents():
     return html.Li(
         [
             html.A(
-                'EA Growth Metrics: ',
+                'EA Growth Metrics',
                 href="#growth-reading"
             ),
             html.Ul(
