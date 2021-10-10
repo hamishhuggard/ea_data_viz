@@ -19,15 +19,17 @@ def header():
             html.Div(
                 dash_dangerously_set_inner_html.DangerouslySetInnerHTML('''
                     <img
-                        src='/assets/hamburger-menu.svg'
+                        src='/assets/hamburger-menu-2.svg'
                         onclick='toggleSidebarVisible()'
-                        class='hamburger'
+                        class='clickable-icon icon'
+                        title='Show or hide contents'
                     >
                 '''),
+                className='icon',
             ),
             html.Img(
                 src = lightbulb_img_url,
-                className='lightbulb',
+                className='icon',
             ),
             html.H1(
                 [
@@ -55,6 +57,35 @@ def header():
                 ],
                 className = 'main-title long-title',
             ),
+            html.Div(
+                [
+                    html.Div(
+                        dash_dangerously_set_inner_html.DangerouslySetInnerHTML('''
+                            <img
+                                src='/assets/moon.svg'
+                                onclick='toggleNightMode()'
+                                class='clickable-icon icon'
+                                title='Night mode'
+                                id='nightmode-button'
+                            >
+                        '''),
+                        className='icon',
+                    ),
+                    html.Div(
+                        dash_dangerously_set_inner_html.DangerouslySetInnerHTML('''
+                            <img
+                                src='/assets/question-mark.svg'
+                                onclick='toggleAboutVisibility()'
+                                class='clickable-icon icon'
+                                title='About'
+                            >
+                        '''),
+                        className='icon',
+                    ),
+                ],
+                className = 'right-icons',
+            )
+
         ],
-        className='header main-title-and-bulb center',
+        className='header center',
     )
