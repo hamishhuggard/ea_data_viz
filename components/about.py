@@ -27,7 +27,7 @@ def about_box():
                 [
                     'Source code is available on ',
                     html.A(
-                        "Github",
+                        "GitHub",
                         href="https://github.com/hamishhuggard/ea_data_viz"
                     ),
                     '.',

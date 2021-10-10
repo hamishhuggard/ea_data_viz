@@ -8,6 +8,7 @@
 
 :root {
     --ea-color: #0e7a8e;
+    --alt-ea-color: #46b6ca;
     --header-content-height: 2.5rem;
     --header-padding: 20px;
     --header-height: calc(var(--header-content-height) + 2*var(--header-padding));
@@ -31,6 +32,10 @@ a {
     color: var(--ea-color);
 }
 
+a:hover {
+    color: var(--alt-ea-color);
+}
+
 .center {
     display: grid;
     place-items: center;
@@ -48,8 +53,9 @@ p, h1, h2, h3, h4 {
     color: black;
 }
 
+
 .nightmode {
-    filter: invert(1);
+    filter: invert() hue-rotate(180deg) brightness(100%) contrast(105%);
 }
 
 /*------------------
@@ -162,6 +168,7 @@ p, h1, h2, h3, h4 {
     background-color: white;
     -webkit-transition-duration: 600ms;
     transition-duration: 600ms;
+    line-height: 1.7rem
 }
 
 #sidebar-buttress {
