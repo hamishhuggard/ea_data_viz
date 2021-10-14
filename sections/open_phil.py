@@ -4,9 +4,9 @@ import numpy as np
 from dash import dcc
 from dash import html
 from dash import dash_table
-from utils.ea_bar_graph import EABarGraph
+from plots.bar import Bar
 from utils.subtitle import get_subtitle
-from utils.scatter import Scatter
+from plots.scatter import Scatter
 
 def get_op_grants():
 
@@ -76,7 +76,7 @@ def org_bar_chart(op_grants):
 
     op_orgs_truncated = op_orgs.iloc[len(op_orgs)-25:]
 
-    return EABarGraph(op_orgs_truncated, title='Top 30 Donee Organizations')
+    return Bar(op_orgs_truncated, title='Top 30 Donee Organizations')
 
 
 def cause_bar_chart(op_grants):
@@ -96,7 +96,7 @@ def cause_bar_chart(op_grants):
 
     height_per_bar = 25 if len(op_causes) > 10 else 28
     height = height_per_bar * len(op_causes) + 20
-    return EABarGraph(op_causes, height=height, title='Focus Areas')
+    return Bar(op_causes, height=height, title='Focus Areas')
 
 
 def grants_scatter(op_grants):

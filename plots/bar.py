@@ -4,7 +4,7 @@ from dash import html
 import plotly.graph_objects as go
 import plotly.express as px
 
-class EABarGraph(dcc.Graph):
+class Bar(dcc.Graph):
 
     def __init__(self, df, height=None, title=None):
 

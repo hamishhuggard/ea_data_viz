@@ -6,7 +6,7 @@ import plotly.express as px
 import pandas as pd
 import re
 from glob import glob
-from utils.ea_bar_graph import EABarGraph
+from plots.bar import Bar
 from utils.subtitle import get_subtitle
 
 def get_demo_table(demo_name):
@@ -81,7 +81,7 @@ def get_demo_table(demo_name):
 def get_bar_chart(demo_name):
     demo_table = get_demo_table(demo_name)
     title = demo_table.columns[0]
-    return EABarGraph(demo_table, title=title)
+    return Bar(demo_table, title=title)
 
 
 def demographics_section():
