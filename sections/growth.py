@@ -6,6 +6,7 @@ import string
 from dash import dcc
 from dash import html
 from utils.subtitle import get_subtitle
+from plots.line import Line
 
 commiting = pd.read_csv('data/is_ea_growing/is_ea_growing_commiting.csv')
 doing = pd.read_csv('data/is_ea_growing/is_ea_growing_doing.csv')
@@ -72,17 +73,11 @@ for df in [commiting, doing, joining, reading]:
       row_df['label'] = label#[:30]
       row_dfs.append(row_df)
    long_df = pd.concat(row_dfs, ignore_index=True)
-   # remove rows with value=0 to avoid singularity in log scale
-   long_df = long_df[ long_df['value']!=0 ]
    long_df['year'] = pd.to_datetime(long_df['year'], format='%Y')
-   long_df = long_df.sort_values(by='year')
 
    long_dfs.append( long_df )
 
 commiting, doing, joining, reading = long_dfs
-
-HEIGHT = 600
-WIDTH = 600
 
 growing_figs = []
 for table, table_name in zip(
@@ -100,144 +95,56 @@ for table, table_name in zip(
         #'money',
     ]
 ):
-    fig = go.Figure()
-    annotations = []
-    for val in table['label'].unique():
+    ignored_labels = [
+        'EA FB “Active Users”',
+        'Vox Future Perfect Newsletter sign-ups',
 
-        if val in [
-            'EA FB “Active Users”',
-            'Vox Future Perfect Newsletter sign-ups',
+        'New EA Reddit subscribers',
+        'EA FB membership',
 
-            'New EA Reddit subscribers',
-            'EA FB membership',
+        'Number of 80,000 Hours significant plan changes (not impact adjusted)',
+        'Number of 80,000 Hours significant plan changes (impact adjusted)',
+        'ACE money moved[x]',
+        'TLYCS money moved',
+        'Total OpenPhil non-GiveWell donations',
+        'Total non-OpenPhil donors to GiveWell',
+        '# donors in EA Survey',
+        #'OpenPhil GiveWell donations',
+        #'Non-OpenPhil GiveWell donations',
+        'Total recorded money actually donated (not pledges) from Giving What We Can members',
+        #'# donors in EA Survey',
+        #'Founder’s Pledge pledges',
+        'EA Funds payouts[y]',
 
-            'Number of 80,000 Hours significant plan changes (not impact adjusted)',
-            'Number of 80,000 Hours significant plan changes (impact adjusted)',
-            'ACE money moved[x]',
-            'TLYCS money moved',
-            'Total OpenPhil non-GiveWell donations',
-            'Total non-OpenPhil donors to GiveWell',
-            '# donors in EA Survey',
-            #'OpenPhil GiveWell donations',
-            #'Non-OpenPhil GiveWell donations',
-            'Total recorded money actually donated (not pledges) from Giving What We Can members',
-            #'# donors in EA Survey',
-            #'Founder’s Pledge pledges',
-            'EA Funds payouts[y]',
+        'Google interest in “effective altruism” (relative scoring)',
+    ]
 
-            'Google interest in “effective altruism” (relative scoring)',
-        ]:
-            continue
+    table = table[ ~table['label'].isin(ignored_labels) ]
 
-        val_df = table.loc[ table['label']==val ]
+    def hover(row):
+        label =row['label']
+        value = row['value']
+        year = row['year'].year
+        return f'<b>{label}</b><br>{value:,.0f}<br><i>{year}</i>'
 
-        hover_texts = []
-        def hover(row):
-            label =row['label']
-            value = row['value']
-            year = row['year'].year
-            return f'<b>{label}</b><br>{value:,.0f}<br><i>{year}</i>'
-        hover_texts.extend(
-            val_df.apply(hover, axis=1).tolist()
-        )
+    table['hover'] = table.apply(hover, axis=1).tolist()
 
-        fig.add_trace(
-            go.Scatter(
-                x=val_df['year'],
-                y=val_df['value'],
-                name=val,
-                hovertext = hover_texts,
-                hovertemplate = '%{hovertext}<extra></extra>',
-				mode='lines',
-                line=dict(
-                    color="#0c869b",
-                ),
-            )
-        )
-        fig.update_layout(
-            title=table_name,
-            #height=HEIGHT,
-            # width=WIDTH,
-            #showlegend=True,
-            showlegend=False,
-            # yaxis_type="log",
-        )
-        #if table is doing:
-        #    fig.update_layout(
-        #    yaxis_type="log",
-        #)
-
-        # Annotations
-        # These aren't working?
-        val_df = val_df[ val_df['value'].notnull() ].reset_index()
-        last_row = val_df.iloc[len(val_df)-1]
-        last_hover = hover(last_row)
-
-        fig.add_trace(go.Scatter(
-            x=[last_row['year']],
-            y=[last_row['value']],
-            mode='markers',
-            marker=dict(
-                #color=colors[i],
-                color="#0c869b",
-                size=10,#mode_size[i]
-            ),
-            hovertext = [last_hover],
-            hovertemplate = '%{hovertext}<extra></extra>',
-        ))
-
-        annotations.append(dict(
-            #xref='paper',
-            #yref='paper',
-            x=last_row['year'],
-            y=last_row['value'],
-            xanchor='left',
-            yanchor='middle',
-            text=f' {val}',
-            font={
-            #    'family': 'Arial',
-                'size': 13,
-            },
-            showarrow=False,
-        ))
-
-    fig.update_layout(
-
-        annotations=annotations,
-        #margin=dict(l=0, r=0, t=30, b=0),
-        margin=dict(l=0, r=0, t=0, b=0),
-        title_x=0.5,
-
-        # autosize = True,
-
-        # Top-left corner:
-
-        legend = dict(
-            yanchor="top",
-            y=0.99,
-            xanchor="left",
-            x=0.01,
-            title_text='',
-        )
-
-        # Below:
-
-        # legend = {
-        #       'xanchor': "center",
-        #       'yanchor': "top",
-        #       'y': -0.3, # play with it
-        #       'x': 0.5,   # play with it
-        #       'title_text': '',
-        # }
-
-    )
 
     growing_figs.append(
         html.Div(
-            dcc.Graph(
-                figure=fig,
-                responsive=True
-            ),
+            Line(
+                table,
+                x='year',
+                y='value',
+                label='label',
+                title='',
+                x_title='',
+                y_title='',
+                size=None,
+                color=None,
+                hover='hover',
+                log_y=False,
+            )
         )
     )
 
