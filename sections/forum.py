@@ -7,6 +7,7 @@ import dash_table
 from math import log
 from utils.ea_bar_graph import EABarGraph
 from utils.subtitle import get_subtitle
+from utils.scatter import Scatter
 import json
 
 def get_forum_data():
@@ -128,37 +129,17 @@ def cause_bar_chart(op_grants):
 
 def forum_scatter(forum_df):
 
-    forum_df['size'] = (forum_df['wordcount']+2).apply(log)
-
-    fig = px.scatter(
+    return Scatter(
         forum_df,
-        x="posted_at",
-        y="karma",
-        # log_y=True,
-        title='Forum Posts (log)',
-        # size="size", # this looks too weird
+        id = "forum-scatter",
+        x = "posted_at",
+        y = "karma",
+        x_title = "Publication Date",
+        y_title = "Karma",
+        title = "Forum Posts (log)",
+        hover = 'hover',
     )
-    fig.update_traces(
-        marker_color="#0c869b",
-        hovertext = forum_df['hover'],
-        hovertemplate = '%{hovertext}<extra></extra>',
-    )
-    fig.update_layout(
-        margin=dict(l=0, r=0, t=30, b=0),
-        autosize=True,
-        xaxis=dict(
-            title='Publication Date',
-        ),
-        yaxis=dict(
-            title='Karma'
-        ),
-        title_x=0.5,
-        font=dict(
-            family="Raleway",
-            size=12,
-        )
-    )
-    return dcc.Graph(id='op-grants-scatter', figure=fig)
+
 
 # def grants_cumulative_scatter(op_grants):
 #     fig = px.scatter(
