@@ -151,6 +151,8 @@ p, h1, h2, h3, h4 {
 .body {
     height: var(--body-height);
     display: flex;
+    overflow-x: hidden;
+    position: relative;
 }
 
 
