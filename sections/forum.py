@@ -150,6 +150,7 @@ def forum_scatter_section():
             html.Div(
                 html.H2('Forum Posts by Publication Date and Karma'),
                 className='section-title',
+                id='forum-date-karma',
             ),
             get_subtitle('open_phil', hover='points', zoom=True),
             html.Div(
