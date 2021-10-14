@@ -3,8 +3,8 @@ import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
 import string
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 from utils.subtitle import get_subtitle
 
 commiting = pd.read_csv('data/is_ea_growing/is_ea_growing_commiting.csv')
