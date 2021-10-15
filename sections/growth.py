@@ -15,8 +15,8 @@ reading = pd.read_csv('data/is_ea_growing/is_ea_growing_reading.csv')
 
 
 # "Founder's Pledge pledges" makes more sense in "doing" than in "commiting"
-doing = doing.append( commiting[ commiting['Type of data']=='Founder’s Pledge pledges' ], ignore_index=True )
-commiting = commiting[ ~(commiting['Type of data']=='Founder’s Pledge pledges') ]
+doing = doing.append( commiting.loc[ commiting['Type of data']=='Founder’s Pledge pledges' ], ignore_index=True )
+commiting = commiting.loc[ ~(commiting['Type of data']=='Founder’s Pledge pledges') ]
 
 
 
@@ -95,6 +95,15 @@ for table, table_name in zip(
         #'money',
     ]
 ):
+
+    def hover(row):
+        label =row['label']
+        value = row['value']
+        year = row['year'].year
+        return f'<b>{label}</b><br>{value:,.0f}<br><i>{year}</i>'
+
+    table['hover'] = table.apply(hover, axis=1).tolist()
+
     ignored_labels = [
         'EA FB “Active Users”',
         'Vox Future Perfect Newsletter sign-ups',
@@ -119,16 +128,7 @@ for table, table_name in zip(
         'Google interest in “effective altruism” (relative scoring)',
     ]
 
-    table = table[ ~table['label'].isin(ignored_labels) ]
-
-    def hover(row):
-        label =row['label']
-        value = row['value']
-        year = row['year'].year
-        return f'<b>{label}</b><br>{value:,.0f}<br><i>{year}</i>'
-
-    table['hover'] = table.apply(hover, axis=1).tolist()
-
+    table = table.loc[ ~table['label'].isin(ignored_labels) ]
 
     growing_figs.append(
         html.Div(

@@ -26,7 +26,7 @@ class Line(dcc.Graph):
         for val in df[label].unique():
 
             val_df = df.loc[ df[label]==val ]
-            val_df.sort_values(by=x, inplace=True)
+            val_df = val_df.sort_values(by=x)
 
             fig.add_trace(
                 go.Scatter(
@@ -52,7 +52,7 @@ class Line(dcc.Graph):
                 showlegend=False,
             )
 
-            val_df = val_df[ val_df['value'].notnull() ].reset_index()
+            val_df = val_df.loc[ val_df['value'].notnull() ].reset_index()
             last_row = val_df.iloc[len(val_df)-1]
             last_hover = last_row['hover']
 
