@@ -7,7 +7,6 @@ import dash
 from dash import html
 
 from sections.forum import forum_scatter_section
-from sections.forum import forum_leaderboard_section
 
 from sections.donations_sankey import donations_sankey_section
 

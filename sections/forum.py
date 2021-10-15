@@ -78,55 +78,6 @@ def get_forum_data():
     return posts_df
 
 
-def org_bar_chart(op_grants):
-
-    op_orgs = op_grants.groupby(by='Organization Name', as_index=False).sum()
-    op_orgs = op_orgs.sort_values(by='Amount')
-    op_orgs['x'] = op_orgs['Organization Name']
-    # op_orgs['x'] = op_orgs['x'].apply(lambda x: x if len(x) < 30 else x[:27]+'...')
-    op_orgs['y'] = op_orgs['Amount']
-    op_orgs['text'] = op_orgs['Amount'].apply(lambda x: f'${x:,.0f}')
-
-    # Some organization names get truncated to the same value.
-    # This prevents that:
-    for val in op_orgs['x'].unique():
-        val_df = op_orgs[ op_orgs['x']==val ]
-        for i in range(1, len(val_df)):
-            index = val_df.iloc[i].name
-            op_orgs.loc[index, 'x'] = op_orgs.loc[index, 'x'][:-3-i] + '...'
-
-    def hover(row):
-        org = row['Organization Name']
-        amount = row['text']
-        grants = row['grants']
-        return f'<b>{org}</b><br>{grants} grants<br>{amount} total'
-    op_orgs['hover'] = op_orgs.apply(hover, axis=1)
-
-    op_orgs_truncated = op_orgs.iloc[len(op_orgs)-25:]
-
-    return Bar(op_orgs_truncated, title='Top 30 Donee Organizations')
-
-
-def cause_bar_chart(op_grants):
-
-    op_causes = op_grants.groupby(by='Focus Area', as_index=False).sum()
-    op_causes = op_causes.sort_values(by='Amount')
-    op_causes['x'] = op_causes['Focus Area']
-    op_causes['y'] = op_causes['Amount']
-    op_causes['text'] = op_causes['Amount'].apply(lambda x: f'${x:,.0f}')
-
-    def hover(row):
-        area = row['Focus Area']
-        amount = row['text']
-        grants = row['grants']
-        return f'<b>{area}</b><br>{grants} grants<br>{amount} total'
-    op_causes['hover'] = op_causes.apply(hover, axis=1)
-
-    height_per_bar = 25 if len(op_causes) > 10 else 28
-    height = height_per_bar * len(op_causes) + 20
-    return Bar(op_causes, height=height, title='Focus Areas')
-
-
 def forum_scatter(forum_df):
 
     return Scatter(
@@ -164,36 +115,4 @@ def forum_scatter_section():
         ],
         className = 'section',
         id='forum-scatter-section',
-    )
-
-def forum_leaderboard_section():
-
-    op_grants = get_op_grants()
-
-    return html.Div(
-        [
-            html.Div(
-                html.H2('Open Philanthropy Grants by Focus Area and Donee Organization'),
-                className='section-title',
-            ),
-            get_subtitle('open_phil'),
-            html.Div(
-                html.Div(
-                    [
-                        html.Div(
-                            cause_bar_chart(op_grants),
-                            className='plot-container',
-                        ),
-                        html.Div(
-                            org_bar_chart(op_grants),
-                            className='plot-container',
-                        ),
-                    ],
-                    className='grid desk-cols-2 tab-cols-2',
-                ),
-                className='section-body'
-            ),
-        ],
-        className = 'section',
-        id='op-grants-categories',
     )
