@@ -90,10 +90,9 @@ def forum_scatter(forum_df):
         y = "karma",
         x_title = "Publication Date",
         y_title = "Karma",
-        title = "Forum Posts (log)",
+        title = "",
         hover = 'hover',
     )
-
 
 def forum_scatter_section():
 
