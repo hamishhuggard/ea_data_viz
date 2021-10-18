@@ -1,14 +1,17 @@
-import plotly.express as px
-import pandas as pd
-import numpy as np
 from dash import dcc
 from dash import html
 from dash import dash_table
+
+import pandas as pd
+import numpy as np
+
 from math import log
-from plots.bar import Bar
 from utils.subtitle import get_subtitle
-from plots.scatter import Scatter
 import json
+
+from plots.bar import Bar
+from plots.line import Line
+from plots.scatter import Scatter
 
 def get_forum_data():
 
