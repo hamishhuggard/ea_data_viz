@@ -7,6 +7,7 @@ import dash
 from dash import html
 
 from sections.forum import forum_scatter_section
+from sections.forum import forum_count_section
 
 from sections.donations_sankey import donations_sankey_section
 
@@ -30,7 +31,6 @@ def body():
     return html.Div(
         [
 
-
             donations_sankey_section(),
 
             openphil_grants_scatter_section(),
@@ -50,6 +50,7 @@ def body():
             growth4(),
 
             forum_scatter_section(),
+            forum_count_section(),
 
         ],
         className = 'content scroll-snapper',
