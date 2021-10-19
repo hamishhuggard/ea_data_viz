@@ -14,6 +14,11 @@ data_source_details = {
     ),
 
 
+    'ea_forum': dict(
+        name='EA Forum GraphQL',
+        url='https://forum.effectivealtruism.org/graphiql'
+    ),
+
     'open_phil': dict(
         name='OP Grants Database',
         url='https://www.openphilanthropy.org/giving/grants'
