@@ -340,7 +340,7 @@ def forum_count_section():
             ),
         ],
         className = 'section',
-        id='forum-scatter-section',
+        id='forum-growth-section',
     )
 
 def forum_post_wilkinson_section():
