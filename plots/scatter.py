@@ -16,6 +16,7 @@ class Scatter(dcc.Graph):
         color=None,
         hover=None,
         title=None,
+        text=None,
         log_y=False,
     ):
 
@@ -27,6 +28,7 @@ class Scatter(dcc.Graph):
             title = title,
             size = size,
             color = color,
+            text = text,
         )
 
         fig.update_traces(
