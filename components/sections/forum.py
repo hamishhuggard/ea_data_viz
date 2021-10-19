@@ -96,9 +96,9 @@ def forum_scatter(forum_df):
         forum_df,
         x = "posted_at",
         y = "karma",
-        x_title = "Publication Date",
+        x_title = "Date Posted",
         y_title = "Karma",
-        title = "",
+        title = "All EA Forum Posts",
         hover = 'hover',
     )
 
@@ -109,7 +109,7 @@ def forum_scatter_section():
     return html.Div(
         [
             html.Div(
-                html.H2('Forum Posts by Date Posted and Karma'),
+                html.H2('EA Forum Posts by Date Posted and Karma'),
                 className='section-title',
             ),
             get_subtitle('ea_forum', hover='points', zoom=True),
@@ -266,7 +266,7 @@ def post_counts(forum_df):
         x_title = '',
         y_title = '',
         hover = 'new_posts_hover',
-        title = 'Post Count',
+        title = 'Number of Posts',
         label = 'new_posts_label',
     )
 
@@ -281,7 +281,7 @@ def post_counts(forum_df):
         x_title = '',
         y_title = '',
         hover = 'new_authors_hover',
-        title = 'Author Count',
+        title = 'Number of Unique Author',
         label = 'new_authors_label',
     )
 
@@ -298,7 +298,7 @@ def post_counts(forum_df):
         x_title = '',
         y_title = '',
         hover = 'word_count_hover',
-        title = 'Cumulative Word Count',
+        title = 'Total Word Count',
         label = 'word_count_label',
     )
 
@@ -351,28 +351,31 @@ def forum_post_wilkinson_section():
         forum_df.sort_values('karma'),
         value='karma',
         text='title',
-        title='Karma Distribution',
+        title='Posts by Karma',
+        y_title='Karma',
         hover='hover',
     )
     length_graph = Wilkinson(
         forum_df.sort_values('wordcount'),
         value='wordcount',
         text='title',
-        title='Wordcount Distribution',
+        title='Posts by Wordcount',
+        y_title='Words',
         hover='hover',
     )
     date_graph = Wilkinson(
         forum_df.sort_values('posted_at'),
         value='posted_at',
         text='title',
-        title='Post Date Distribution',
+        title='Posts by Date Posted',
+        y_title='Date Posted',
         hover='hover',
     )
 
     return html.Div(
         [
             html.Div(
-                html.H2('EA Forum Posts by Karma, Wordcount, and Date Posted'),
+                html.H2('EA Forum Posts: Karma, Wordcount, and Date Posted'),
                 className='section-title',
             ),
             get_subtitle('ea_forum', hover='points', zoom=True),
@@ -436,7 +439,8 @@ def forum_user_wilkinson_section():
         author_df.sort_values('karma'),
         value='karma',
         text='author',
-        title='Total Karma',
+        title='Authors by Total Karma',
+        y_title='Karma',
         hover='hover',
         bins=30,
     )
@@ -444,7 +448,8 @@ def forum_user_wilkinson_section():
         author_df.sort_values('wordcount'),
         value='wordcount',
         text='author',
-        title='Total Wordcount',
+        title='Authors by Total Wordcount',
+        y_title='Words',
         hover='hover',
         bins=30,
     )
@@ -452,14 +457,15 @@ def forum_user_wilkinson_section():
         author_df.sort_values('posted_at'),
         value='posted_at',
         text='author',
-        title='Date of First Post',
+        title='Authors by Date of First Post',
+        y_title='Date Posted',
         hover='hover',
     )
 
     return html.Div(
         [
             html.Div(
-                html.H2("EA Forum Post Authors"),
+                html.H2("EA Forum Authors: Total Karma, Total Wordcount, and Date of First Post"),
                 className='section-title',
             ),
             get_subtitle('ea_forum', hover='points', zoom=True),
