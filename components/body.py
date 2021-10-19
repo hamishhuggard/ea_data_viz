@@ -8,6 +8,8 @@ from dash import html
 
 from sections.forum import forum_scatter_section
 from sections.forum import forum_count_section
+from sections.forum import forum_post_wilkinson_section
+from sections.forum import forum_user_wilkinson_section
 
 from sections.donations_sankey import donations_sankey_section
 
@@ -44,13 +46,15 @@ def body():
             education_section(),
             career_section(),
 
+            forum_scatter_section(),
+            forum_count_section(),
+            forum_post_wilkinson_section(),
+            forum_user_wilkinson_section(),
+
             growth1(),
             growth2(),
             growth3(),
             growth4(),
-
-            forum_scatter_section(),
-            forum_count_section(),
 
         ],
         className = 'content scroll-snapper',
