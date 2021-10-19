@@ -173,8 +173,6 @@ def post_counts(forum_df):
 
         result = ''
         result += f"<b>{posted_at}</b>"
-        #result += f"<br><b>{total_posts} total posts</b>"
-        #result += f"<br><b>{new_posts} new posts:</b>"
         result += f"<br><b>{new_posts} new posts ({total_posts:,} total):</b>"
         for title in titles:
 
@@ -210,10 +208,6 @@ def post_counts(forum_df):
             new_authors = new_authors[:max_displayed_authors] + ['...']
 
         result = ''
-        #result += f"<b>{posted_at}</b>"
-        #result += f"<br><b>{total_authors} total authors</b>"
-        #result += f"<b>{posted_at} - {total_authors} total authors</b>"
-        #result += f"<br><b>{new_authors_count} new authors:</b>"
         result += f"<b>{posted_at}</b>"
         result += f"<br><b>{new_authors_count} new authors ({total_authors:,} total):</b>"
         for author in new_authors:
@@ -248,8 +242,6 @@ def post_counts(forum_df):
         result += f"<b>{posted_at}</b>"
         result += f"<br>{total_words:,} total words"
         result += f"<br>{new_words:,} new words"
-        #result += f"<b>{posted_at} - {total_words:,} total words"
-        #result += f"<br>{new_words:,} new words"
 
         return result
 
