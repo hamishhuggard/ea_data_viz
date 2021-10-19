@@ -111,7 +111,6 @@ def grants_scatter(op_grants):
         title = 'Individual Grants (log)',
         y_title = 'Amount (USD)',
         x_title = '',
-        id = 'op-grants-scatter',
     )
 
 # def grants_cumulative_scatter(op_grants):

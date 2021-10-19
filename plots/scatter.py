@@ -7,7 +7,6 @@ class Scatter(dcc.Graph):
     def __init__(
         self,
         df,
-        id,
         x='x',
         y='y',
         x_title='',
@@ -57,8 +56,9 @@ class Scatter(dcc.Graph):
             )
         )
 
+        fig.update_traces(textposition="middle right")
+
         super().__init__(
-            id = id,
             figure = fig,
             responsive = True,
         )
