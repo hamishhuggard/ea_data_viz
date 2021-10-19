@@ -1,12 +1,13 @@
 import plotly.express as px
 import pandas as pd
 import numpy as np
-import dash_core_components as dcc
-import dash_html_components as html
-import dash_table
+from dash import dcc
+from dash import html
+from dash import dash_table
 from math import log
-from utils.ea_bar_graph import EABarGraph
+from plots.bar import Bar
 from utils.subtitle import get_subtitle
+from plots.scatter import Scatter
 import json
 
 def get_forum_data():
@@ -103,7 +104,7 @@ def org_bar_chart(op_grants):
 
     op_orgs_truncated = op_orgs.iloc[len(op_orgs)-25:]
 
-    return EABarGraph(op_orgs_truncated, title='Top 30 Donee Organizations')
+    return Bar(op_orgs_truncated, title='Top 30 Donee Organizations')
 
 
 def cause_bar_chart(op_grants):
@@ -123,107 +124,21 @@ def cause_bar_chart(op_grants):
 
     height_per_bar = 25 if len(op_causes) > 10 else 28
     height = height_per_bar * len(op_causes) + 20
-    return EABarGraph(op_causes, height=height, title='Focus Areas')
+    return Bar(op_causes, height=height, title='Focus Areas')
 
 
 def forum_scatter(forum_df):
 
-    forum_df['size'] = (forum_df['wordcount']+2).apply(log)
-
-    fig = px.scatter(
+    return Scatter(
         forum_df,
-        x="posted_at",
-        y="karma",
-        # log_y=True,
-        title='Forum Posts (log)',
-        # size="size", # this looks too weird
+        id = "forum-scatter",
+        x = "posted_at",
+        y = "karma",
+        x_title = "Publication Date",
+        y_title = "Karma",
+        title = "Forum Posts (log)",
+        hover = 'hover',
     )
-    fig.update_traces(
-        marker_color="#0c869b",
-        hovertext = forum_df['hover'],
-        hovertemplate = '%{hovertext}<extra></extra>',
-    )
-    fig.update_layout(
-        margin=dict(l=0, r=0, t=30, b=0),
-        autosize=True,
-        xaxis=dict(
-            title='Publication Date',
-        ),
-        yaxis=dict(
-            title='Karma'
-        ),
-        title_x=0.5,
-        font=dict(
-            family="Raleway",
-            size=12,
-        )
-    )
-    return dcc.Graph(id='op-grants-scatter', figure=fig)
-
-# def grants_cumulative_scatter(op_grants):
-#     fig = px.scatter(
-#         op_grants,
-#         x="Date",
-#         y="Amount ($)",
-#         # color="Focus Area",
-#         # size='Amount',
-#         hover_data=['Grant'],
-#         log_y=True,
-#         title='Cumulative Grants (log)',
-#     )
-#     fig.update_traces(
-#         marker_color="#0c869b",
-#         hovertext = op_grants['hover'],
-#         hovertemplate = '%{hovertext}<extra></extra>',
-#     )
-#     fig.update_layout(
-#         margin=dict(l=0, r=0, t=30, b=0),
-#         xaxis=dict(
-#             title='',
-#         ),
-#         yaxis=dict(
-#             title='Amount ($)',
-#         ),
-#         title_x=0.5,
-#         font=dict(
-#             family="Raleway",
-#             size=12,
-#         )
-#     )
-#     return dcc.Graph(id='op-grants-cum-scatter', figure=fig),
-
-# op_grants = op_grants[['Grant', 'Organization Name', 'Focus Area']]
-# grants_table = dash_table.DataTable(
-#     id = 'op_table',
-#     columns = [{"name": i, "id": i} for i in op_grants.columns],
-#     data = op_grants.to_dict('records'),
-#     page_action='none',
-#     fixed_rows={
-#         'headers': True,
-#     },
-#     style_table={
-#         'width': '100%',
-#         'minWidth': '100%',
-#         'maxWidth': '100%',
-#     },
-#     style_cell={
-#         'whiteSpace': 'normal',
-#         'height': 'auto',
-#     },
-#     style_cell_conditional=[
-#         {'if': {'column_id': 'Grant'},
-#          'width': '30%'},
-#         {'if': {'column_id': 'Organization Name'},
-#          'width': '20%'},
-#         {'if': {'column_id': 'Focus Area'},
-#          'width': '10%'},
-#     ],
-#     # style_cell={
-#     #     # 'minWidth': 95,
-#     #     'maxWidth': '30%',
-#     #     'width': '100%',
-#     # }
-# )
 
 
 def forum_scatter_section():
@@ -235,6 +150,7 @@ def forum_scatter_section():
             html.Div(
                 html.H2('Forum Posts by Publication Date and Karma'),
                 className='section-title',
+                id='forum-date-karma',
             ),
             get_subtitle('open_phil', hover='points', zoom=True),
             html.Div(

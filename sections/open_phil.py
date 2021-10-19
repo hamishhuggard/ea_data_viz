@@ -1,11 +1,12 @@
 import plotly.express as px
 import pandas as pd
 import numpy as np
-import dash_core_components as dcc
-import dash_html_components as html
-import dash_table
-from utils.ea_bar_graph import EABarGraph
+from dash import dcc
+from dash import html
+from dash import dash_table
+from plots.bar import Bar
 from utils.subtitle import get_subtitle
+from plots.scatter import Scatter
 
 def get_op_grants():
 
@@ -75,7 +76,7 @@ def org_bar_chart(op_grants):
 
     op_orgs_truncated = op_orgs.iloc[len(op_orgs)-25:]
 
-    return EABarGraph(op_orgs_truncated, title='Top 30 Donee Organizations')
+    return Bar(op_orgs_truncated, title='Top 30 Donee Organizations')
 
 
 def cause_bar_chart(op_grants):
@@ -95,41 +96,23 @@ def cause_bar_chart(op_grants):
 
     height_per_bar = 25 if len(op_causes) > 10 else 28
     height = height_per_bar * len(op_causes) + 20
-    return EABarGraph(op_causes, height=height, title='Focus Areas')
+    return Bar(op_causes, height=height, title='Focus Areas')
 
 
 def grants_scatter(op_grants):
-    fig = px.scatter(
+    return Scatter(
         op_grants,
-        x="Date",
-        y="Amount",
+        x = "Date",
+        y = "Amount",
         # color="Focus Area",
         # size='Amount',
-        hover_data=['Grant'],
-        log_y=True,
-        title='Individual Grants (log)',
+        hover = 'hover',
+        log_y = True,
+        title = 'Individual Grants (log)',
+        y_title = 'Amount (USD)',
+        x_title = '',
+        id = 'op-grants-scatter',
     )
-    fig.update_traces(
-        marker_color="#0c869b",
-        hovertext = op_grants['hover'],
-        hovertemplate = '%{hovertext}<extra></extra>',
-    )
-    fig.update_layout(
-        margin=dict(l=0, r=0, t=30, b=0),
-        autosize=True,
-        xaxis=dict(
-            title='',
-        ),
-        yaxis=dict(
-            title='Amount (USD)'
-        ),
-        title_x=0.5,
-        font=dict(
-            family="Raleway",
-            size=12,
-        )
-    )
-    return dcc.Graph(id='op-grants-scatter', figure=fig)
 
 # def grants_cumulative_scatter(op_grants):
 #     fig = px.scatter(

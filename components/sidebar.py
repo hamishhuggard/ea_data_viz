@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.express as px
@@ -121,6 +121,26 @@ def growth_contents():
         ],
     )
 
+def forum_contents():
+    return html.Li(
+        [
+            html.A(
+                'EA Forum Metrics',
+                href="#forum-date-karma"
+            ),
+            html.Ul(
+                [
+                    html.Li(
+                        html.A(
+                            "Date and Karma",
+                            href="#forum-date-karma"
+                        ),
+                    ),
+                ],
+            ),
+        ],
+    )
+
 def contents():
     return html.Div(
         [
@@ -136,6 +156,7 @@ def contents():
                     open_phil_contents(),
                     survey_contents(),
                     growth_contents(),
+                    forum_contents(),
                 ]
             ),
         ],

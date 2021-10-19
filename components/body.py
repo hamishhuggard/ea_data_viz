@@ -4,7 +4,7 @@
 # visit http://127.0.0.1:8050/ in your web browser.
 
 import dash
-import dash_html_components as html
+from dash import html
 
 from sections.forum import forum_scatter_section
 from sections.forum import forum_leaderboard_section
@@ -50,7 +50,7 @@ def body():
             growth3(),
             growth4(),
 
-            # forum_scatter_section(),
+            forum_scatter_section(),
 
         ],
         className = 'content scroll-snapper',

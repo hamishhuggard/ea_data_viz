@@ -4,7 +4,7 @@
 # visit http://127.0.0.1:8050/ in your web browser.
 
 import dash
-import dash_html_components as html
+from dash import html
 
 from components.header import header
 from components.sidebar import sidebar
@@ -46,5 +46,5 @@ app.layout = html.Div(
 # app.layout = serve_layout
 
 if __name__ == '__main__':
-    #app.run_server(debug=True)
-    app.run_server(debug=False)
+    app.run_server(debug=True)
+    #app.run_server(debug=False)

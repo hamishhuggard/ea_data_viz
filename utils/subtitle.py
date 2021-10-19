@@ -1,5 +1,5 @@
-import dash_html_components as html
-import dash_core_components as dcc
+from dash import html
+from dash import dcc
 
 data_source_details = {
 
@@ -50,7 +50,7 @@ def get_subtitle(data_sources, zoom=False, hover='bars', extra_text=[]):
         extra_text = [ extra_text ]
 
     data_links = [
-        dcc.Link(
+        html.A(
             data_source_details[data_source]['name'],
             href = data_source_details[data_source]['url']
         )

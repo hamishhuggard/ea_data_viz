@@ -1,9 +1,9 @@
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
-from utils.ea_bar_graph import EABarGraph
+from plots.bar import Bar
 from countryinfo import CountryInfo
 from math import log
 from utils.subtitle import get_subtitle
@@ -132,7 +132,7 @@ countries['text'] = countries['Responses'].apply(lambda x: f'{x:}')
 countries['y'] = countries['Responses']
 countries_truncated = countries.iloc[len(countries)*2//3:]
 
-countries_bar = EABarGraph(
+countries_bar = Bar(
     countries_truncated,
     title = f'Countries with Most EAs',
 )
@@ -143,7 +143,7 @@ countries_capita_sort['y'] = countries_capita_sort['Density (per million)']
 countries_capita_sort['text'] = countries_capita_sort['Density (per million)'].apply(lambda x: f'{x:.1f}')
 countries_capita_sort_truncated = countries_capita_sort.iloc[len(countries)*2//3:]
 
-per_capita_bar = EABarGraph(
+per_capita_bar = Bar(
     countries_capita_sort_truncated,
     title = f'Top EAs per Capita (×1M)',
 )
