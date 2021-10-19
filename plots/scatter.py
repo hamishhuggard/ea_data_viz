@@ -31,7 +31,8 @@ class Scatter(dcc.Graph):
         )
 
         fig.update_traces(
-            marker_color = "#0c869b",
+            #marker_color = "#0c869b",
+            marker_color = 'rgba(12, 134, 155, 0.6)',
         )
 
         if hover:
