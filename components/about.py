@@ -18,10 +18,17 @@ def about_box():
                 ]
             ),
             html.P(
-                'There are several EA organisations which collect data on grants, donors, and pledges.',
+                'This website aggregates and visualizes data from EA organisations, including grants, donors, and pledges.',
             ),
             html.P(
-                'This website aggregates and visualizes that data.',
+                [
+                    'More information on this website can be found ',
+                    html.A(
+                        "here",
+                        href="https://forum.effectivealtruism.org/posts/CQaNyJfsRFZhseiLZ/effectivealtruismdata-com-a-website-for-aggregating-and"
+                    ),
+                    '.',
+                ]
             ),
             html.P(
                 [
