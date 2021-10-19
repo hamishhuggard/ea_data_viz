@@ -44,7 +44,7 @@ class Line(dcc.Graph):
 
             val_df = val_df.loc[ val_df[y].notnull() ].reset_index()
             last_row = val_df.iloc[len(val_df)-1]
-            last_hover = last_row['hover']
+            last_hover = last_row[hover]
 
             fig.add_trace(go.Scatter(
                 x=[ last_row[x] ],
