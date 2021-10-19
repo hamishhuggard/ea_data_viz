@@ -124,7 +124,7 @@ def forum_scatter_section():
             ),
         ],
         className = 'section',
-        id='forum-cumulative-section',
+        id='forum-scatter-section',
     )
 
 def post_counts(forum_df):
