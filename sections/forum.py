@@ -13,7 +13,12 @@ from plots.bar import Bar
 from plots.line import Line
 from plots.scatter import Scatter
 
+posts_df = None
 def get_forum_data():
+    global posts_df
+
+    if type(posts_df) != type(None):
+        return posts_df
 
     with open('./data/forum.json', 'r') as forum_file:
         forum_json = json.loads(forum_file.read())
