@@ -58,6 +58,9 @@ def get_forum_data():
             comment_count,
         ]
 
+    # remove very low karma posts
+    posts_df = posts_df.loc[ posts_df['karma'] > -20 ]
+
     posts_df['posted_at'] = pd.to_datetime(posts_df['posted_at'])#, format='%m/%Y')
     posts_df = posts_df.sort_values(by='posted_at', ascending=False)
     posts_df['posted_at_readable'] = posts_df['posted_at'].dt.strftime('%d %b %Y')
