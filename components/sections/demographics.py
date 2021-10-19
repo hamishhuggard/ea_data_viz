@@ -6,7 +6,7 @@ import plotly.express as px
 import pandas as pd
 import re
 from glob import glob
-from plots.bar import Bar
+from utils.plots.bar import Bar
 from utils.subtitle import get_subtitle
 
 def get_demo_table(demo_name):

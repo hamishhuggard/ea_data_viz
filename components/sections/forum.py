@@ -9,10 +9,10 @@ from math import log
 from utils.subtitle import get_subtitle
 import json
 
-from plots.bar import Bar
-from plots.line import Line
-from plots.scatter import Scatter
-from plots.wilkinson import Wilkinson
+from utils.plots.bar import Bar
+from utils.plots.line import Line
+from utils.plots.scatter import Scatter
+from utils.plots.wilkinson import Wilkinson
 
 posts_df = None
 def get_forum_data():

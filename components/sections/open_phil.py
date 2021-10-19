@@ -4,9 +4,9 @@ import numpy as np
 from dash import dcc
 from dash import html
 from dash import dash_table
-from plots.bar import Bar
+from utils.plots.bar import Bar
 from utils.subtitle import get_subtitle
-from plots.scatter import Scatter
+from utils.plots.scatter import Scatter
 
 def get_op_grants():
 

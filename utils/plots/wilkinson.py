@@ -1,4 +1,4 @@
-from plots.scatter import Scatter
+from utils.plots.scatter import Scatter
 from collections import Counter
 
 class Wilkinson(Scatter):

@@ -3,7 +3,7 @@ from dash import html
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
-from plots.bar import Bar
+from utils.plots.bar import Bar
 from countryinfo import CountryInfo
 from math import log
 from utils.subtitle import get_subtitle

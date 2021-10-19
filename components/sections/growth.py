@@ -6,7 +6,7 @@ import string
 from dash import dcc
 from dash import html
 from utils.subtitle import get_subtitle
-from plots.line import Line
+from utils.plots.line import Line
 
 commiting = pd.read_csv('data/is_ea_growing/is_ea_growing_commiting.csv')
 doing = pd.read_csv('data/is_ea_growing/is_ea_growing_doing.csv')
