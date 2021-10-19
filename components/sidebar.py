@@ -83,6 +83,44 @@ def survey_contents():
         ],
     )
 
+def forum_contents():
+    return html.Li(
+        [
+            html.A(
+                'EA Forum',
+                href="#forum-scatter-section"
+            ),
+            html.Ul(
+                [
+                    html.Li(
+                        html.A(
+                            "Posted Date vs Karma",
+                            href="#forum-scatter-section"
+                        ),
+                    ),
+                    html.Li(
+                        html.A(
+                            "Forum Growth",
+                            href="#forum-growth-section"
+                        ),
+                    ),
+                    html.Li(
+                        html.A(
+                            "Post Distributions",
+                            href="#post-wilkinson-section"
+                        ),
+                    ),
+                    html.Li(
+                        html.A(
+                            "Author Distributions",
+                            href="#author-wilkinson-section"
+                        ),
+                    ),
+                ],
+            ),
+        ],
+    )
+
 def growth_contents():
     return html.Li(
         [
@@ -135,6 +173,7 @@ def contents():
                     ),
                     open_phil_contents(),
                     survey_contents(),
+                    forum_contents(),
                     growth_contents(),
                 ]
             ),
