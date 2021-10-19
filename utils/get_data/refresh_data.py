@@ -1,4 +1,4 @@
-import utils.data_scraping as data_scraping
+import utils.get_data.data_scraping as data_scraping
 import os
 import time
 
