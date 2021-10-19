@@ -12,6 +12,7 @@ import json
 from plots.bar import Bar
 from plots.line import Line
 from plots.scatter import Scatter
+from plots.wilkinson import Wilkinson
 
 posts_df = None
 def get_forum_data():
@@ -343,7 +344,59 @@ def forum_count_section():
     )
 
 def forum_post_wilkinson_section():
-    return html.Div()
+
+    forum_df = get_forum_data()
+
+    karma_graph = Wilkinson(
+        forum_df.sort_values('karma'),
+        value='karma',
+        text='title',
+        title='Karma Distribution',
+        hover='hover',
+    )
+    length_graph = Wilkinson(
+        forum_df.sort_values('wordcount'),
+        value='wordcount',
+        text='title',
+        title='Wordcount Distribution',
+        hover='hover',
+    )
+    date_graph = Wilkinson(
+        forum_df.sort_values('posted_at'),
+        value='posted_at',
+        text='title',
+        title='Post Date Distribution',
+        hover='hover',
+    )
+
+    return html.Div(
+        [
+            html.Div(
+                html.H2('EA Forum Posts by Karma, Wordcount, and Date Posted'),
+                className='section-title',
+            ),
+            get_subtitle('ea_forum', hover='points', zoom=True),
+            html.Div(
+                [
+                    html.Div(
+                        karma_graph,
+                        className='plot-container',
+                    ),
+                    html.Div(
+                        length_graph,
+                        className='plot-container',
+                    ),
+                    html.Div(
+                        date_graph,
+                        className='plot-container',
+                    ),
+                ],
+                className='grid desk-cols-3 section-body'
+            ),
+        ],
+        className = 'section',
+        id='post-wilkinson-section',
+    )
 
 def forum_user_wilkinson_section():
     html.Div()
