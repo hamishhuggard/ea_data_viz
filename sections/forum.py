@@ -93,7 +93,6 @@ def forum_scatter(forum_df):
 
     return Scatter(
         forum_df,
-        id = "forum-scatter",
         x = "posted_at",
         y = "karma",
         x_title = "Publication Date",
