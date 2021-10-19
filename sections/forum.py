@@ -109,10 +109,10 @@ def forum_scatter_section():
     return html.Div(
         [
             html.Div(
-                html.H2('Forum Posts by Publication Date and Karma'),
+                html.H2('Forum Posts by Date Posted and Karma'),
                 className='section-title',
             ),
-            get_subtitle('open_phil', hover='points', zoom=True),
+            get_subtitle('ea_forum', hover='points', zoom=True),
             html.Div(
                 [
                     html.Div(
@@ -281,7 +281,7 @@ def post_counts(forum_df):
         x_title = '',
         y_title = '',
         hover = 'new_authors_hover',
-        title = 'Unique Author Count',
+        title = 'Author Count',
         label = 'new_authors_label',
     )
 
@@ -317,10 +317,10 @@ def forum_count_section():
     return html.Div(
         [
             html.Div(
-                html.H2('Cumulative Writing on EA Forum'),
+                html.H2('Growth in EA Forum Activity'),
                 className='section-title',
             ),
-            get_subtitle('open_phil', hover='points', zoom=True),
+            get_subtitle('ea_forum', hover='points', zoom=True),
             html.Div(
                 [
                     html.Div(
