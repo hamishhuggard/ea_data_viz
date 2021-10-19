@@ -6,28 +6,28 @@
 import dash
 from dash import html
 
-from sections.forum import forum_scatter_section
-from sections.forum import forum_count_section
-from sections.forum import forum_post_wilkinson_section
-from sections.forum import forum_user_wilkinson_section
+from components.sections.forum import forum_scatter_section
+from components.sections.forum import forum_count_section
+from components.sections.forum import forum_post_wilkinson_section
+from components.sections.forum import forum_user_wilkinson_section
 
-from sections.donations_sankey import donations_sankey_section
+from components.sections.donations_sankey import donations_sankey_section
 
-from sections.demographics import demographics_section
-from sections.demographics import beliefs_section
-from sections.demographics import education_section
-from sections.demographics import career_section
+from components.sections.demographics import demographics_section
+from components.sections.demographics import beliefs_section
+from components.sections.demographics import education_section
+from components.sections.demographics import career_section
 
-from sections.growth import growth1
-from sections.growth import growth2
-from sections.growth import growth3
-from sections.growth import growth4
+from components.sections.growth import growth1
+from components.sections.growth import growth2
+from components.sections.growth import growth3
+from components.sections.growth import growth4
 
-from sections.geography import country_total_section
-from sections.geography import country_per_capita_section
+from components.sections.geography import country_total_section
+from components.sections.geography import country_per_capita_section
 
-from sections.open_phil import openphil_grants_scatter_section
-from sections.open_phil import openphil_grants_categories_section
+from components.sections.open_phil import openphil_grants_scatter_section
+from components.sections.open_phil import openphil_grants_categories_section
 
 def body():
     return html.Div(
