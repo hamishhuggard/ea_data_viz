@@ -159,26 +159,6 @@ def growth_contents():
         ],
     )
 
-def forum_contents():
-    return html.Li(
-        [
-            html.A(
-                'EA Forum Metrics',
-                href="#forum-date-karma"
-            ),
-            html.Ul(
-                [
-                    html.Li(
-                        html.A(
-                            "Date and Karma",
-                            href="#forum-date-karma"
-                        ),
-                    ),
-                ],
-            ),
-        ],
-    )
-
 def contents():
     return html.Div(
         [
@@ -195,7 +175,6 @@ def contents():
                     survey_contents(),
                     forum_contents(),
                     growth_contents(),
-                    forum_contents(),
                 ]
             ),
         ],

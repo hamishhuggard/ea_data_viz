@@ -319,7 +319,6 @@ def forum_count_section():
             html.Div(
                 html.H2('Growth in EA Forum Activity'),
                 className='section-title',
-                id='forum-date-karma',
             ),
             get_subtitle('ea_forum', hover='points', zoom=True),
             html.Div(
