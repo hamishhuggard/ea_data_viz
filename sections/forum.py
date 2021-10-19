@@ -336,7 +336,7 @@ def forum_count_section():
                         className='plot-container',
                     ),
                 ],
-                className='grid tab-cols-2 desk-cols-3 section-body'
+                className='grid desk-cols-3 section-body'
             ),
         ],
         className = 'section',
