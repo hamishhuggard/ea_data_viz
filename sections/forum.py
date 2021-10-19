@@ -399,4 +399,88 @@ def forum_post_wilkinson_section():
     )
 
 def forum_user_wilkinson_section():
-    html.Div()
+
+    forum_df = get_forum_data()
+
+    # Only consider first author
+    forum_df['first_author'] = forum_df['authors'].apply(lambda x: x.split(',')[0].strip())
+    forum_df = forum_df.sort_values(['first_author', 'posted_at'])
+
+    author_groups = forum_df.groupby('first_author')
+    author_df = pd.DataFrame({
+        'author': forum_df['first_author'].unique(),
+    })
+    author_df['karma'] = author_groups['karma'].sum().tolist()
+    author_df['wordcount'] = author_groups['wordcount'].sum().tolist()
+    author_df['posted_at'] = author_groups['posted_at'].first().tolist()
+    author_df['posted_at_readable'] = author_groups['posted_at_readable'].first().tolist()
+
+    def hover(row):
+
+        author = row['author']
+        posted_at = row['posted_at_readable']
+        wordcount = row['wordcount']
+        karma = row['karma']
+
+        result = ''
+        result += f"<b>{author}</b>"
+        result += f"<br>First posted: {posted_at}"
+        result += f"<br>Total karma: {karma:,}"
+        result += f"<br>Total wordcount: {wordcount:,}"
+
+        return result
+
+    author_df['hover'] = author_df.apply(hover, axis=1)
+
+    karma_graph = Wilkinson(
+        author_df.sort_values('karma'),
+        value='karma',
+        text='author',
+        title='Total Karma',
+        hover='hover',
+        bins=30,
+    )
+    length_graph = Wilkinson(
+        author_df.sort_values('wordcount'),
+        value='wordcount',
+        text='author',
+        title='Total Wordcount',
+        hover='hover',
+        bins=30,
+    )
+    date_graph = Wilkinson(
+        author_df.sort_values('posted_at'),
+        value='posted_at',
+        text='author',
+        title='Date of First Post',
+        hover='hover',
+    )
+
+    return html.Div(
+        [
+            html.Div(
+                html.H2("EA Forum Post Authors"),
+                className='section-title',
+            ),
+            get_subtitle('ea_forum', hover='points', zoom=True),
+            html.Div(
+                [
+                    html.Div(
+                        karma_graph,
+                        className='plot-container',
+                    ),
+                    html.Div(
+                        length_graph,
+                        className='plot-container',
+                    ),
+                    html.Div(
+                        date_graph,
+                        className='plot-container',
+                    ),
+                ],
+                className='grid desk-cols-3 section-body'
+            ),
+        ],
+        className = 'section',
+        id='author-wilkinson-section',
+    )
