@@ -31,16 +31,22 @@ class Wilkinson(Scatter):
         count_col = f'{value}_count'
         df[count_col] = df[bin_col].apply(get_count)
 
+        def trim_text(text, max_len):
+            if len(text) < max_len:
+                return text
+            return text[:max_len-3] + '...'
+
         def get_text(row):
             bin_value = row[bin_col]
             row_count = row[count_col]
-            # if this is the last row in the bin, return the text
-            if row_count < 3 and row_count == bin_counter[bin_value]:
-                display_text = row[text]
-                max_text_len = 40
-                if len(display_text) > max_text_len:
-                    display_text = display_text[:max_text_len] + '...'
-                return display_text
+            display_text = row[text]
+            # if the dot is in a row by itself then show its text
+            if row_count == 1 and bin_counter[bin_value] == 1:
+                return trim_text(display_text, 40)
+            # if there are two dots in a row, show both of their text
+            elif row_count == 2 and bin_counter[bin_value] == 2:
+                other_text = df.loc[ (df[bin_col]==bin_value) & (df[count_col]==1), text ].iat[0]
+                return trim_text(other_text, 20) + ', ' + trim_text(display_text, 20)
             # otherwise return an empty string
             else:
                 return ''
@@ -56,5 +62,6 @@ class Wilkinson(Scatter):
             y = bin_col,
             x = count_col,
             text = text_col,
+            transparent = False,
             **kwargs,
         )

@@ -17,6 +17,7 @@ class Scatter(dcc.Graph):
         title=None,
         text=None,
         log_y=False,
+        transparent=True,
     ):
 
         fig = px.scatter(
@@ -31,8 +32,7 @@ class Scatter(dcc.Graph):
         )
 
         fig.update_traces(
-            #marker_color = "#0c869b",
-            marker_color = 'rgba(12, 134, 155, 0.6)',
+            marker_color = 'rgba(12, 134, 155, 0.6)' if transparent else "#0c869b",
         )
 
         if hover:
