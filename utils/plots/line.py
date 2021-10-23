@@ -11,18 +11,19 @@ class Line(dcc.Graph):
         x='x',
         y='y',
         label='label',
+        hover='hover',
         title=None,
         x_title='',
         y_title='',
         size=None,
         color=None,
-        hover=None,
         log_y=False,
+        dollars=False,
     ):
 
         fig = go.Figure()
-        annotations = []
 
+        annotations = []
         for val in df[label].unique():
 
             val_df = df.loc[ df[label]==val ]
@@ -75,11 +76,10 @@ class Line(dcc.Graph):
                 yaxis_type="log",
             )
 
-        fig.update_layout(
-            title=title,
-            showlegend=False,
-        )
-
+        if dollars:
+            fig.update_layout(
+                yaxis_tickprefix = '$',
+            )
 
         top_margin = 40 if title else 0
         fig.update_layout(
