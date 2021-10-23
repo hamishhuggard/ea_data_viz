@@ -150,7 +150,3 @@ def scrape_founders_pledge():
         'countries': n_countries
     }
 
-def query_giving_what_we_can():
-    new_pledges_url = 'https://dashboard.effectivealtruism.org/api/public/card/a8499095-be16-46fe-af1f-e3e56ee04e88/query?parameters=%5B%5D'
-    donations_by_year_url = 'https://dashboard.effectivealtruism.org/api/public/card/9906735e-1350-4353-9828-bb3ec16137e3/query?parameters=%5B%5D'
-    donations_by_org_url = 'https://dashboard.effectivealtruism.org/api/public/card/b3887098-686a-491c-9f9c-9a5b0e2b7fd8/query?parameters=%5B%5D'
