@@ -19,6 +19,8 @@ class Line(dcc.Graph):
         color=None,
         log_y=False,
         dollars=False,
+        xanchor='right',
+        yanchor='bottom',
     ):
 
         fig = go.Figure()
@@ -62,8 +64,8 @@ class Line(dcc.Graph):
             annotations.append(dict(
                 x=last_row[x],
                 y=last_row[y],
-                xanchor='right',
-                yanchor='bottom',
+                xanchor=xanchor,
+                yanchor=yanchor,
                 text=f' {val}',
                 font={
                     'size': 13,
