@@ -77,7 +77,7 @@ def get_total_pledges_long(new_pledges):
 
     label = total_try_giving_long['value'].tolist()[-1]
     #last_date = int(total_try_giving_long['date'].tolist()[-1])
-    total_try_giving_long['label'] = f'{label:,} Total Trial Pledges'
+    total_try_giving_long['label'] = f'{label:,} Total<br>Trial Pledges'
 
     return pd.concat([total_pledges_long, total_try_giving_long], ignore_index=True)
 
