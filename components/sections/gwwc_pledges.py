@@ -42,18 +42,23 @@ def get_new_pledges_long(new_pledges):
     new_pledges_long['hover'] = new_pledges['the_pledge_hover']
 
     label = new_pledges_long['value'].tolist()[-1]
-    #last_date = int(new_pledges_long['date'].tolist()[-1])
-    new_pledges_long['label'] = f'{label:,} Pledges'
+    last_date = new_pledges_long['date'].tolist()[-1].strftime('%B')
+    new_pledges_long['label'] = f'{last_date}:<br>{label:,} New'
+
+    return new_pledges_long
+
+def get_new_trial_pledges_long(new_pledges):
 
     new_try_giving_long = new_pledges.loc[:, ['date']]
     new_try_giving_long['value'] = new_pledges['try_giving']
     new_try_giving_long['hover'] = new_pledges['try_giving_hover']
 
     label = new_try_giving_long['value'].tolist()[-1]
-    #last_date = int(new_try_giving_long['date'].tolist()[-1])
-    new_try_giving_long['label'] = f'{label:,} Trial Pledges'
+    last_date = new_try_giving_long['date'].tolist()[-1].strftime('%B')
+    new_try_giving_long['label'] = f'{last_date}:<br>{label:,} New'
 
-    return pd.concat([new_pledges_long, new_try_giving_long], ignore_index=True)
+    return new_try_giving_long
+
 
 
 def get_total_pledges_long(new_pledges):
@@ -91,22 +96,36 @@ def get_gwwc_pledges_section():
     new_pledges['try_giving_hover'] = new_pledges.apply(get_try_giving_hover, axis=1)
 
     new_pledges_long = get_new_pledges_long(new_pledges)
+    new_trial_pledges_long = get_new_trial_pledges_long(new_pledges)
     total_pledges_long = get_total_pledges_long(new_pledges)
 
     new_pledges_graph = Line(
         new_pledges_long,
         x='date',
         y='value',
-        title='',
+        title='New Giving Pledges by Month',
         x_title='',
         y_title='',
+        xanchor='left',
+        yanchor='middle',
+    )
+
+    new_trial_pledges_graph = Line(
+        new_trial_pledges_long,
+        x='date',
+        y='value',
+        title='New Trial Pledges by Month',
+        x_title='',
+        y_title='',
+        xanchor='left',
+        yanchor='middle',
     )
 
     total_pledges_graph = Line(
         total_pledges_long,
         x='date',
         y='value',
-        title='',
+        title='Total Pledges',
         x_title='',
         y_title='',
     )
@@ -117,13 +136,14 @@ def get_gwwc_pledges_section():
                 html.H2('Giving What We Can Pledges'),
                 className='section-heading',
             ),
-            get_subtitle('growth', hover='points', zoom=True),
+            get_subtitle('gwwc_pledges', hover='points', zoom=True),
             html.Div(
                 [
                     new_pledges_graph,
+                    new_trial_pledges_graph,
                     total_pledges_graph
                 ],
-                className='grid desk-cols-2 section-body'
+                className='grid desk-cols-3 section-body'
             ),
         ],
         className = 'section',
