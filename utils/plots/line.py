@@ -93,12 +93,6 @@ class Line(dcc.Graph):
             yaxis = dict(
                 title = y_title,
             ),
-            #margin = dict(l=0, r=0, t=30, b=0),
-            #autosize = True,
-            #title_x = 0.5,
-            #font = dict(
-            #    family = "Raleway",
-            #    size = 12,
             annotations=annotations,
             margin=dict(l=0, r=0, t=top_margin, b=0),
             title_x=0.5,
