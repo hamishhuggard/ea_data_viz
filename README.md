@@ -20,33 +20,29 @@ pipenv run python app.py
 ```
 
 ## To do
-- EA Funds visualisations like OP
 
-## Ideas:
-- Multipage routing
-- [Better bar charts](https://dkane.net/2020/better-horizontal-bar-charts-with-plotly/?utm_source=pocket_mylist)
-- Navigation bar
-- OP grant table
-- Reimplement in chart.js or D3.js for performance
-   - With better zoom controls
-- Disable the menu on the Sankey plot
+### Version 1 (Current Version)
+- OP Line plots
+    - Cumulative grants
+    - Grants by month/year
+- EA Funds
+    - Scatter
+    - Cumulative grants
+    - Grants by month/year
+- X-Risk
+    - Probability of x-risks given by Toby Ord
 - Founders pledge
-   - Member over time
-   - Commitments over time
-   - Pledges over time
-- Giving what we can
-   - Member over time
-   - Donations over time
-   - Pledges over time
-- 80,000 Hours
-   - Latest podcasts
-   - Podcast downloads
-   - Latest posts
-   - Pageviews
-   - 80,000 hours pageviews
-- EA Forums
-   - Views
-   - Posts
-   - Most recent posts
-- On the title: X EAs have donated Y amount and pledged a further Z.
-- [Gapminder-style](https://www.gapminder.org/tools/#$chart-type=bubbles) animation of EA orgs
+    - Members over time
+    - Pledged value over time
+    - Fulfilled commitments over time
+- Title page with summary statistics
+    - X EAs have donated Y amount and pledged a further Z.
+- Spin off data aggregation to own Python library
+- Periodic data refreshing
+- [Better bar charts](https://dkane.net/2020/better-horizontal-bar-charts-with-plotly/?utm_source=pocket_mylist)
+- Space efficient data source annotations
+
+### Version 2
+- Reimplement in chart.js or D3.js
+- See data as table or as plot
+- Data download buttons
