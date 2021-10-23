@@ -121,6 +121,38 @@ def forum_contents():
         ],
     )
 
+def gwwc_contents():
+    return html.Li(
+        [
+            html.A(
+                'Giving What We Can',
+                href="#gwwc-pledge-section"
+            ),
+            html.Ul(
+                [
+                    html.Li(
+                        html.A(
+                            "Pledges",
+                            href="#gwwc-pledge-section",
+                        ),
+                    ),
+                    html.Li(
+                        html.A(
+                            "Donations",
+                            href="#gwwc-donations-section",
+                        ),
+                    ),
+                    html.Li(
+                        html.A(
+                            "Donation Organizations",
+                            href="#gwwc-orgs-section",
+                        ),
+                    ),
+                ],
+            ),
+        ],
+    )
+
 def growth_contents():
     return html.Li(
         [
@@ -172,6 +204,7 @@ def contents():
                         ),
                     ),
                     open_phil_contents(),
+                    gwwc_contents(),
                     survey_contents(),
                     forum_contents(),
                     growth_contents(),
