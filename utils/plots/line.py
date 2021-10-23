@@ -34,7 +34,7 @@ class Line(dcc.Graph):
                     x=val_df[x],
                     y=val_df[y],
                     name=val,
-                    hovertext = df[hover],
+                    hovertext = val_df[hover],
                     hovertemplate = '%{hovertext}<extra></extra>',
                     mode='lines',
                     line=dict(
