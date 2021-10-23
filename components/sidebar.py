@@ -153,44 +153,6 @@ def gwwc_contents():
         ],
     )
 
-def growth_contents():
-    return html.Li(
-        [
-            html.A(
-                'EA Growth Metrics',
-                href="#growth-reading"
-            ),
-            html.Ul(
-                [
-                    html.Li(
-                        html.A(
-                            "Reading",
-                            href="#growth-reading"
-                        ),
-                    ),
-                    html.Li(
-                        html.A(
-                            "Joining",
-                            href="#growth-joining"
-                        ),
-                    ),
-                    html.Li(
-                        html.A(
-                            "Committing",
-                            href="#growth-committing"
-                        ),
-                    ),
-                    html.Li(
-                        html.A(
-                            "Donating",
-                            href="#growth-donating"
-                        ),
-                    ),
-                ],
-            ),
-        ],
-    )
-
 def contents():
     return html.Div(
         [
@@ -207,7 +169,6 @@ def contents():
                     gwwc_contents(),
                     survey_contents(),
                     forum_contents(),
-                    growth_contents(),
                 ]
             ),
         ],

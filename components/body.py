@@ -59,11 +59,6 @@ def body():
             forum_post_wilkinson_section(),
             forum_user_wilkinson_section(),
 
-            growth1(),
-            growth2(),
-            growth3(),
-            growth4(),
-
         ],
         className = 'content scroll-snapper',
     )
