@@ -18,6 +18,10 @@ from components.sections.demographics import beliefs_section
 from components.sections.demographics import education_section
 from components.sections.demographics import career_section
 
+from components.sections.gwwc_donation_growth import get_gwwc_donation_growth_section
+from components.sections.gwwc_pledges import get_gwwc_pledges_section
+from components.sections.gwwc_donation_orgs import get_gwwc_donations_orgs_section
+
 from components.sections.growth import growth1
 from components.sections.growth import growth2
 from components.sections.growth import growth3
@@ -37,6 +41,10 @@ def body():
 
             openphil_grants_scatter_section(),
             openphil_grants_categories_section(),
+
+            get_gwwc_pledges_section(),
+            get_gwwc_donation_growth_section(),
+            get_gwwc_donations_orgs_section(),
 
             country_total_section(),
             country_per_capita_section(),
