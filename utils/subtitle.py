@@ -44,6 +44,21 @@ data_source_details = {
         url='https://forum.effectivealtruism.org/posts/MBJvDDw2sFGkFCA29/is-ea-growing-ea-growth-metrics-for-2018',
     ),
 
+    'gwwc_pledges': dict(
+        name='Giving What We Can Pledges Dashboard',
+        url='http://dashboard.effectivealtruism.org/public/question/a8499095-be16-46fe-af1f-e3e56ee04e88',
+    ),
+
+    'gwwc_donations': dict(
+        name='Giving What We Can Donations Dashboard',
+        url='http://dashboard.effectivealtruism.org/public/question/9906735e-1350-4353-9828-bb3ec16137e3',
+    ),
+
+    'gwwc_orgs': dict(
+        name='Giving What We Can Donation Organizations Dashboard',
+        url='http://dashboard.effectivealtruism.org/public/question/b3887098-686a-491c-9f9c-9a5b0e2b7fd8',
+    ),
+
 }
 
 def get_subtitle(data_sources, zoom=False, hover='bars', extra_text=[]):
