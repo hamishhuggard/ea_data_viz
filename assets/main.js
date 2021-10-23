@@ -13,23 +13,6 @@ function toggleSidebarVisible() {
 
 }
 
-function toggleNightMode() {
-
-	const body = document.body;
-	const button = document.getElementById("nightmode-button");
-
-    if (body.classList.contains("nightmode")) {
-        body.classList.remove("nightmode");
-        button.src = "/assets/moon.svg"
-        button.title = "Night mode"
-    } else {
-        body.classList.add("nightmode");
-        button.src = "/assets/sun.svg"
-        button.title = "Day mode"
-    }
-
-}
-
 function toggleAboutVisibility() {
 
 	const about = document.getElementById("about-box");
@@ -41,3 +24,40 @@ function toggleAboutVisibility() {
     }
 
 }
+
+
+// NIGHT MODE AND DAY MODE
+
+function setNightMode() {
+    document.body.classList.add("nightmode");
+	const button = document.getElementById("nightmode-button");
+    button.src = "/assets/sun.svg"
+    button.title = "Day mode"
+}
+
+function setDayMode() {
+    document.body.classList.remove("nightmode");
+	const button = document.getElementById("nightmode-button");
+    button.src = "/assets/moon.svg"
+    button.title = "Night mode"
+}
+
+function toggleNightMode() {
+    if (document.body.classList.contains("nightmode")) 
+        setDayMode();
+    else 
+        setNightMode();
+}
+
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    setDayMode();
+}
+
+// To watch for changes:
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (e.matches) 
+        setNightMode();
+    else 
+        setDayMode();
+});
+
