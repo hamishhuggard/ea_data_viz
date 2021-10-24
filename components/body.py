@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Run this app with `python app.py` and
-# visit http://127.0.0.1:8050/ in your web browser.
-
 import dash
 from dash import html
 
@@ -22,16 +17,12 @@ from components.sections.gwwc_donation_growth import get_gwwc_donation_growth_se
 from components.sections.gwwc_pledges import get_gwwc_pledges_section
 from components.sections.gwwc_donation_orgs import get_gwwc_donations_orgs_section
 
-from components.sections.growth import growth1
-from components.sections.growth import growth2
-from components.sections.growth import growth3
-from components.sections.growth import growth4
-
 from components.sections.geography import country_total_section
 from components.sections.geography import country_per_capita_section
 
 from components.sections.open_phil import openphil_grants_scatter_section
 from components.sections.open_phil import openphil_grants_categories_section
+from components.sections.open_phil import openphil_line_plot_section
 
 def body():
     return html.Div(
@@ -41,6 +32,7 @@ def body():
 
             openphil_grants_scatter_section(),
             openphil_grants_categories_section(),
+            openphil_line_plot_section(),
 
             get_gwwc_pledges_section(),
             get_gwwc_donation_growth_section(),
