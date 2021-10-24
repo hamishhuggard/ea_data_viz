@@ -38,14 +38,14 @@ def get_gwwc_donation_growth_section():
 
     label = donations_by_year['amount_normalized'].tolist()[-1]
     last_year = int(donations_by_year['year'].tolist()[-1])
-    label = f'${label/1e6:,.1f} Donated in {last_year}'
+    label = f'<b>{last_year} Donations</b><br>${label/1e6:,.1f} Million'
     donations_by_year['label'] = label
 
     annual_donations_graph = Line(
         donations_by_year,
         x='date',
         y='amount_normalized',
-        title='Donations by Year',
+        title='Annual Donation Amounts',
         x_title='',
         y_title='',
         hover='hover',
@@ -53,14 +53,14 @@ def get_gwwc_donation_growth_section():
     )
 
     label = donations_by_year['amount_normalized_total'].tolist()[-1]
-    label = f'${label/1e6:,.1f} Million Total Donated'
+    label = f'<b>Total Donated</b><br>${label/1e6:,.1f} Million'
     donations_by_year['label'] = label
 
     total_donations_graph = Line(
         donations_by_year,
         x='date',
         y='amount_normalized_total',
-        title='Cumulative Donations',
+        title='Total Donated',
         x_title='',
         y_title='',
         hover='hover',
@@ -68,14 +68,14 @@ def get_gwwc_donation_growth_section():
     )
 
     label = donations_by_year['num_donors'].tolist()[-1]
-    label = f'{label:,} Donors in {last_year}'
+    label = f'<b>{last_year} Donors</b><br>{label:,} People'
     donations_by_year['label'] = label
 
     num_donors_graph = Line(
         donations_by_year,
         x='date',
         y='num_donors',
-        title='Number of Donors',
+        title='Annual Number of Donors',
         x_title='',
         y_title='',
         hover='hover',
