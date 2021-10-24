@@ -54,7 +54,7 @@ p, h1, h2, h3, h4 {
 }
 
 
-.nightmode {
+.darkmode {
     background-color: black;
     filter: invert() hue-rotate(180deg) brightness(100%) contrast(105%);
 }

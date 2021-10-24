@@ -63,10 +63,10 @@ def header():
                         dash_dangerously_set_inner_html.DangerouslySetInnerHTML('''
                             <img
                                 src='/assets/moon.svg'
-                                onclick='toggleNightMode()'
+                                onclick='toggleDarkMode()'
                                 class='clickable-icon icon'
                                 title='Night mode'
-                                id='nightmode-button'
+                                id='darkmode-button'
                             >
                         '''),
                         className='icon',

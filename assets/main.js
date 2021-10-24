@@ -28,36 +28,39 @@ function toggleAboutVisibility() {
 
 // NIGHT MODE AND DAY MODE
 
-function setNightMode() {
-    document.body.classList.add("nightmode");
-	const button = document.getElementById("nightmode-button");
+function setDarkMode() {
+    document.body.classList.add("darkmode");
+	const button = document.getElementById("darkmode-button");
     button.src = "/assets/sun.svg"
-    button.title = "Day mode"
+    button.title = "Light mode"
 }
 
-function setDayMode() {
-    document.body.classList.remove("nightmode");
-	const button = document.getElementById("nightmode-button");
+function setLightMode() {
+    document.body.classList.remove("darkmode");
+	const button = document.getElementById("darkmode-button");
     button.src = "/assets/moon.svg"
-    button.title = "Night mode"
+    button.title = "Dark mode"
 }
 
-function toggleNightMode() {
-    if (document.body.classList.contains("nightmode")) 
-        setDayMode();
+function toggleDarkMode() {
+    if (document.body.classList.contains("darkmode")) 
+        setLightMode();
     else 
-        setNightMode();
+        setDarkMode();
 }
 
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    setDayMode();
+// Initial dark mode preference
+window.onload = () => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setDarkMode();
+    }
 }
 
-// To watch for changes:
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+// Detect changes in dark mode preferences
+window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
     if (e.matches) 
-        setNightMode();
+        setDarkMode();
     else 
-        setDayMode();
+        setLightMode();
 });
 
