@@ -17,7 +17,6 @@ from utils.plots.wilkinson import Wilkinson
 posts_df = None
 def get_forum_data():
     global posts_df
-
     if type(posts_df) != type(None):
         return posts_df
 
@@ -293,8 +292,8 @@ def post_counts(forum_df):
 
     word_count_graph = Line(
         new_words_df,
-        x='posted_at',
-        y='total_words',
+        x = 'posted_at',
+        y = 'total_words',
         x_title = '',
         y_title = '',
         hover = 'word_count_hover',
