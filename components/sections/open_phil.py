@@ -8,8 +8,13 @@ from dash import dash_table
 from utils.plots.bar import Bar
 from utils.subtitle import get_subtitle
 from utils.plots.scatter import Scatter
+from utils.plots.line import Line
 
+op_grants = None
 def get_op_grants():
+    global op_grants
+    if type(op_grants) != type(None):
+        return op_grants
 
     op_grants = pd.read_csv('./data/openphil_grants.csv')
     op_grants['Amount'] = op_grants['Amount'].apply(
