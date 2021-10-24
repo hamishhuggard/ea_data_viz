@@ -91,8 +91,8 @@ def get_gwwc_donation_growth_section():
             html.Div(
                 [
                     annual_donations_graph,
-                    total_donations_graph,
                     num_donors_graph,
+                    total_donations_graph,
                 ],
                 className='grid tab-cols-3 desk-cols-3 section-body'
             ),
