@@ -1,5 +1,6 @@
 import plotly.express as px
 import pandas as pd
+from pandas.tseries.offsets import MonthEnd
 import numpy as np
 from dash import dcc
 from dash import html
@@ -234,4 +235,124 @@ def openphil_grants_categories_section():
         ],
         className = 'section',
         id='op-grants-categories',
+    )
+
+def group_by_month(op_grants):
+
+    # Round the dates to the end of the month
+    op_grants['Date'] += MonthEnd(1)
+
+    # Generate a date range up to the present
+    min_date = op_grants['Date'].min()
+    max_date = op_grants['Date'].max()
+    dates = pd.date_range(start=min_date, end=max_date, freq='M')
+
+    grants_by_month = pd.DataFrame(columns=[
+        'date',
+        'grants',
+        'focus_areas',
+        'organizations',
+        'total_amount',
+        'n_grants',
+    ])
+
+    for i, date in enumerate(dates):
+        grants_by_month_i = op_grants.loc[ op_grants['Date'] == date ]
+        grants_by_month.loc[i, 'date'] = date
+        grants_by_month.loc[i, 'grants'] = grants_by_month_i['Grant'].tolist()
+        grants_by_month.loc[i, 'focus_areas'] = grants_by_month_i['Focus Area'].tolist()
+        grants_by_month.loc[i, 'organizations'] = grants_by_month_i['Focus Area'].tolist()
+        grants_by_month.loc[i, 'total_amount'] = grants_by_month_i['Amount'].sum()
+        grants_by_month.loc[i, 'n_grants'] = len(grants_by_month_i)
+
+    return grants_by_month
+
+
+def openphil_line_plot_section():
+
+    op_grants = get_op_grants()
+    op_grants = op_grants.sort_values(by='Date').reset_index()
+
+    grants_by_month = group_by_month(op_grants)
+
+    def monthly_hover(row):
+        month = row['date'].strftime('%B %Y')
+        result = ''
+        result += f"<b>{month}</b>"
+        result += f"<br>{row.n_grants} grants"
+        result += f"<br>${row.total_amount:,.2f} total value"
+        return result
+
+    grants_by_month['hover'] = grants_by_month.apply(monthly_hover, axis=1)
+    last_row = grants_by_month.iloc[len(grants_by_month)-1]
+    last_month = last_row['date'].strftime('%B %Y')
+    label = ''
+    label += f"<b>{last_month}</b>"
+    label += f"<br>{last_row.n_grants} grants"
+    label += f"<br>${last_row.total_amount/1e6:,.1f}M total"
+    grants_by_month['label'] = label
+
+    month_grants_graph = Line(
+        grants_by_month,
+        x = 'date',
+        y = 'total_amount',
+        x_title = '',
+        y_title = '',
+        hover = 'hover',
+        title = 'Granted Amount by Month',
+        label = 'label',
+        xanchor='left',
+        dollars=True,
+    )
+
+
+    op_grants['cumulative_amount'] = op_grants['Amount'].cumsum()
+
+    def cumulative_hover(row):
+        result = row['hover']
+        result += f"<br>${row.cumulative_amount:,.2f} total"
+        return result
+
+    op_grants['hover'] = op_grants.apply(cumulative_hover, axis=1)
+    grants_total = op_grants['cumulative_amount'].tolist()[-1]
+    op_grants['label'] = f"<b>Total Grants</b><br>${grants_total/1e9:,.2f}B"
+
+    total_grants_graph = Line(
+        op_grants,
+        x = 'Date',
+        y = 'cumulative_amount',
+        x_title = '',
+        y_title = '',
+        hover = 'hover',
+        title = 'Total Granted Amount',
+        label = 'label',
+        dollars=True,
+    )
+
+    return html.Div(
+        [
+            html.Div(
+                html.H2('Open Philanthropy Grants Over Time'),
+                className='section-title',
+            ),
+            get_subtitle('open_phil'),
+            html.Div(
+                html.Div(
+                    [
+                        html.Div(
+                            month_grants_graph,
+                            className='plot-container',
+                        ),
+                        html.Div(
+                            total_grants_graph,
+                            className='plot-container',
+                        ),
+                    ],
+                    className='grid desk-cols-2 tab-cols-2',
+                ),
+                className='section-body'
+            ),
+        ],
+        className = 'section',
+        id='op-grants-growth',
     )
