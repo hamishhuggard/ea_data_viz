@@ -19,13 +19,19 @@ def open_phil_contents():
                     html.Li(
                         html.A(
                             "Individual Grants Plot",
-                            href="#op-grants-scatter-section"
+                            href="#op-grants-scatter-section",
                         ),
                     ),
                     html.Li(
                         html.A(
                             "Focus Area and Donee Organization",
-                            href="#op-grants-categories"
+                            href="#op-grants-categories",
+                        ),
+                    ),
+                    html.Li(
+                        html.A(
+                            "Changes over Time",
+                            href="#op-grants-growth",
                         ),
                     ),
                 ]
