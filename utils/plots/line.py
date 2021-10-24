@@ -29,7 +29,7 @@ class Line(dcc.Graph):
         for val in df[label].unique():
 
             val_df = df.loc[ df[label]==val ]
-            val_df = val_df.sort_values(by=x)
+            val_df = val_df.sort_values(by=[x,y])
 
             fig.add_trace(
                 go.Scatter(
