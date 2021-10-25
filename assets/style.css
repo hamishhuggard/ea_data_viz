@@ -13,7 +13,7 @@
     --header-padding: 20px;
     --header-height: calc(var(--header-content-height) + 2*var(--header-padding));
     --body-height: calc(100vh - var(--header-height));
-    --sidebar-width: 300px;
+    --sidebar-width: 250px;
 }
 
 * {
@@ -178,6 +178,16 @@ p, h1, h2, h3, h4 {
     width: var(--sidebar-width);
     height: var(--body-height);
     display: block;
+}
+
+#sidebar p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+#sidebar ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 /* The sidebar is visible by default on desktop but hidden by default on mobile.  */

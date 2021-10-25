@@ -7,176 +7,170 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.express as px
 
+def intro_contents():
+    return [
+        html.P(
+            'Overview',
+        ),
+        html.Ul(
+            [
+                html.A(
+                    "All Donations",
+                    href="#donations-sankey"
+                ),
+            ]
+        )
+    ]
+
 def open_phil_contents():
-    return html.Li(
-        [
-            html.A(
-                'Open Philanthropy Grants',
-                href="#op-grants-scatter-section"
-            ),
-            html.Ul(
-                [
-                    html.Li(
-                        html.A(
-                            "Individual Grants Plot",
-                            href="#op-grants-scatter-section",
-                        ),
+    return [
+        html.P(
+            'Open Philanthropy Grants',
+        ),
+        html.Ul(
+            [
+                html.Li(
+                    html.A(
+                        "Individual Grants Plot",
+                        href="#op-grants-scatter-section",
                     ),
-                    html.Li(
-                        html.A(
-                            "Focus Area and Donee Organization",
-                            href="#op-grants-categories",
-                        ),
+                ),
+                html.Li(
+                    html.A(
+                        "Focus Area and Donee Organization",
+                        href="#op-grants-categories",
                     ),
-                    html.Li(
-                        html.A(
-                            "Changes over Time",
-                            href="#op-grants-growth",
-                        ),
+                ),
+                html.Li(
+                    html.A(
+                        "Changes over Time",
+                        href="#op-grants-growth",
                     ),
-                ]
-            )
-        ],
-    )
+                ),
+            ]
+        )
+    ]
 
 def survey_contents():
-    return html.Li(
-        [
-            html.A(
-                'EA Survey Results',
-                href="#countries"
-            ),
-            html.Ul(
-                [
-                    html.Li(
-                        html.A(
-                            "Countries (total)",
-                            href="#countries"
-                        ),
+    return [
+        html.P(
+            'EA Survey Results',
+        ),
+        html.Ul(
+            [
+                html.Li(
+                    html.A(
+                        "Countries (total)",
+                        href="#countries"
                     ),
-                    html.Li(
-                        html.A(
-                            "Countries (per Capita)",
-                            href="#countries-per-capita"
-                        ),
+                ),
+                html.Li(
+                    html.A(
+                        "Countries (per Capita)",
+                        href="#countries-per-capita"
                     ),
-                    html.Li(
-                        html.A(
-                            "Demographics",
-                            href="#demographics"
-                        ),
+                ),
+                html.Li(
+                    html.A(
+                        "Demographics",
+                        href="#demographics"
                     ),
-                    html.Li(
-                        html.A(
-                            "Beliefs and Lifestyle",
-                            href="#beliefs-lifestyle"
-                        ),
+                ),
+                html.Li(
+                    html.A(
+                        "Beliefs and Lifestyle",
+                        href="#beliefs-lifestyle"
                     ),
-                    html.Li(
-                        html.A(
-                            "Education",
-                            href="#education"
-                        ),
+                ),
+                html.Li(
+                    html.A(
+                        "Education",
+                        href="#education"
                     ),
-                    html.Li(
-                        html.A(
-                            "Careers",
-                            href="#careers"
-                        ),
+                ),
+                html.Li(
+                    html.A(
+                        "Careers",
+                        href="#careers"
                     ),
-                ],
-            ),
-        ],
-    )
+                ),
+            ],
+        ),
+    ]
 
 def forum_contents():
-    return html.Li(
-        [
-            html.A(
-                'EA Forum',
-                href="#forum-scatter-section"
-            ),
-            html.Ul(
-                [
-                    html.Li(
-                        html.A(
-                            "Posted Date vs Karma",
-                            href="#forum-scatter-section"
-                        ),
+    return [
+        html.P(
+            'EA Forum',
+        ),
+        html.Ul(
+            [
+                html.Li(
+                    html.A(
+                        "Posted Date vs Karma",
+                        href="#forum-scatter-section"
                     ),
-                    html.Li(
-                        html.A(
-                            "Forum Growth",
-                            href="#forum-growth-section"
-                        ),
+                ),
+                html.Li(
+                    html.A(
+                        "Forum Growth",
+                        href="#forum-growth-section"
                     ),
-                    html.Li(
-                        html.A(
-                            "Post Distributions",
-                            href="#post-wilkinson-section"
-                        ),
+                ),
+                html.Li(
+                    html.A(
+                        "Post Distributions",
+                        href="#post-wilkinson-section"
                     ),
-                    html.Li(
-                        html.A(
-                            "Author Distributions",
-                            href="#author-wilkinson-section"
-                        ),
+                ),
+                html.Li(
+                    html.A(
+                        "Author Distributions",
+                        href="#author-wilkinson-section"
                     ),
-                ],
-            ),
-        ],
-    )
+                ),
+            ],
+        ),
+    ]
 
 def gwwc_contents():
-    return html.Li(
-        [
-            html.A(
-                'Giving What We Can',
-                href="#gwwc-pledge-section"
-            ),
-            html.Ul(
-                [
-                    html.Li(
-                        html.A(
-                            "Pledges",
-                            href="#gwwc-pledge-section",
-                        ),
+    return [
+        html.P(
+            'Giving What We Can',
+        ),
+        html.Ul(
+            [
+                html.Li(
+                    html.A(
+                        "Pledges",
+                        href="#gwwc-pledge-section",
                     ),
-                    html.Li(
-                        html.A(
-                            "Donations",
-                            href="#gwwc-donations-section",
-                        ),
+                ),
+                html.Li(
+                    html.A(
+                        "Donations",
+                        href="#gwwc-donations-section",
                     ),
-                    html.Li(
-                        html.A(
-                            "Donation Organizations",
-                            href="#gwwc-orgs-section",
-                        ),
+                ),
+                html.Li(
+                    html.A(
+                        "Donation Organizations",
+                        href="#gwwc-orgs-section",
                     ),
-                ],
-            ),
-        ],
-    )
+                ),
+            ],
+        ),
+    ]
 
 def contents():
     return html.Div(
         [
             html.H2('Contents'),
-            html.Ul(
-                [
-                    html.Li(
-                        html.A(
-                            "Donations Overview",
-                            href="#donations-sankey"
-                        ),
-                    ),
-                    open_phil_contents(),
-                    gwwc_contents(),
-                    survey_contents(),
-                    forum_contents(),
-                ]
-            ),
+            *intro_contents(),
+            *open_phil_contents(),
+            *gwwc_contents(),
+            *survey_contents(),
+            *forum_contents(),
         ],
         className = 'section_list',
     )
