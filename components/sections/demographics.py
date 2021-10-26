@@ -7,7 +7,8 @@ import pandas as pd
 import re
 from glob import glob
 from utils.plots.bar import Bar
-from utils.subtitle import get_subtitle
+from utils.subtitle import get_data_source
+from utils.subtitle import get_instructions
 
 def get_demo_table(demo_name):
 
@@ -91,7 +92,7 @@ def demographics_section():
                 html.H2('EA Demographics'),
                 className='section-title',
             ),
-            get_subtitle('rethink19'),
+            get_instructions(),
             html.Div(
                 [
                     html.Div(
@@ -108,7 +109,8 @@ def demographics_section():
                     ),
                 ],
                 className = 'grid tab-cols-2 desk-cols-3 section-body',
-            )
+            ),
+            get_data_source('rethink19'),
         ],
         className = 'section',
         id='demographics',
@@ -122,7 +124,7 @@ def beliefs_section():
                 html.H2('EA Beliefs and Lifestyle'),
                 className='section-title',
             ),
-            get_subtitle('rethink19'),
+            get_instructions(),
             html.Div(
                 [
                     html.Div(
@@ -139,7 +141,8 @@ def beliefs_section():
                     ),
                 ],
                 className = 'grid tab-cols-2 desk-cols-3 section-body',
-            )
+            ),
+            get_data_source('rethink19'),
         ],
         className = 'section',
         id='beliefs-lifestyle',
@@ -152,7 +155,7 @@ def education_section():
                 html.H2('EA Education'),
                 className='section-title',
             ),
-            get_subtitle('rethink19'),
+            get_instructions(),
             html.Div(
                 [
                     html.Div(
@@ -165,7 +168,8 @@ def education_section():
                     ),
                 ],
                 className = 'grid tab-cols-2 desk-cols-2 section-body',
-            )
+            ),
+            get_data_source('rethink19'),
         ],
         className = 'section',
         id='education',
@@ -178,7 +182,7 @@ def career_section():
                 html.H2('EA Careers'),
                 className='section-title',
             ),
-            get_subtitle('rethink19'),
+            get_instructions(),
             html.Div(
                 [
                     html.Div(
@@ -191,7 +195,8 @@ def career_section():
                     ),
                 ],
                 className = 'grid tab-cols-2 desk-cols-2 section-body',
-            )
+            ),
+            get_data_source('rethink19'),
         ],
         className = 'section',
         id='careers',

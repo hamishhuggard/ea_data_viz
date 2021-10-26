@@ -1,6 +1,7 @@
 import pandas as pd
 from dash import html
-from utils.subtitle import get_subtitle
+from utils.subtitle import get_data_source
+from utils.subtitle import get_instructions
 from utils.plots.bar import Bar
 from utils.get_data.query_gwwc import get_donations_by_org
 
@@ -50,7 +51,7 @@ def get_gwwc_donations_orgs_section():
                 html.H2('Giving What We Can Donations by Organization'),
                 className='section-heading',
             ),
-            get_subtitle('gwwc_orgs', hover='points', zoom=True),
+            get_instructions(hover='points', zoom=True),
             html.Div(
                 [
                     get_top_orgs_by_amount(donations_by_org),
@@ -58,6 +59,7 @@ def get_gwwc_donations_orgs_section():
                 ],
                 className='grid tab-cols-2 desk-cols-2 section-body'
             ),
+            get_data_source('gwwc_orgs'),
         ],
         className = 'section',
         id='gwwc-orgs-section',

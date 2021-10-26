@@ -6,7 +6,8 @@ import pandas as pd
 from utils.plots.bar import Bar
 from countryinfo import CountryInfo
 from math import log
-from utils.subtitle import get_subtitle
+from utils.subtitle import get_data_source
+from utils.subtitle import get_instructions
 
 ##################################
 ###         WORLD MAP          ###
@@ -155,7 +156,7 @@ def country_total_section():
                 html.H2('EAs by Country'),
                 className='section-heading',
             ),
-            get_subtitle('rethink19-geo', hover='countries or bars', extra_text='Scroll to zoom on map.'),
+            get_instructions(hover='countries or bars', extra_text='Scroll to zoom on map.'),
             html.Div(
                 html.Div(
                     [
@@ -176,6 +177,7 @@ def country_total_section():
                 ),
                 className='section-body',
             ),
+            get_data_source('rethink19-geo'),
         ],
         className = 'section',
         id='countries',
@@ -188,7 +190,7 @@ def country_per_capita_section():
                 html.H2('EAs per Capita by Country'),
                 className='section-heading',
             ),
-            get_subtitle('rethink19-geo', hover='countries or bars', extra_text='Scroll to zoom on map.'),
+            get_instructions(hover='countries or bars', extra_text='Scroll to zoom on map.'),
             html.Div(
                 html.Div(
                     [
@@ -209,6 +211,7 @@ def country_per_capita_section():
                 ),
                 className='section-body',
             ),
+            get_data_source('rethink19-geo'),
         ],
         className = 'section',
         id='countries-per-capita',

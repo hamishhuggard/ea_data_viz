@@ -8,7 +8,8 @@ import pandas as pd
 import re
 from glob import glob
 import os
-from utils.subtitle import get_subtitle
+from utils.subtitle import get_data_source
+from utils.subtitle import get_instructions
 
 def get_op_grants():
     op_grants = pd.read_csv('./data/openphil_grants.csv')
@@ -211,13 +212,7 @@ def donations_sankey_section():
                 html.H2('Donations Overview'),
                 className='section-title',
             ),
-            get_subtitle(
-                [
-                    'open_phil',
-                    'funds_payout',
-                    'founders_pledge',
-                    'gwwc',
-                ],
+            get_instructions(
                 hover='rectangles or lines',
                 extra_text = 'Rectangles can be rearranged by dragging.',
             ),
@@ -231,6 +226,14 @@ def donations_sankey_section():
                     className = 'plot-container',
                 ),
                 className = 'section-body',
+            ),
+            get_data_source(
+                [
+                    'open_phil',
+                    'funds_payout',
+                    'founders_pledge',
+                    'gwwc',
+                ],
             ),
         ],
         className = 'section',
