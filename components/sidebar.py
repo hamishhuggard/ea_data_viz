@@ -14,9 +14,11 @@ def intro_contents():
         ),
         html.Ul(
             [
-                html.A(
-                    "All Donations",
-                    href="#donations-sankey"
+                html.Li(
+                    html.A(
+                        "All Donations",
+                        href="#donations-sankey"
+                    ),
                 ),
             ]
         )
