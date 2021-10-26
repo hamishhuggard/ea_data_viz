@@ -17,7 +17,7 @@ def get_op_grants():
     if type(op_grants) != type(None):
         return op_grants
 
-    op_grants = pd.read_csv('./data/openphil_grants.csv')
+    op_grants = pd.read_csv('./assets/data/openphil_grants.csv')
     op_grants['Amount'] = op_grants['Amount'].apply(
         lambda x: int(x[1:].replace(',','')) if type(x)==str else x
     )

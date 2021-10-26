@@ -8,10 +8,10 @@ from dash import html
 from utils.subtitle import get_subtitle
 from utils.plots.line import Line
 
-commiting = pd.read_csv('data/is_ea_growing/is_ea_growing_commiting.csv')
-doing = pd.read_csv('data/is_ea_growing/is_ea_growing_doing.csv')
-joining = pd.read_csv('data/is_ea_growing/is_ea_growing_joining.csv')
-reading = pd.read_csv('data/is_ea_growing/is_ea_growing_reading.csv')
+commiting = pd.read_csv('assets/data/is_ea_growing/is_ea_growing_commiting.csv')
+doing = pd.read_csv('assets/data/is_ea_growing/is_ea_growing_doing.csv')
+joining = pd.read_csv('assets/data/is_ea_growing/is_ea_growing_joining.csv')
+reading = pd.read_csv('assets/data/is_ea_growing/is_ea_growing_reading.csv')
 
 
 # "Founder's Pledge pledges" makes more sense in "doing" than in "commiting"

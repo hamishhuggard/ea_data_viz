@@ -21,7 +21,7 @@ def get_forum_data():
     if type(posts_df) != type(None):
         return posts_df
 
-    with open('./data/ea_forum.json', 'r') as forum_file:
+    with open('./assets/data/ea_forum.json', 'r') as forum_file:
         forum_json = json.loads(forum_file.read())
 
     posts = forum_json['data']['posts']['results']

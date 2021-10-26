@@ -22,7 +22,7 @@ def get_num_donors_hover(row):
 
 def get_gwwc_donation_growth_section():
 
-    donations_by_year = pd.read_json('./data/gwwc/donations_by_year.json')
+    donations_by_year = pd.read_json('./assets/data/gwwc/donations_by_year.json')
     #donations_by_year = get_donations_by_year()
 
     donations_by_year['date'] = pd.to_datetime(donations_by_year['year'], format='%Y')

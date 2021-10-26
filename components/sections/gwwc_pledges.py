@@ -89,7 +89,7 @@ def get_total_pledges_long(new_pledges):
 
 def get_gwwc_pledges_section():
 
-    new_pledges = pd.read_json('./data/gwwc/new_pledges.json')
+    new_pledges = pd.read_json('./assets/data/gwwc/new_pledges.json')
     #new_pledges = get_new_pledges()
 
     new_pledges['date'] = pd.to_datetime(new_pledges['pledge_month'])

@@ -42,7 +42,7 @@ def get_top_orgs_by_num_donors(donations_by_org):
 
 def get_gwwc_donations_orgs_section():
 
-    donations_by_org = pd.read_json('./data/gwwc/donations_by_org.json')
+    donations_by_org = pd.read_json('./assets/data/gwwc/donations_by_org.json')
     #donations_by_org = get_donations_by_org()
 
     return html.Div(

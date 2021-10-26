@@ -11,7 +11,7 @@ data_source_details = {
     'rethink19-geo': dict(
         name='EA Survey 2019',
         url='https://rethinkpriorities.org/publications/eas2019-geographic-distribution-of-eas',
-        download_url='/data/rp_survey_data_2019/country2.csv'
+        download_url='/assets/data/rp_survey_data_2019/country2.csv'
     ),
 
     'ea_forum': dict(
