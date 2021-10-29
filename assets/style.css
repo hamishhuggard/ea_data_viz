@@ -60,23 +60,19 @@ p, h1, h2, h3, h4 {
 }
 
 ._dash-loading {
-    margin: 0;
-    color: transparent;
     text-align: center;
-}
-
-._dash-loading::before {
-    content: "Loading...";
-    color: black;
-    position: absolute;
-    font-family: "Roboto Slab", "Times New Roman", serif;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    transform: translateX(-50%) translateY(-50%);
     font-weight: 700;
     font-size: 2em;
+    font-family: "Roboto Slab", "Times New Roman", serif;
+    display: table-cell;
+    width: 100vw;
+    height: 100vh;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.darkmodeloading {
+    display: none;
 }
 
 /*------------------
