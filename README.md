@@ -6,7 +6,7 @@
 
 There are several EA organisations that collect data on grants, donors, and pledges. This website aggregates and visualises that data.
 
-The website is coded in Python using [Dash](https://dash.plotly.com/) and [Plotly](https://plotly.com/). it is currently deployed with Heroku at [effectivealtruismdata.com](https://effectivealtruismdata.com).
+The website is coded in Python using [Dash](https://dash.plotly.com/) and [Plotly](https://plotly.com/). It is currently deployed with Heroku at [effectivealtruismdata.com](https://effectivealtruismdata.com).
 
 There may be some overlap between this project and with the [EA Hub map](https://eahub.org/) and the [EA Funds dashboard](https://app.effectivealtruism.org/funds/about/stats).
 

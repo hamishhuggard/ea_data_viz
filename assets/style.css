@@ -59,6 +59,22 @@ p, h1, h2, h3, h4 {
     filter: invert() hue-rotate(180deg) brightness(100%) contrast(105%);
 }
 
+._dash-loading {
+    text-align: center;
+    font-weight: 700;
+    font-size: 2em;
+    font-family: "Roboto Slab", "Times New Roman", serif;
+    display: table-cell;
+    width: 100vw;
+    height: 100vh;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.darkmodeloading {
+    display: none;
+}
+
 /*------------------
       HEADER
 ------------------*/
