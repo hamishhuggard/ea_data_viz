@@ -12,6 +12,8 @@ from components.about import about_box
 from components.body import body
 
 from utils.get_data.refresh_data import refresh_data
+from dash.dependencies import Input, Output, State
+import visdcc
 
 app = dash.Dash(
     __name__,
@@ -34,17 +36,31 @@ app.layout = html.Div(
             header(),
             html.Div(
                 [
-                    sidebar(),
+                    html.Div(
+                        [
+                            sidebar(),
+                        ],
+                        id="sidebar-visdcc",
+                    ),
                     about_box(),
                     body(),
+                    visdcc.Run_js(id='javascript')
                 ],
                 className = 'body',
             )
         ],
     )
 
+@app.callback(
+    Output('javascript', 'run'),
+    [Input('sidebar-visdcc', 'n_clicks')])
+def sidebar(x):
+    if x: 
+        return "document.getElementById('sidebar').setAttribute('onclick', 'mobileSidebar()')"
+    return ""
+
 # app.layout = serve_layout
 
 if __name__ == '__main__':
     #app.run_server(debug=True)
-    app.run_server(debug=False)
+    app.run_server(host="0.0.0.0", debug=True)

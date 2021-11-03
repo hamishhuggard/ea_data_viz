@@ -26,6 +26,15 @@ function toggleAboutVisibility() {
 }
 
 
+if (window.matchMedia("(max-media: 700px)").matches) {
+    function mobileSidebar() {
+        
+        toggleSidebarVisible();
+
+    }
+}
+
+
 // NIGHT MODE AND DAY MODE
 
 function setDarkMode() {
