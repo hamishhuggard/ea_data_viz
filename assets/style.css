@@ -160,6 +160,22 @@ p, h1, h2, h3, h4 {
 
 }
 
+@media (prefers-color-scheme: dark) {
+    #darkmode-button {
+        content: url("/assets/sun.svg");
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    #darkmode-button {
+        content: url("/assets/moon.svg");
+    }
+}
+
+.noprefer {
+    content: unset !important;
+}
+
 /*------------------
        BODY
 ------------------*/
