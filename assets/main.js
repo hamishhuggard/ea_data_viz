@@ -26,20 +26,29 @@ function toggleAboutVisibility() {
 }
 
 
+if (window.matchMedia("(max-media: 700px)").matches) {
+    function mobileSidebar() {
+        
+        toggleSidebarVisible();
+
+    }
+}
+
+
 // NIGHT MODE AND DAY MODE
 
 function setDarkMode() {
     document.body.classList.add("darkmode");
 	const button = document.getElementById("darkmode-button");
     button.src = "/assets/sun.svg"
-    button.title = "Light mode"
+    button.classList.add("noprefer");
 }
 
 function setLightMode() {
     document.body.classList.remove("darkmode");
 	const button = document.getElementById("darkmode-button");
-    button.src = "/assets/moon.svg"
-    button.title = "Dark mode"
+    button.src = "/assets/moon.svg";
+    button.classList.add("noprefer");
 }
 
 function toggleDarkMode() {

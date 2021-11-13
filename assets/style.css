@@ -71,6 +71,12 @@ p, h1, h2, h3, h4 {
     vertical-align: middle;
 }
 
+@media only screen and (max-width: 700px) {
+    ._dash-loading {
+        height: 85vh;
+    }
+}
+
 .darkmodeloading {
     display: none;
 }
@@ -158,6 +164,22 @@ p, h1, h2, h3, h4 {
         display: none;
     }
 
+}
+
+@media (prefers-color-scheme: dark) {
+    #darkmode-button {
+        content: url("/assets/sun.svg");
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    #darkmode-button {
+        content: url("/assets/moon.svg");
+    }
+}
+
+.noprefer {
+    content: unset !important;
 }
 
 /*------------------
