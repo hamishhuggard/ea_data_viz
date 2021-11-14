@@ -91,7 +91,7 @@ def get_data_source(data_sources):
             content.append(
                 html.A(
                     'download',
-                    href = details['download_url']
+                    href = details['download_url'],
                 )
             )
             content.append(')')
