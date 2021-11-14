@@ -25,8 +25,6 @@ def get_op_grants():
     op_grants['Focus Area'] = op_grants['Focus Area'].apply(lambda x: x.replace('Artificial Intelligence', 'AI'))
     op_grants = op_grants[::-1]
 
-    op_grants['Grant'] = op_grants['Grant']
-
     def normalize_orgname(orgname):
         if type(orgname) == str:
             orgname = orgname.strip()
@@ -179,35 +177,6 @@ def openphil_grants_categories_section():
         id='op-grants-categories',
     )
 
-def group_by_month(op_grants):
-
-    # Round the dates to the end of the month
-    op_grants['Date'] += MonthEnd(1)
-
-    # Generate a date range up to the present
-    min_date = op_grants['Date'].min()
-    max_date = op_grants['Date'].max()
-    dates = pd.date_range(start=min_date, end=max_date, freq='M')
-
-    grants_by_month = pd.DataFrame(columns=[
-        'date',
-        'grants',
-        'focus_areas',
-        'organizations',
-        'total_amount',
-        'n_grants',
-    ])
-
-    for i, date in enumerate(dates):
-        grants_by_month_i = op_grants.loc[ op_grants['Date'] == date ]
-        grants_by_month.loc[i, 'date'] = date
-        grants_by_month.loc[i, 'grants'] = grants_by_month_i['Grant'].tolist()
-        grants_by_month.loc[i, 'focus_areas'] = grants_by_month_i['Focus Area'].tolist()
-        grants_by_month.loc[i, 'organizations'] = grants_by_month_i['Focus Area'].tolist()
-        grants_by_month.loc[i, 'total_amount'] = grants_by_month_i['Amount'].sum()
-        grants_by_month.loc[i, 'n_grants'] = len(grants_by_month_i)
-
-    return grants_by_month
 
 
 def openphil_line_plot_section():
