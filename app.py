@@ -47,20 +47,28 @@ app.layout = html.Div(
                         [
                             sidebar(),
                         ],
-                        id="sidebar-visdcc",
                     ),
                     about_box(),
                     body(),
-                    visdcc.Run_js(id='javascript')
+                    visdcc.Run_js(id='javascript-body'),
                 ],
                 className = 'body',
+                id = "sidebar-visdcc",
             )
         ],
     )
 
 @app.callback(
-    Output('javascript', 'run'),
+    Output('javascript-body', 'run'),
     [Input('sidebar-visdcc', 'n_clicks')])
+def sidebar(x):
+    if x: 
+        return "document.getElementById('sidebar').setAttribute('onclick', 'mobileSidebar()')"
+    return ""
+
+@app.callback(
+    Output('javascript-header', 'run'),
+    [Input('header-sidebar-visdcc', 'n_clicks')])
 def sidebar(x):
     if x: 
         return "document.getElementById('sidebar').setAttribute('onclick', 'mobileSidebar()')"
