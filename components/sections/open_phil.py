@@ -177,14 +177,41 @@ def openphil_grants_categories_section():
         id='op-grants-categories',
     )
 
+def group_by_month(op_grants):
+
+    # Round the dates to the end of the month
+    op_grants['Date'] += MonthEnd(1)
+
+    # Generate a date range up to the present
+    min_date = op_grants['Date'].min()
+    max_date = op_grants['Date'].max()
+    dates = pd.date_range(start=min_date, end=max_date, freq='M')
+
+    grants_by_month = pd.DataFrame(columns=[
+        'date',
+        'grants',
+        'focus_areas',
+        'organizations',
+        'total_amount',
+        'n_grants',
+    ])
+
+    for i, date in enumerate(dates):
+        grants_by_month_i = op_grants.loc[ op_grants['Date'] == date ]
+        grants_by_month.loc[i, 'date'] = date
+        grants_by_month.loc[i, 'grants'] = grants_by_month_i['Grant'].tolist()
+        grants_by_month.loc[i, 'focus_areas'] = grants_by_month_i['Focus Area'].tolist()
+        grants_by_month.loc[i, 'organizations'] = grants_by_month_i['Focus Area'].tolist()
+        grants_by_month.loc[i, 'total_amount'] = grants_by_month_i['Amount'].sum()
+        grants_by_month.loc[i, 'n_grants'] = len(grants_by_month_i)
+
+    return grants_by_month
 
 
 def openphil_line_plot_section():
 
     op_grants = get_op_grants()
     op_grants = op_grants.sort_values(by='Date').reset_index()
-
-    grants_by_month = group_by_month(op_grants)
 
     def monthly_hover(row):
         month = row['date'].strftime('%B %Y')
@@ -193,6 +220,8 @@ def openphil_line_plot_section():
         result += f"<br>{row.n_grants} grants"
         result += f"<br>${row.total_amount:,.2f} total value"
         return result
+
+    grants_by_month = group_by_month(op_grants)
 
     grants_by_month['hover'] = grants_by_month.apply(monthly_hover, axis=1)
     last_row = grants_by_month.iloc[len(grants_by_month)-1]
