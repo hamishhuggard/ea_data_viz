@@ -59,6 +59,28 @@ p, h1, h2, h3, h4 {
     filter: invert() hue-rotate(180deg) brightness(100%) contrast(105%);
 }
 
+._dash-loading {
+    text-align: center;
+    font-weight: 700;
+    font-size: 2em;
+    font-family: "Roboto Slab", "Times New Roman", serif;
+    display: table-cell;
+    width: 100vw;
+    height: 100vh;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+@media only screen and (max-width: 700px) {
+    ._dash-loading {
+        height: 85vh;
+    }
+}
+
+.darkmodeloading {
+    display: none;
+}
+
 /*------------------
       HEADER
 ------------------*/
@@ -142,6 +164,22 @@ p, h1, h2, h3, h4 {
         display: none;
     }
 
+}
+
+@media (prefers-color-scheme: dark) {
+    #darkmode-button {
+        content: url("/assets/sun.svg");
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    #darkmode-button {
+        content: url("/assets/moon.svg");
+    }
+}
+
+.noprefer {
+    content: unset !important;
 }
 
 /*------------------
@@ -299,6 +337,13 @@ p, h1, h2, h3, h4 {
     height: 100%;
     width: 100%;
     max-height: 100vh;
+}
+
+@media only screen and (max-width: 700px) {
+    #gwwc-pledge-section, #gwwc-donations-section, #gwwc-orgs-section {
+        min-height: 100%;
+        margin-bottom: 12.5em;
+    }
 }
 
 /*------------------

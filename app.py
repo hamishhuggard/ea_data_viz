@@ -12,11 +12,20 @@ from components.about import about_box
 from components.body import body
 
 from utils.get_data.refresh_data import refresh_data
+from dash.dependencies import Input, Output, State
+import visdcc
 
 app = dash.Dash(
     __name__,
     meta_tags = [
         {
+            'og:title': 'Effective Altruism Data',
+            "og:url": "https://effectivealtruismdata.com",
+            "og:site_name": "Effective Altruism Data",
+            "og:image": "https://i.ibb.co/mqbpdXW/eadata.png",
+            "og:image:width": "1440",
+            "og:image:height": "630",
+            "twitter:card": "summary_large_image",
             'name': 'viewport',
             'content': 'width=device-width, initial-scale=1.0',
         }
@@ -34,14 +43,36 @@ app.layout = html.Div(
             header(),
             html.Div(
                 [
-                    sidebar(),
+                    html.Div(
+                        [
+                            sidebar(),
+                        ],
+                    ),
                     about_box(),
                     body(),
+                    visdcc.Run_js(id='javascript-body'),
                 ],
                 className = 'body',
+                id = "sidebar-visdcc",
             )
         ],
     )
+
+@app.callback(
+    Output('javascript-body', 'run'),
+    [Input('sidebar-visdcc', 'n_clicks')])
+def sidebar(x):
+    if x: 
+        return "document.getElementById('sidebar').setAttribute('onclick', 'mobileSidebar()')"
+    return ""
+
+@app.callback(
+    Output('javascript-header', 'run'),
+    [Input('header-sidebar-visdcc', 'n_clicks')])
+def sidebar(x):
+    if x: 
+        return "document.getElementById('sidebar').setAttribute('onclick', 'mobileSidebar()')"
+    return ""
 
 # app.layout = serve_layout
 

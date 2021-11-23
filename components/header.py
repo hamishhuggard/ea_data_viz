@@ -4,6 +4,7 @@ import dash
 from dash import dcc
 from dash import html
 import dash_dangerously_set_inner_html
+import visdcc
 
 def header():
 
@@ -62,15 +63,16 @@ def header():
                     html.Div(
                         dash_dangerously_set_inner_html.DangerouslySetInnerHTML('''
                             <img
-                                src='/assets/moon.svg'
+                                src="/assets/sun.svg"
                                 onclick='toggleDarkMode()'
                                 class='clickable-icon icon'
-                                title='Night mode'
+                                title="Change appearance"
                                 id='darkmode-button'
                             >
                         '''),
                         className='icon',
                     ),
+                    visdcc.Run_js(id='javascript-header'),
                     html.Div(
                         dash_dangerously_set_inner_html.DangerouslySetInnerHTML('''
                             <img
@@ -88,4 +90,5 @@ def header():
 
         ],
         className='header center',
+        id="header-sidebar-visdcc"
     )
