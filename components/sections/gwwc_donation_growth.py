@@ -1,7 +1,8 @@
 import pandas as pd
 from dash import html
 from utils.get_data.query_gwwc import get_donations_by_year
-from utils.subtitle import get_subtitle
+from utils.subtitle import get_data_source
+from utils.subtitle import get_instructions
 from utils.plots.line import Line
 from datetime import datetime
 
@@ -21,7 +22,7 @@ def get_num_donors_hover(row):
 
 def get_gwwc_donation_growth_section():
 
-    donations_by_year = pd.read_json('./data/gwwc/donations_by_year.json')
+    donations_by_year = pd.read_json('./assets/data/gwwc/donations_by_year.json')
     #donations_by_year = get_donations_by_year()
 
     donations_by_year['date'] = pd.to_datetime(donations_by_year['year'], format='%Y')
@@ -38,7 +39,7 @@ def get_gwwc_donation_growth_section():
 
     label = donations_by_year['amount_normalized'].tolist()[-1]
     last_year = int(donations_by_year['year'].tolist()[-1])
-    label = f'<b>{last_year} Donations</b><br>${label/1e6:,.1f} Million'
+    label = f'<b>${label/1e6:,.1f} Million</b><br>{last_year} Donations'
     donations_by_year['label'] = label
 
     annual_donations_graph = Line(
@@ -53,7 +54,7 @@ def get_gwwc_donation_growth_section():
     )
 
     label = donations_by_year['amount_normalized_total'].tolist()[-1]
-    label = f'<b>Total Donated</b><br>${label/1e6:,.1f} Million'
+    label = f'<b>${label/1e6:,.1f} Million</b><br>Total Donated'
     donations_by_year['label'] = label
 
     total_donations_graph = Line(
@@ -68,7 +69,7 @@ def get_gwwc_donation_growth_section():
     )
 
     label = donations_by_year['num_donors'].tolist()[-1]
-    label = f'<b>{last_year} Donors</b><br>{label:,} People'
+    label = f'<b>{label:,} Donors</b><br>in {last_year}'
     donations_by_year['label'] = label
 
     num_donors_graph = Line(
@@ -87,7 +88,7 @@ def get_gwwc_donation_growth_section():
                 html.H2('Giving What We Can Donations'),
                 className='section-heading',
             ),
-            get_subtitle('gwwc_pledges', hover='points', zoom=True),
+            get_instructions(hover='points', zoom=True),
             html.Div(
                 [
                     annual_donations_graph,
@@ -96,6 +97,7 @@ def get_gwwc_donation_growth_section():
                 ],
                 className='grid tab-cols-3 desk-cols-3 section-body'
             ),
+            get_data_source('gwwc_pledges'),
         ],
         className = 'section',
         id='gwwc-donations-section',

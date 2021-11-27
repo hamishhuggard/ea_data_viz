@@ -8,10 +8,11 @@ import pandas as pd
 import re
 from glob import glob
 import os
-from utils.subtitle import get_subtitle
+from utils.subtitle import get_data_source
+from utils.subtitle import get_instructions
 
 def get_op_grants():
-    op_grants = pd.read_csv('./data/openphil_grants.csv')
+    op_grants = pd.read_csv('./assets/data/openphil_grants.csv')
     # op_grants = pd.read_csv('https://www.openphilanthropy.org/giving/grants/spreadsheet')
 
     # Standardize cause area names
@@ -54,11 +55,11 @@ def get_op_grants():
 
 
 def get_gwwc_and_founders_pledge():
-    return pd.read_csv('data/misc.csv')
+    return pd.read_csv('assets/data/misc.csv')
 
 
 def get_ea_funds():
-    ea_funds = pd.read_csv('./data/ea_funds_grants.csv')
+    ea_funds = pd.read_csv('./assets/data/ea_funds_grants.csv')
 
     subs = {
         'global-development': 'Global Poverty',
@@ -211,13 +212,7 @@ def donations_sankey_section():
                 html.H2('Donations Overview'),
                 className='section-title',
             ),
-            get_subtitle(
-                [
-                    'open_phil',
-                    'funds_payout',
-                    'founders_pledge',
-                    'gwwc',
-                ],
+            get_instructions(
                 hover='rectangles or lines',
                 extra_text = 'Rectangles can be rearranged by dragging.',
             ),
@@ -231,6 +226,14 @@ def donations_sankey_section():
                     className = 'plot-container',
                 ),
                 className = 'section-body',
+            ),
+            get_data_source(
+                [
+                    'open_phil',
+                    'funds_payout',
+                    'founders_pledge',
+                    'gwwc',
+                ],
             ),
         ],
         className = 'section',

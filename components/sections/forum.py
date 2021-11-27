@@ -6,7 +6,8 @@ import pandas as pd
 import numpy as np
 
 from math import log
-from utils.subtitle import get_subtitle
+from utils.subtitle import get_data_source
+from utils.subtitle import get_instructions
 import json
 
 from utils.plots.bar import Bar
@@ -20,7 +21,7 @@ def get_forum_data():
     if type(posts_df) != type(None):
         return posts_df
 
-    with open('./data/ea_forum.json', 'r') as forum_file:
+    with open('./assets/data/ea_forum.json', 'r') as forum_file:
         forum_json = json.loads(forum_file.read())
 
     posts = forum_json['data']['posts']['results']
@@ -111,7 +112,7 @@ def forum_scatter_section():
                 html.H2('EA Forum Posts by Date Posted and Karma'),
                 className='section-title',
             ),
-            get_subtitle('ea_forum', hover='points', zoom=True),
+            get_instructions(hover='points', zoom=True),
             html.Div(
                 [
                     html.Div(
@@ -121,6 +122,7 @@ def forum_scatter_section():
                 ],
                 className='section-body'
             ),
+            get_data_source('ea_forum'),
         ],
         className = 'section',
         id='forum-scatter-section',
@@ -319,7 +321,7 @@ def forum_count_section():
                 html.H2('Growth in EA Forum Activity'),
                 className='section-title',
             ),
-            get_subtitle('ea_forum', hover='points', zoom=True),
+            get_instructions(hover='points', zoom=True),
             html.Div(
                 [
                     html.Div(
@@ -337,6 +339,7 @@ def forum_count_section():
                 ],
                 className='grid desk-cols-3 section-body'
             ),
+            get_data_source('ea_forum'),
         ],
         className = 'section',
         id='forum-growth-section',
@@ -377,7 +380,7 @@ def forum_post_wilkinson_section():
                 html.H2('EA Forum Posts: Karma, Wordcount, and Date Posted'),
                 className='section-title',
             ),
-            get_subtitle('ea_forum', hover='points', zoom=True),
+            get_instructions(hover='points', zoom=True),
             html.Div(
                 [
                     html.Div(
@@ -395,6 +398,7 @@ def forum_post_wilkinson_section():
                 ],
                 className='grid desk-cols-3 section-body'
             ),
+            get_data_source('ea_forum'),
         ],
         className = 'section',
         id='post-wilkinson-section',
@@ -467,7 +471,7 @@ def forum_user_wilkinson_section():
                 html.H2("EA Forum Authors: Total Karma, Total Wordcount, and Date of First Post"),
                 className='section-title',
             ),
-            get_subtitle('ea_forum', hover='points', zoom=True),
+            get_instructions(hover='points', zoom=True),
             html.Div(
                 [
                     html.Div(
@@ -485,6 +489,7 @@ def forum_user_wilkinson_section():
                 ],
                 className='grid desk-cols-3 section-body'
             ),
+            get_data_source('ea_forum'),
         ],
         className = 'section',
         id='author-wilkinson-section',

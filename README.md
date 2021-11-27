@@ -22,23 +22,38 @@ pipenv run python app.py
 ## To do
 
 ### Version 1 (Current Version)
-- OP Line plots
-    - Cumulative grants
-    - Grants by month/year
+- Download links
+- Data refreshing
+- Analytics
+- OP Wilkinson Plots
+    - Grants by size and by time
+    - Organizations by #grants and by total amount
 - EA Funds
     - Scatter
     - Cumulative grants
     - Grants by month/year
-- X-Risk
-    - Probability of x-risks given by Toby Ord
 - Founders pledge
     - Members over time
     - Pledged value over time
     - Fulfilled commitments over time
 - Title page with summary statistics
     - X EAs have donated Y amount and pledged a further Z.
+- Probabilities of x-risks given by Toby Ord
+- Global Poverty
+    - Cost to save a life with most effective charities
+- Value of Future
+    - People currently alive
+    - People who have ever lived
+    - Projected peak population
+    - Potential future earth people
+    - Potential future space people
+    - Potential future virtual people
+- Animals
+    - Most effective animal interventions
+    - Number of animals in factory farms
+    - Most effective diet interventions
+- [Key EA numbers](https://github.com/benthamite/EA-numbers/blob/main/source.org)
 - Spin off data aggregation to own Python library
-- Periodic data refreshing
 - [Better bar charts](https://dkane.net/2020/better-horizontal-bar-charts-with-plotly/?utm_source=pocket_mylist)
 - Space efficient data source annotations
 

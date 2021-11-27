@@ -6,7 +6,8 @@ from dash import dcc
 from dash import html
 from dash import dash_table
 from utils.plots.bar import Bar
-from utils.subtitle import get_subtitle
+from utils.subtitle import get_instructions
+from utils.subtitle import get_data_source
 from utils.plots.scatter import Scatter
 from utils.plots.line import Line
 
@@ -16,15 +17,13 @@ def get_op_grants():
     if type(op_grants) != type(None):
         return op_grants
 
-    op_grants = pd.read_csv('./data/openphil_grants.csv')
+    op_grants = pd.read_csv('./assets/data/openphil_grants.csv')
     op_grants['Amount'] = op_grants['Amount'].apply(
         lambda x: int(x[1:].replace(',','')) if type(x)==str else x
     )
     op_grants = op_grants.dropna()
     op_grants['Focus Area'] = op_grants['Focus Area'].apply(lambda x: x.replace('Artificial Intelligence', 'AI'))
     op_grants = op_grants[::-1]
-
-    op_grants['Grant'] = op_grants['Grant']
 
     def normalize_orgname(orgname):
         if type(orgname) == str:
@@ -80,9 +79,9 @@ def org_bar_chart(op_grants):
         return f'<b>{org}</b><br>{grants} grants<br>{amount} total'
     op_orgs['hover'] = op_orgs.apply(hover, axis=1)
 
-    op_orgs_truncated = op_orgs.iloc[len(op_orgs)-25:]
+    op_orgs_truncated = op_orgs.reset_index().iloc[:20]
 
-    return Bar(op_orgs_truncated, title='Top 30 Donee Organizations')
+    return Bar(op_orgs_truncated, title='Top 20 Donee Organizations')
 
 
 def cause_bar_chart(op_grants):
@@ -129,7 +128,7 @@ def openphil_grants_scatter_section():
                 html.H2('Open Philanthropy Grants'),
                 className='section-title',
             ),
-            get_subtitle('open_phil', hover='points', zoom=True),
+            get_instructions('open_phil'),
             html.Div(
                 [
                     html.Div(
@@ -139,6 +138,7 @@ def openphil_grants_scatter_section():
                 ],
                 className='section-body'
             ),
+            get_data_source('open_phil'),
         ],
         className = 'section',
         id='op-grants-scatter-section',
@@ -154,7 +154,7 @@ def openphil_grants_categories_section():
                 html.H2('Open Philanthropy Grants by Focus Area and Donee Organization'),
                 className='section-title',
             ),
-            get_subtitle('open_phil'),
+            get_instructions(),
             html.Div(
                 html.Div(
                     [
@@ -171,6 +171,7 @@ def openphil_grants_categories_section():
                 ),
                 className='section-body'
             ),
+            get_data_source('open_phil'),
         ],
         className = 'section',
         id='op-grants-categories',
@@ -212,8 +213,6 @@ def openphil_line_plot_section():
     op_grants = get_op_grants()
     op_grants = op_grants.sort_values(by='Date').reset_index()
 
-    grants_by_month = group_by_month(op_grants)
-
     def monthly_hover(row):
         month = row['date'].strftime('%B %Y')
         result = ''
@@ -222,13 +221,14 @@ def openphil_line_plot_section():
         result += f"<br>${row.total_amount:,.2f} total value"
         return result
 
+    grants_by_month = group_by_month(op_grants)
+
     grants_by_month['hover'] = grants_by_month.apply(monthly_hover, axis=1)
     last_row = grants_by_month.iloc[len(grants_by_month)-1]
     last_month = last_row['date'].strftime('%B %Y')
     label = ''
-    label += f"<b>{last_month}</b>"
-    label += f"<br>{last_row.n_grants} grants"
-    label += f"<br>${last_row.total_amount/1e6:,.1f}M total"
+    label += f"<b>${last_row.total_amount/1e6:,.1f} Million</b>"
+    label += f"<br>{last_month}"
     grants_by_month['label'] = label
 
     month_grants_graph = Line(
@@ -254,7 +254,7 @@ def openphil_line_plot_section():
 
     op_grants['hover'] = op_grants.apply(cumulative_hover, axis=1)
     grants_total = op_grants['cumulative_amount'].tolist()[-1]
-    op_grants['label'] = f"<b>Total Grants</b><br>${grants_total/1e9:,.2f}B"
+    op_grants['label'] = f"<b>${grants_total/1e9:,.2f} Billion</b><br>Total Grants"
 
     total_grants_graph = Line(
         op_grants,
@@ -274,7 +274,7 @@ def openphil_line_plot_section():
                 html.H2('Open Philanthropy Grants Over Time'),
                 className='section-title',
             ),
-            get_subtitle('open_phil'),
+            get_instructions(),
             html.Div(
                 html.Div(
                     [
@@ -291,6 +291,7 @@ def openphil_line_plot_section():
                 ),
                 className='section-body'
             ),
+            get_data_source('open_phil'),
         ],
         className = 'section',
         id='op-grants-growth',

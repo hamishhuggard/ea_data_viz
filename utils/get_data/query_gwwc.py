@@ -28,12 +28,12 @@ def get_donations_by_org():
 def save_data():
     print('requesting new_pledges...')
     new_pledges = get_new_pledges()
-    new_pledges.to_json('./data/gwwc/new_pledges.json')
+    new_pledges.to_json('./assets/data/gwwc/new_pledges.json')
 
     print('requesting donations_by_year...')
     donations_by_year = get_donations_by_year()
-    donations_by_year.to_json('./data/gwwc/donations_by_year.json')
+    donations_by_year.to_json('./assets/data/gwwc/donations_by_year.json')
 
     print('requesting donations_by_org...')
     donations_by_org = get_donations_by_org()
-    donations_by_org.to_json('./data/gwwc/donations_by_org.json')
+    donations_by_org.to_json('./assets/data/gwwc/donations_by_org.json')

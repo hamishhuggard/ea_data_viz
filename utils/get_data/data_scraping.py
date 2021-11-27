@@ -2,16 +2,13 @@ from bs4 import BeautifulSoup
 import re
 import requests
 import pandas as pd
-from datetime import datetime 
+from datetime import datetime
 import json
 
 def url_to_soup(url):
     page = requests.get(url, headers={'User-Agent': ''})
     return BeautifulSoup(page.content, features="html.parser")
 
-def download_op_grants():
-    openphil_url = 'https://www.openphilanthropy.org/giving/grants/spreadsheet'
-    return requests.get(openphil_url, headers={'User-Agent': ''})
 
 def download_ea_funds_grants():
     # The data can be seen at 'https://app.effectivealtruism.org/funds/{}/payouts'.

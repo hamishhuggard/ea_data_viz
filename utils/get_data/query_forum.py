@@ -56,5 +56,5 @@ def refresh_forum_data():
             offset_forum_data['data']['posts']['results']
         )
 
-    with open('./data/ea_forum.json', 'w') as f:
+    with open('./assets/data/ea_forum.json', 'w') as f:
         f.write(json.dumps(forum_data))
