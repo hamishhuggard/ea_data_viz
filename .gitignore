@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+.prettierignore
 build/
 develop-eggs/
 dist/
