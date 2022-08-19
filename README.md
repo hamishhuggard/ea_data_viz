@@ -12,6 +12,10 @@ There may be some overlap between this project and with the [EA Hub map](https:/
 
 ## How to run
 
+1. Make sure that you have Python 3.9 installed in your system.
+
+- Otherwise, install it, e.g., with `sudo apt install python3.9` on Debian-based Linux sytems.
+
 1. Install [pipenv](https://pipenv.pypa.io/en/latest/). If you have `pip` installed, this looks like:
 
 ```
@@ -24,6 +28,13 @@ pip install --user pipenv
 git clone https://github.com/hamishhuggard/ea_data_viz.git
 cd ea_data_viz
 pipenv run python app.py
+```
+
+You can also specify a particular path for python on pipenv with:
+
+```
+pipenv --python /usr/bin/python3.9 run python app.py
+
 ```
 
 ## To do
